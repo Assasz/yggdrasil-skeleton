@@ -4,5 +4,5 @@ Skeleton application for Yggdrasil framework.
 
 ### Installation
 ```
-composer require assasz/yggdrasil-skeleton
+composer create-project assasz/yggdrasil-skeleton
 ```
