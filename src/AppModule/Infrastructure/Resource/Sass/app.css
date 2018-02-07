@@ -1,0 +1,17 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css";
+.main-content {
+  margin-top: 80px; }
+
+.offscreen {
+  clip-path: inset(100%);
+  clip: rect(1px 1px 1px 1px);
+  /* IE 6/7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  /* added line */
+  width: 1px; }
+
+/*# sourceMappingURL=app.css.map */

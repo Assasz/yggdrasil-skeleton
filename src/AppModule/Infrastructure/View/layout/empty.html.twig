@@ -1,0 +1,15 @@
+{% if is_pjax(app.request) %}
+    {% set base = 'base_pjax.html.twig' %}
+{% else %}
+    {% set base = 'base.html.twig' %}
+{% endif %}
+
+{% extends base %}
+
+{% block layout %}
+    <main class="main-content" role="main">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+{% endblock %}
