@@ -12,19 +12,24 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Assasz/yggdrasil.git",
-                "reference": "8978b5a8b80a2056911a72607ccc08b8ccf0736d"
+                "reference": "95a5e24d55e4b4d228e2ece876bc28f06344e650"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Assasz/yggdrasil/zipball/8978b5a8b80a2056911a72607ccc08b8ccf0736d",
-                "reference": "8978b5a8b80a2056911a72607ccc08b8ccf0736d",
+                "url": "https://api.github.com/repos/Assasz/yggdrasil/zipball/95a5e24d55e4b4d228e2ece876bc28f06344e650",
+                "reference": "95a5e24d55e4b4d228e2ece876bc28f06344e650",
                 "shasum": ""
             },
             "require": {
                 "doctrine/orm": "^2.6",
                 "filp/whoops": "^2.1",
+                "league/container": "^2.4",
                 "php": "^7.1",
+                "swiftmailer/swiftmailer": "^6.0",
+                "symfony/console": "^4.0",
                 "symfony/http-foundation": "^4.0",
+                "symfony/validator": "^4.0",
+                "symfony/yaml": "^4.0",
                 "twig/twig": "^2.4"
             },
             "type": "library",
@@ -34,8 +39,11 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
             "description": "Clean architecture PHP framework",
-            "time": "2018-02-01 00:14:01"
+            "time": "2018-02-07 20:41:01"
         },
         {
             "name": "container-interop/container-interop",
