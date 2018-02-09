@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Assasz/yggdrasil.git",
-                "reference": "95a5e24d55e4b4d228e2ece876bc28f06344e650"
+                "reference": "77b98eb89cab6e684d4f91c85615e47abf35c2cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Assasz/yggdrasil/zipball/95a5e24d55e4b4d228e2ece876bc28f06344e650",
-                "reference": "95a5e24d55e4b4d228e2ece876bc28f06344e650",
+                "url": "https://api.github.com/repos/Assasz/yggdrasil/zipball/77b98eb89cab6e684d4f91c85615e47abf35c2cc",
+                "reference": "77b98eb89cab6e684d4f91c85615e47abf35c2cc",
                 "shasum": ""
             },
             "require": {
@@ -43,7 +43,7 @@
                 "MIT"
             ],
             "description": "Clean architecture PHP framework",
-            "time": "2018-02-07 20:41:01"
+            "time": "2018-02-09T00:17:51+00:00"
         },
         {
             "name": "container-interop/container-interop",

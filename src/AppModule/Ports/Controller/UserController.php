@@ -4,13 +4,11 @@ namespace AppModule\Ports\Controller;
 
 use AppModule\Application\Service\Request\EmailCheckerRequest;
 use AppModule\Application\Service\Request\RememberedAuthRequest;
-use AppModule\Application\Service\Request\SignupConfirmRequest;
+use AppModule\Application\Service\Request\SignupConfirmationRequest;
 use AppModule\Application\Service\Request\SignupRequest;
 use AppModule\Application\Service\Request\UserAuthRequest;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Yggdrasil\Core\AbstractController;
+use Yggdrasil\Core\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Yggdrasil\Core\Form\FormHandler;
 
@@ -146,19 +144,19 @@ class UserController extends AbstractController
         return $this->json(["true"]);
     }
 
-    public function signupConfirmAction($token)
+    public function signupConfirmationAction($token)
     {
-        $confirmRequest = new SignupConfirmRequest();
-        $confirmRequest->setToken($token);
+        $confirmationRequest = new SignupConfirmationRequest();
+        $confirmationRequest->setToken($token);
 
-        $confirmService = $this->getContainer()->get('signup_confirm');
-        $confirmResponse = $confirmService->process($confirmRequest);
+        $confirmationService = $this->getContainer()->get('signup_confirmation');
+        $confirmationResponse = $confirmationService->process($confirmationRequest);
 
         $session = new Session();
 
-        if($confirmResponse->isAlreadyActive()){
+        if($confirmationResponse->isAlreadyActive()){
             $session->getFlashBag()->set('warning', 'This account is already active.');
-        } elseif (!$confirmResponse->isSuccess()){
+        } elseif (!$confirmationResponse->isSuccess()){
             $session->getFlashBag()->set('warning', 'Invalid confirmation token.');
         } else {
             $session->getFlashBag()->set('success', 'Account activated successfully. Now you can sign in!');

@@ -9,7 +9,6 @@ use Yggdrasil\Core\Service\AbstractService;
 use Yggdrasil\Core\Service\ServiceInterface;
 use Yggdrasil\Core\Service\ServiceRequestInterface;
 use Yggdrasil\Core\Service\ServiceResponseInterface;
-use Symfony\Component\Validator\Validation;
 
 class SignupService extends AbstractService implements ServiceInterface
 {
@@ -24,9 +23,7 @@ class SignupService extends AbstractService implements ServiceInterface
         $response = new SignupResponse();
 
         if(count($errors) < 1){
-            $router = $this->getDriver('router');
-
-            $link = $router->getQuery('User:signupConfirm', [$user->getConfirmationToken()]);
+            $link = $this->getRouter()->getQuery('User:signupConfirmation', [$user->getConfirmationToken()]);
             $body = 'Hi '.$user->getUsername().'! Click <a href="'.$link.'">here</a> to activate your account.<br><br>Best regards, your Team.';
 
             $mailSenderRequest = new MailSenderRequest();

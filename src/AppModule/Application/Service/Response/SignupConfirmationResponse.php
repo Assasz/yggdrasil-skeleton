@@ -4,7 +4,7 @@ namespace AppModule\Application\Service\Response;
 
 use Yggdrasil\Core\Service\ServiceResponseInterface;
 
-class SignupConfirmResponse implements ServiceResponseInterface
+class SignupConfirmationResponse implements ServiceResponseInterface
 {
     private $success;
     private $alreadyActive;

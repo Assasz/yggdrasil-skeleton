@@ -4,7 +4,7 @@ namespace AppModule\Application\Service\Request;
 
 use Yggdrasil\Core\Service\ServiceRequestInterface;
 
-class SignupConfirmRequest implements ServiceRequestInterface
+class SignupConfirmationRequest implements ServiceRequestInterface
 {
     private $token;
 
