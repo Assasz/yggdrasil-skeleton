@@ -4,7 +4,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
-use AppModule\Infrastructure\Config\AppConfiguration;
+use Skeleton\Infrastructure\Config\AppConfiguration;
 
 $application = new Application('Yggdrasil CLI', '0.1');
 
