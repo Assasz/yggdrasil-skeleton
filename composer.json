@@ -5,7 +5,7 @@
   "description": "Skeleton app for Yggdrasil framework",
   "autoload": {
     "psr-4": {
-      "AppModule\\": "src/AppModule/"
+      "Skeleton\\": "src/Skeleton/"
     }
   },
   "require": {

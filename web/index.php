@@ -9,7 +9,7 @@ if(!DEBUG) {
 require __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
-use AppModule\Infrastructure\Config\AppConfiguration;
+use Skeleton\Infrastructure\Config\AppConfiguration;
 use Yggdrasil\Core\Kernel;
 
 $appConfiguration = new AppConfiguration();
