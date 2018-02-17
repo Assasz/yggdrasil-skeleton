@@ -13,12 +13,12 @@ class EmailCheckerResponse implements ServiceResponseInterface
         $this->success = false;
     }
 
-    public function isSuccess()
+    public function isSuccess(): bool
     {
         return $this->success;
     }
 
-    public function setSuccess(bool $success)
+    public function setSuccess(bool $success): void
     {
         $this->success = $success;
     }

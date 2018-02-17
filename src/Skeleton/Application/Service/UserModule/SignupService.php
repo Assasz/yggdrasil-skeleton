@@ -2,7 +2,7 @@
 
 namespace Skeleton\Application\Service\UserModule;
 
-use Skeleton\Application\Service\UserModule\Request\MailSenderRequest;
+use Skeleton\Application\Service\SharedModule\Request\MailSenderRequest;
 use Skeleton\Application\Service\UserModule\Response\SignupResponse;
 use Skeleton\Domain\Entity\User;
 use Yggdrasil\Core\Service\AbstractService;

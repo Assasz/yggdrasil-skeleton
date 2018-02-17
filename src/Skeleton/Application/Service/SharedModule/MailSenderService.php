@@ -1,8 +1,8 @@
 <?php
 
-namespace Skeleton\Application\Service\UserModule;
+namespace Skeleton\Application\Service\SharedModule;
 
-use Skeleton\Application\Service\UserModule\Response\MailSenderResponse;
+use Skeleton\Application\Service\SharedModule\Response\MailSenderResponse;
 use Yggdrasil\Core\Service\AbstractService;
 use Yggdrasil\Core\Service\ServiceInterface;
 use Yggdrasil\Core\Service\ServiceRequestInterface;
@@ -12,8 +12,6 @@ class MailSenderService extends AbstractService implements ServiceInterface
 {
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
-        $mailer = $this->getMailer();
-
         $message = (new \Swift_Message($request->getSubject()))
             ->setFrom($request->getSender())
             ->setTo($request->getReceivers())
@@ -21,7 +19,7 @@ class MailSenderService extends AbstractService implements ServiceInterface
 
         $response = new MailSenderResponse();
 
-        if($mailer->send($message)){
+        if($this->getMailer()->send($message)){
             $response->setSuccess(true);
         }
 

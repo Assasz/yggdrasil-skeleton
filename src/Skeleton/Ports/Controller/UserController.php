@@ -144,7 +144,7 @@ class UserController extends AbstractController
         return $this->json(["true"]);
     }
 
-    public function signupConfirmationAction($token)
+    public function signupConfirmationAction(string $token)
     {
         $confirmationRequest = new SignupConfirmationRequest();
         $confirmationRequest->setToken($token);

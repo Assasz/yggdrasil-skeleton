@@ -15,22 +15,22 @@ class RememberedAuthResponse implements ServiceResponseInterface
         $this->success = false;
     }
 
-    public function isSuccess()
+    public function isSuccess(): bool
     {
         return $this->success;
     }
 
-    public function setSuccess(bool $success)
+    public function setSuccess(bool $success): void
     {
         $this->success = $success;
     }
 
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    public function setUser(User $user)
+    public function setUser(User $user): void
     {
         $this->user = $user;
     }

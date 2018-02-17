@@ -3,53 +3,86 @@
 namespace Skeleton\Domain\Entity;
 
 /**
+ * User entity
+ *
  * @Entity(repositoryClass="Skeleton\Application\Repository\UserRepository")
  * @Table(name="`user`")
  */
 class User
 {
     /**
+     * User ID
+     *
      * @Id
      * @Column(type="integer")
      * @GeneratedValue(strategy="AUTO")
+     * @var int $id
      */
     private $id;
 
     /**
+     * User username
+     *
      * @Column(type="string", length=36)
+     * @var string $username
      */
     private $username;
 
     /**
+     * User email address
+     *
      * @Column(type="string", length=255)
+     * @var string $email
      */
     private $email;
 
     /**
+     * User password
+     *
      * @Column(type="string", length=255)
+     * @var string $password
      */
     private $password;
 
     /**
+     * User remember token
+     *
      * @Column(type="string", length=255, nullable=true)
+     * @var string $rememberToken
      */
     private $rememberToken;
 
     /**
+     * User remember identifier
+     *
      * @Column(type="string", length=255)
+     * @var string $rememberIdentifier
      */
     private $rememberIdentifier;
 
     /**
+     * User enabled status
+     *
      * @Column(type="string", columnDefinition="ENUM('0', '1')")
+     * @var string $enabled
      */
     private $enabled;
 
     /**
+     * User confirmation token
+     *
      * @Column(type="string", length=255)
+     * @var string $confirmationToken
      */
     private $confirmationToken;
 
+    /**
+     * User constructor.
+     *
+     * Sets default values
+     *
+     * @throws \Exception
+     */
     public function __construct()
     {
         $this->rememberIdentifier = bin2hex(random_bytes(32));
@@ -57,77 +90,152 @@ class User
         $this->confirmationToken = bin2hex(random_bytes(32));
     }
 
-    public function getIt()
+    /**
+     * Returns user ID
+     *
+     * @return int
+     */
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getUsername()
+    /**
+     * Returns user username
+     *
+     * @return string
+     */
+    public function getUsername(): string
     {
         return $this->username;
     }
 
-    public function setUsername($username)
+    /**
+     * Sets user username
+     *
+     * @param string $username
+     */
+    public function setUsername(string $username): void
     {
         $this->username = $username;
     }
 
-    public function getEmail()
+    /**
+     * Returns user email
+     *
+     * @return string
+     */
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function setEmail($email)
+    /**
+     * Sets user email
+     *
+     * @param string $email
+     */
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
 
-    public function getPassword()
+    /**
+     * Returns user password
+     *
+     * @return string
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function setPassword($password)
+    /**
+     * Sets user password
+     *
+     * @param string $password
+     */
+    public function setPassword(string $password): void
     {
         $this->password = $password;
     }
 
-    public function getRememberToken()
+    /**
+     * Returns user remember token
+     *
+     * @return string
+     */
+    public function getRememberToken(): string
     {
         return $this->rememberToken;
     }
 
-    public function setRememberToken($token)
+    /**
+     * Sets user remember token
+     *
+     * @param string $token
+     */
+    public function setRememberToken(string $token): void
     {
         $this->rememberToken = $token;
     }
 
-    public function getRememberIdentifier()
+    /**
+     * Returns user remember identifier
+     *
+     * @return string
+     */
+    public function getRememberIdentifier(): string
     {
         return $this->rememberIdentifier;
     }
 
-    public function setRememberIdentifier($rememberIdentifier)
+    /**
+     * Sets user remember identifier
+     *
+     * @param string $rememberIdentifier
+     */
+    public function setRememberIdentifier(string $rememberIdentifier): void
     {
         $this->rememberIdentifier = $rememberIdentifier;
     }
 
-    public function getEnabled()
+    /**
+     * Returns user enabled status
+     *
+     * @return string
+     */
+    public function getEnabled(): string
     {
         return $this->enabled;
     }
 
-    public function setEnabled($enabled)
+    /**
+     * Sets user enabled status
+     *
+     * @param string $enabled
+     */
+    public function setEnabled(string $enabled): void
     {
         $this->enabled = $enabled;
     }
 
-    public function getConfirmationToken()
+    /**
+     * Returns user confirmation token
+     *
+     * @return string
+     */
+    public function getConfirmationToken(): string
     {
         return $this->confirmationToken;
     }
 
-    public function setConfirmationToken($confirmationToken)
+    /**
+     * Sets user confirmation token
+     *
+     * @param string $confirmationToken
+     */
+    public function setConfirmationToken(string $confirmationToken): void
     {
         $this->confirmationToken = $confirmationToken;
     }

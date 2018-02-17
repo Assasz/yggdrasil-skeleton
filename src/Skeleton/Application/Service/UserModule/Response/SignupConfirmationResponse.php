@@ -15,22 +15,22 @@ class SignupConfirmationResponse implements ServiceResponseInterface
         $this->alreadyActive = false;
     }
 
-    public function isSuccess()
+    public function isSuccess(): bool
     {
         return $this->success;
     }
 
-    public function setSuccess(bool $success)
+    public function setSuccess(bool $success): void
     {
         $this->success = $success;
     }
 
-    public function isAlreadyActive()
+    public function isAlreadyActive(): bool
     {
         return $this->alreadyActive;
     }
 
-    public function setAlreadyActive(bool $alreadyActive)
+    public function setAlreadyActive(bool $alreadyActive): void
     {
         $this->alreadyActive = $alreadyActive;
     }

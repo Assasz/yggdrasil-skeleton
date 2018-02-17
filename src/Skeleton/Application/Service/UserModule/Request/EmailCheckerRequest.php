@@ -8,12 +8,12 @@ class EmailCheckerRequest implements ServiceRequestInterface
 {
     private $email;
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function setEmail($email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }

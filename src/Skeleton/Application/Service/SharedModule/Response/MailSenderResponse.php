@@ -1,6 +1,6 @@
 <?php
 
-namespace Skeleton\Application\Service\UserModule\Response;
+namespace Skeleton\Application\Service\SharedModule\Response;
 
 use Yggdrasil\Core\Service\ServiceResponseInterface;
 
@@ -13,12 +13,12 @@ class MailSenderResponse implements ServiceResponseInterface
         $this->success = false;
     }
 
-    public function setSuccess(bool $success)
+    public function setSuccess(bool $success): void
     {
         $this->success = $success;
     }
 
-    public function isSuccess()
+    public function isSuccess(): bool
     {
         return $this->success;
     }

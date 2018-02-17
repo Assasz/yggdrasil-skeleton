@@ -10,32 +10,32 @@ class UserAuthRequest implements ServiceRequestInterface
     private $password;
     private $remember;
 
-    public  function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function setPassword($password)
+    public  function setEmail(string $email): void
     {
-        $this->password = $password;
+        $this->email = $email;
     }
 
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function getRemember()
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    public function getRemember(): string
     {
         return $this->remember;
     }
 
-    public function setRemember(bool $remember)
+    public function setRemember(bool $remember): void
     {
         $this->remember = $remember;
     }

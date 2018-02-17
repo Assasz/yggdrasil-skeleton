@@ -9,22 +9,22 @@ class RememberedAuthRequest implements ServiceRequestInterface
     private $rememberToken;
     private $rememberIdentifier;
 
-    public function getRememberToken()
+    public function getRememberToken(): string
     {
         return $this->rememberToken;
     }
 
-    public function setRememberToken($rememberToken)
+    public function setRememberToken(string $rememberToken): void
     {
         $this->rememberToken = $rememberToken;
     }
 
-    public function getRememberIdentifier()
+    public function getRememberIdentifier(): string
     {
         return $this->rememberIdentifier;
     }
 
-    public function setRememberIdentifier($rememberIdentifier)
+    public function setRememberIdentifier(string $rememberIdentifier): void
     {
         $this->rememberIdentifier = $rememberIdentifier;
     }

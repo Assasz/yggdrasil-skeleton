@@ -1,6 +1,6 @@
 <?php
 
-namespace Skeleton\Application\Service\UserModule\Request;
+namespace Skeleton\Application\Service\SharedModule\Request;
 
 use Yggdrasil\Core\Service\ServiceRequestInterface;
 
@@ -17,27 +17,27 @@ class MailSenderRequest implements ServiceRequestInterface
         $this->receivers = [];
     }
 
-    public function getSubject()
+    public function getSubject(): string
     {
         return $this->subject;
     }
 
-    public function setSubject($subject)
+    public function setSubject(string $subject): void
     {
         $this->subject = $subject;
     }
 
-    public function getBody()
+    public function getBody(): string
     {
         return $this->body;
     }
 
-    public function setBody($body)
+    public function setBody(string $body)
     {
         $this->body = $body;
     }
 
-    public function getSender()
+    public function getSender(): array
     {
         return $this->sender;
     }
@@ -47,7 +47,7 @@ class MailSenderRequest implements ServiceRequestInterface
         $this->sender = $sender;
     }
 
-    public function getReceivers()
+    public function getReceivers(): array
     {
         return $this->receivers;
     }

@@ -8,7 +8,6 @@ use Skeleton\Infrastructure\Config\AppConfiguration;
 
 $application = new Application('Yggdrasil CLI', '0.1');
 
-// select entity manager
 $appConfig = new AppConfiguration();
 $entityManager = $appConfig->loadDriver('entityManager');
 

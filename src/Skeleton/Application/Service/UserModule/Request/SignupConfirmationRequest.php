@@ -8,12 +8,12 @@ class SignupConfirmationRequest implements ServiceRequestInterface
 {
     private $token;
 
-    public function getToken()
+    public function getToken(): string
     {
         return $this->token;
     }
 
-    public function setToken($token)
+    public function setToken(string $token): string
     {
         $this->token = $token;
     }
