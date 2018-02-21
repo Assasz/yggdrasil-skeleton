@@ -8,8 +8,21 @@ use Yggdrasil\Core\Service\ServiceInterface;
 use Yggdrasil\Core\Service\ServiceRequestInterface;
 use Yggdrasil\Core\Service\ServiceResponseInterface;
 
+/**
+ * Class EmailCheckerService
+ *
+ * This is a part of built-in user module, feel free to customize as needed
+ *
+ * @package Skeleton\Application\Service\UserModule
+ */
 class EmailCheckerService extends AbstractService implements ServiceInterface
 {
+    /**
+     * Checks if email address is already taken by another user
+     *
+     * @param ServiceRequestInterface $request
+     * @return ServiceResponseInterface
+     */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
         $entityManager = $this->getEntityManager();

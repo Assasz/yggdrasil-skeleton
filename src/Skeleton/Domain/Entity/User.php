@@ -7,6 +7,8 @@ namespace Skeleton\Domain\Entity;
  *
  * @Entity(repositoryClass="Skeleton\Application\Repository\UserRepository")
  * @Table(name="`user`")
+ *
+ * @package Skeleton\Domain\Entity
  */
 class User
 {

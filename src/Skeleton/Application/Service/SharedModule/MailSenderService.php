@@ -8,8 +8,21 @@ use Yggdrasil\Core\Service\ServiceInterface;
 use Yggdrasil\Core\Service\ServiceRequestInterface;
 use Yggdrasil\Core\Service\ServiceResponseInterface;
 
+/**
+ * Class MailSenderService
+ *
+ * This is a part of built-in shared module, feel free to customize as needed
+ *
+ * @package Skeleton\Application\Service\SharedModule
+ */
 class MailSenderService extends AbstractService implements ServiceInterface
 {
+    /**
+     * Sends mails
+     *
+     * @param ServiceRequestInterface $request
+     * @return ServiceResponseInterface
+     */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
         $message = (new \Swift_Message($request->getSubject()))

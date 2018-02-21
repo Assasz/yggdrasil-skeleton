@@ -11,9 +11,29 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Yggdrasil\Core\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Yggdrasil\Core\Form\FormHandler;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
+/**
+ * Class UserController
+ *
+ * This is a part of built-in user module, feel free to customize as needed
+ *
+ * @package Skeleton\Ports\Controller
+ */
 class UserController extends AbstractController
 {
+    /**
+     * Sign in action
+     * Route: /user/signin
+     *
+     * @return RedirectResponse|Response
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function signinAction()
     {
         if($this->isGranted()){
@@ -60,6 +80,12 @@ class UserController extends AbstractController
         return $this->render('user/signin.html.twig');
     }
 
+    /**
+     * Sign out action
+     * Route: /user/signout
+     *
+     * @return RedirectResponse
+     */
     public function signoutAction()
     {
         if(!$this->isGranted()){
@@ -76,6 +102,11 @@ class UserController extends AbstractController
         return $this->redirectToAction('Default:index');
     }
 
+    /**
+     * Remember me cookie authentication passive action
+     *
+     * @return Response
+     */
     public function authCookiePassiveAction()
     {
         $session = new Session();
@@ -101,6 +132,15 @@ class UserController extends AbstractController
         return $this->getResponse();
     }
 
+    /**
+     * Sign up action
+     * Route: /user/signup
+     *
+     * @return RedirectResponse|Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function signupAction()
     {
         if($this->isGranted()){
@@ -129,6 +169,14 @@ class UserController extends AbstractController
         return $this->render('user/signup.html.twig');
     }
 
+    /**
+     * Check email action
+     * Route: /user/checkemail
+     *
+     * Used by jQuery validation to indicate if email address is already taken or not
+     *
+     * @return JsonResponse
+     */
     public function checkEmailAction()
     {
         $checkerRequest = new EmailCheckerRequest();
@@ -144,6 +192,13 @@ class UserController extends AbstractController
         return $this->json(["true"]);
     }
 
+    /**
+     * Sign up confirmation action
+     * Route: /user/signupconfirmation
+     *
+     * @param string $token
+     * @return RedirectResponse
+     */
     public function signupConfirmationAction(string $token)
     {
         $confirmationRequest = new SignupConfirmationRequest();

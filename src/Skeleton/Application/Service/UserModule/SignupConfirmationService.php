@@ -8,8 +8,24 @@ use Yggdrasil\Core\Service\ServiceInterface;
 use Yggdrasil\Core\Service\ServiceRequestInterface;
 use Yggdrasil\Core\Service\ServiceResponseInterface;
 
+/**
+ * Class SignupConfirmationService
+ *
+ * This is a part of built-in user module, feel free to customize as needed
+ *
+ * @package Skeleton\Application\Service\UserModule
+ */
 class SignupConfirmationService extends AbstractService implements ServiceInterface
 {
+    /**
+     * Activates user account
+     *
+     * @param ServiceRequestInterface $request
+     * @return ServiceResponseInterface
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
         $entityManager = $this->getEntityManager();

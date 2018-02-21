@@ -8,8 +8,25 @@ use Yggdrasil\Core\Service\ServiceInterface;
 use Yggdrasil\Core\Service\ServiceRequestInterface;
 use Yggdrasil\Core\Service\ServiceResponseInterface;
 
+/**
+ * Class UserAuthService
+ *
+ * This is a part of built-in user module, feel free to customize as needed
+ *
+ * @package Skeleton\Application\Service\UserModule
+ */
 class UserAuthService extends AbstractService implements ServiceInterface
 {
+    /**
+     * Authenticates user
+     *
+     * @param ServiceRequestInterface $request
+     * @return ServiceResponseInterface
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Exception
+     */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
         $entityManager = $this->getEntityManager();

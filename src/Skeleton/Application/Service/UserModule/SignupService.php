@@ -10,8 +10,25 @@ use Yggdrasil\Core\Service\ServiceInterface;
 use Yggdrasil\Core\Service\ServiceRequestInterface;
 use Yggdrasil\Core\Service\ServiceResponseInterface;
 
+/**
+ * Class SignupService
+ *
+ * This is a part of built-in user module, feel free to customize as needed
+ *
+ * @package Skeleton\Application\Service\UserModule
+ */
 class SignupService extends AbstractService implements ServiceInterface
 {
+    /**
+     * Registers user
+     *
+     * @param ServiceRequestInterface $request
+     * @return ServiceResponseInterface
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Exception
+     */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
         $user = new User();

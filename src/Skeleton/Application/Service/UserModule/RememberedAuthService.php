@@ -8,8 +8,21 @@ use Yggdrasil\Core\Service\ServiceInterface;
 use Yggdrasil\Core\Service\ServiceRequestInterface;
 use Yggdrasil\Core\Service\ServiceResponseInterface;
 
+/**
+ * Class RememberedAuthService
+ *
+ * This is a part of built-in user module, feel free to customize as needed
+ *
+ * @package Skeleton\Application\Service\UserModule
+ */
 class RememberedAuthService extends AbstractService implements ServiceInterface
 {
+    /**
+     * Authenticates user by remember me cookie
+     *
+     * @param ServiceRequestInterface $request
+     * @return ServiceResponseInterface
+     */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
         $entityManager = $this->getEntityManager();

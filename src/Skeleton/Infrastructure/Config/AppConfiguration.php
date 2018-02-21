@@ -12,10 +12,23 @@ use Yggdrasil\Core\Driver\RouterDriver;
 use Yggdrasil\Core\Driver\TemplateEngineDriver;
 use Yggdrasil\Core\Driver\ValidatorDriver;
 
+/**
+ * Class AppConfiguration
+ *
+ * Manages configuration of application
+ *
+ * @package Skeleton\Infrastructure\Config
+ */
 class AppConfiguration extends AbstractConfiguration implements ConfigurationInterface
 {
+    /**
+     * AppConfiguration constructor.
+     *
+     * Register drivers here
+     */
     public function __construct()
     {
+        // Config directory of application
         parent::__construct('Skeleton/Infrastructure/Config');
 
         $this->drivers = [
