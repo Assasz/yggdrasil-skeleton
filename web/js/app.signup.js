@@ -1,4 +1,12 @@
-$(document).on('ready pjax:end', function () {
+$(document).ready(function () {
+    loadPageActions();
+});
+
+$(document).on('pjax:end', function () {
+    loadPageActions();
+});
+
+function loadPageActions(){
     $('[data-action="show-password"]').click(function () {
         if($('#password').attr('type') == 'password'){
             $('#password').attr('type', 'text');
@@ -61,4 +69,4 @@ $(document).on('ready pjax:end', function () {
             error.appendTo( element.parent() );
         }
     });
-})(jQuery);
+}
