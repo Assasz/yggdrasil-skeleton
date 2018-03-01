@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $(document).pjax('a, [data-pjax]', '#pjax-container', {
+    $(document).pjax('a', '#pjax-container', {
         'timeout': 5000
     });
 

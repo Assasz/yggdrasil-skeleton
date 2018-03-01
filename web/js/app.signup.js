@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).on('ready pjax:end', function () {
     $('[data-action="show-password"]').click(function () {
         if($('#password').attr('type') == 'password'){
             $('#password').attr('type', 'text');
@@ -61,4 +61,4 @@ $(document).ready(function () {
             error.appendTo( element.parent() );
         }
     });
-});
+})(jQuery);
