@@ -13,7 +13,7 @@
     <div class="col-lg-4 col-sm-6 col-xs-12">
         <form id="signin_form" method="post" action="{{ path('User:signin') }}" data-pjax>
             <fieldset>
-                <legend>Sign in to <a href="{{ path('Default:index') }}">Application</a></legend>
+                <legend>Sign in to <a href="{{ path('Default:index') }}">{{ _appname }}</a></legend>
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="email@domain.com" autofocus>

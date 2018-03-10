@@ -159,7 +159,6 @@ class UserController extends AbstractController
 
             if($response->isSuccess()){
                 $session->getFlashBag()->set('success', 'Account created successfully. Check your mailbox for confirmation mail.');
-
                 return $this->redirectToAction('Default:index');
             }
 
@@ -194,7 +193,7 @@ class UserController extends AbstractController
 
     /**
      * Sign up confirmation action
-     * Route: /user/signupconfirmation
+     * Route: /user/signupconfirmation/{token}
      *
      * @param string $token
      * @return RedirectResponse

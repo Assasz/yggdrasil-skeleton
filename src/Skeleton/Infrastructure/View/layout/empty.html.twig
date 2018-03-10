@@ -1,8 +1,4 @@
-{% if is_pjax(app.request) %}
-    {% set base = 'base_pjax.html.twig' %}
-{% else %}
-    {% set base = 'base.html.twig' %}
-{% endif %}
+{% set base = (is_pjax(_request)) ? 'base_pjax.html.twig' : 'base.html.twig' %}
 
 {% extends base %}
 
