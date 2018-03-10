@@ -49,7 +49,7 @@ class UserController extends AbstractController
             $authRequest = $form->serializeData($authRequest);
             $authRequest->setRemember($rememberMe);
 
-            $authService = $this->getContainer()->get('user_auth');
+            $authService = $this->getContainer()->get('user.auth');
             $authResponse = $authService->process($authRequest);
 
             $session = new Session();
@@ -118,7 +118,7 @@ class UserController extends AbstractController
             $authRequest->setRememberIdentifier($cookie['identifier']);
             $authRequest->setRememberToken($cookie['token']);
 
-            $authService = $this->getContainer()->get('remembered_auth');
+            $authService = $this->getContainer()->get('user.remembered_auth');
             $authResponse = $authService->process($authRequest);
 
             if($authResponse->isSuccess()){
@@ -152,7 +152,7 @@ class UserController extends AbstractController
         if($form->handle($this->getRequest())){
             $signupRequest = new SignupRequest();
             $signupRequest = $form->serializeData($signupRequest);
-            $signupService = $this->getContainer()->get('signup');
+            $signupService = $this->getContainer()->get('user.signup');
             $response = $signupService->process($signupRequest);
 
             $session = new Session();
@@ -181,7 +181,7 @@ class UserController extends AbstractController
         $checkerRequest = new EmailCheckerRequest();
         $checkerRequest->setEmail($this->getRequest()->request->get('email'));
 
-        $checkerService = $this->getContainer()->get('email_checker');
+        $checkerService = $this->getContainer()->get('user.email_checker');
         $checkerResponse = $checkerService->process($checkerRequest);
 
         if(!$checkerResponse->isSuccess()){
@@ -203,7 +203,7 @@ class UserController extends AbstractController
         $confirmationRequest = new SignupConfirmationRequest();
         $confirmationRequest->setToken($token);
 
-        $confirmationService = $this->getContainer()->get('signup_confirmation');
+        $confirmationService = $this->getContainer()->get('user.signup_confirmation');
         $confirmationResponse = $confirmationService->process($confirmationRequest);
 
         $session = new Session();

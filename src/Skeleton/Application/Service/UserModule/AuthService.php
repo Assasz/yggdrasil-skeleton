@@ -9,13 +9,13 @@ use Yggdrasil\Core\Service\ServiceRequestInterface;
 use Yggdrasil\Core\Service\ServiceResponseInterface;
 
 /**
- * Class UserAuthService
+ * Class AuthService
  *
  * This is a part of built-in user module, feel free to customize as needed
  *
  * @package Skeleton\Application\Service\UserModule
  */
-class UserAuthService extends AbstractService implements ServiceInterface
+class AuthService extends AbstractService implements ServiceInterface
 {
     /**
      * Authenticates user

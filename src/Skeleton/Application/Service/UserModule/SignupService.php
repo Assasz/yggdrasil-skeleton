@@ -49,7 +49,7 @@ class SignupService extends AbstractService implements ServiceInterface
             $mailSenderRequest->setSender(['team@application.com' => 'Application Team']);
             $mailSenderRequest->setReceivers([$user->getEmail() => $user->getUsername()]);
 
-            $mailSenderService = $this->getContainer()->get('mail_sender');
+            $mailSenderService = $this->getContainer()->get('shared.mail_sender');
             $mailSenderResponse = $mailSenderService->process($mailSenderRequest);
 
             if($mailSenderResponse->isSuccess()) {
