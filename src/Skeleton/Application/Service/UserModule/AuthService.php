@@ -2,7 +2,7 @@
 
 namespace Skeleton\Application\Service\UserModule;
 
-use Skeleton\Application\Service\UserModule\Response\UserAuthResponse;
+use Skeleton\Application\Service\UserModule\Response\AuthResponse;
 use Yggdrasil\Core\Service\AbstractService;
 use Yggdrasil\Core\Service\ServiceInterface;
 use Yggdrasil\Core\Service\ServiceRequestInterface;
@@ -32,7 +32,7 @@ class AuthService extends AbstractService implements ServiceInterface
         $entityManager = $this->getEntityManager();
         $user = $entityManager->getRepository('Entity:User')->findOneByEmail($request->getEmail());
 
-        $response = new UserAuthResponse();
+        $response = new AuthResponse();
 
         if($user !== null) {
             if (password_verify($request->getPassword(), $user->getPassword())) {

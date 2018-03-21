@@ -6,13 +6,13 @@ use Skeleton\Domain\Entity\User;
 use Yggdrasil\Core\Service\ServiceResponseInterface;
 
 /**
- * Class UserAuthResponse
+ * Class AuthResponse
  *
  * This is a part of built-in user module, feel free to customize as needed
  *
  * @package Skeleton\Application\Service\UserModule\Response
  */
-class UserAuthResponse implements ServiceResponseInterface
+class AuthResponse implements ServiceResponseInterface
 {
     /**
      * Result of service processing
@@ -43,7 +43,7 @@ class UserAuthResponse implements ServiceResponseInterface
     private $enabled;
 
     /**
-     * UserAuthResponse constructor.
+     * AuthResponse constructor.
      *
      * Sets default values
      */
