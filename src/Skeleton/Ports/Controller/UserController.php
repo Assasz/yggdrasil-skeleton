@@ -2,7 +2,7 @@
 
 namespace Skeleton\Ports\Controller;
 
-use Skeleton\Application\Service\UserModule\Request\EmailCheckerRequest;
+use Skeleton\Application\Service\UserModule\Request\EmailCheckRequest;
 use Skeleton\Application\Service\UserModule\Request\RememberedAuthRequest;
 use Skeleton\Application\Service\UserModule\Request\SignupConfirmationRequest;
 use Skeleton\Application\Service\UserModule\Request\SignupRequest;
@@ -169,19 +169,19 @@ class UserController extends AbstractController
     }
 
     /**
-     * Check email action
-     * Route: /user/checkemail
+     * Email check action
+     * Route: /user/emailcheck
      *
      * Used by jQuery validation to indicate if email address is already taken or not
      *
      * @return JsonResponse
      */
-    public function checkEmailAction()
+    public function emailCheckAction()
     {
-        $checkerRequest = new EmailCheckerRequest();
+        $checkerRequest = new EmailCheckRequest();
         $checkerRequest->setEmail($this->getRequest()->request->get('email'));
 
-        $checkerService = $this->getContainer()->get('user.email_checker');
+        $checkerService = $this->getContainer()->get('user.email_check');
         $checkerResponse = $checkerService->process($checkerRequest);
 
         if(!$checkerResponse->isSuccess()){

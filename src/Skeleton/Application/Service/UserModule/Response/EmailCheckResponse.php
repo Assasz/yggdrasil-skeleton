@@ -1,17 +1,17 @@
 <?php
 
-namespace Skeleton\Application\Service\SharedModule\Response;
+namespace Skeleton\Application\Service\UserModule\Response;
 
 use Yggdrasil\Core\Service\ServiceResponseInterface;
 
 /**
- * Class MailSenderResponse
+ * Class EmailCheckResponse
  *
- * This is a part of built-in shared module, feel free to customize as needed
+ * This is a part of built-in user module, feel free to customize as needed
  *
- * @package Skeleton\Application\Service\SharedModule\Response
+ * @package Skeleton\Application\Service\UserModule\Response
  */
-class MailSenderResponse implements ServiceResponseInterface
+class EmailCheckResponse implements ServiceResponseInterface
 {
     /**
      * Result of service processing
@@ -21,9 +21,9 @@ class MailSenderResponse implements ServiceResponseInterface
     private $success;
 
     /**
-     * MailSenderResponse constructor.
+     * EmailCheckResponse constructor.
      *
-     * Sets default value for $success
+     * Sets default value of $success
      */
     public function __construct()
     {

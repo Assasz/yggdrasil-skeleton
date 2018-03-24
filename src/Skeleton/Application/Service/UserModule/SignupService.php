@@ -2,7 +2,7 @@
 
 namespace Skeleton\Application\Service\UserModule;
 
-use Skeleton\Application\Service\SharedModule\Request\MailSenderRequest;
+use Skeleton\Application\Service\SharedModule\Request\MailSendRequest;
 use Skeleton\Application\Service\UserModule\Response\SignupResponse;
 use Skeleton\Domain\Entity\User;
 use Yggdrasil\Core\Service\AbstractService;
@@ -43,13 +43,13 @@ class SignupService extends AbstractService implements ServiceInterface
             $link = $this->getRouter()->getQuery('User:signupConfirmation', [$user->getConfirmationToken()]);
             $body = 'Hi '.$user->getUsername().'! Click <a href="'.$link.'">here</a> to activate your account.<br><br>Best regards, your Team.';
 
-            $mailSenderRequest = new MailSenderRequest();
+            $mailSenderRequest = new MailSendRequest();
             $mailSenderRequest->setSubject('Sign up confirmation');
             $mailSenderRequest->setBody($body);
             $mailSenderRequest->setSender(['team@application.com' => 'Application Team']);
             $mailSenderRequest->setReceivers([$user->getEmail() => $user->getUsername()]);
 
-            $mailSenderService = $this->getContainer()->get('shared.mail_sender');
+            $mailSenderService = $this->getContainer()->get('shared.mail_send');
             $mailSenderResponse = $mailSenderService->process($mailSenderRequest);
 
             if($mailSenderResponse->isSuccess()) {

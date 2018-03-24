@@ -23,7 +23,7 @@ function loadSignupActions(){
         rules: {
             email: {
                 remote: {
-                    url: emailCheckerRoute,
+                    url: emailCheckRoute,
                     type: "post",
                     dataType: "json",
                     data: {
