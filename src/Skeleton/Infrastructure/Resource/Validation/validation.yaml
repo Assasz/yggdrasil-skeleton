@@ -1,6 +1,4 @@
 Skeleton\Domain\Entity\User:
-  constraints:
-    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
   properties:
     username:
       - NotBlank: ~
