@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $(document).pjax('a', '#pjax-container', {
+    $(document).pjax('a:not([data-no-pjax])', '#pjax-container', {
         'timeout': 5000
     });
 
@@ -14,4 +14,14 @@ $(document).ready(function () {
     $(document).on('pjax:end', function () {
         NProgress.done();
     });
+
+    loadGlobalActions();
 });
+
+$(document).on('pjax:end', function () {
+    loadGlobalActions();
+});
+
+function loadGlobalActions() {
+    // globally accessible actions goes here
+}
