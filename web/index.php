@@ -1,6 +1,6 @@
 <?php
 define('BASE_URL', 'http://localhost/yggdrasil-skeleton/web/');
-define('DEBUG', false);
+define('DEBUG', true);
 
 if(!DEBUG) {
     ini_set('display_errors', 0);
