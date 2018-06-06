@@ -2,6 +2,8 @@
 
 namespace Skeleton\Domain\Entity;
 
+use Yggdrasil\Component\DoctrineComponent\SerializableEntityInterface;
+
 /**
  * User entity
  *
@@ -10,7 +12,7 @@ namespace Skeleton\Domain\Entity;
  *
  * @package Skeleton\Domain\Entity
  */
-class User
+class User implements SerializableEntityInterface
 {
     /**
      * User ID
@@ -50,7 +52,7 @@ class User
      * User remember token
      *
      * @Column(type="string", length=255, nullable=true)
-     * @var string $rememberToken
+     * @var null|string $rememberToken
      */
     private $rememberToken;
 
@@ -165,9 +167,9 @@ class User
     /**
      * Returns user remember token
      *
-     * @return string
+     * @return null|string
      */
-    public function getRememberToken(): string
+    public function getRememberToken(): ?string
     {
         return $this->rememberToken;
     }
