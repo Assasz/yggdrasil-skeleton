@@ -2,8 +2,6 @@
 
 namespace Skeleton\Domain\Entity;
 
-use Yggdrasil\Component\DoctrineComponent\SerializableEntityInterface;
-
 /**
  * User entity
  *
@@ -12,7 +10,7 @@ use Yggdrasil\Component\DoctrineComponent\SerializableEntityInterface;
  *
  * @package Skeleton\Domain\Entity
  */
-class User implements SerializableEntityInterface
+class User
 {
     /**
      * User ID

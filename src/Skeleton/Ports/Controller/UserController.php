@@ -45,31 +45,31 @@ class UserController extends AbstractController
         if($form->handle($this->getRequest())){
             $rememberMe = $form->hasData('remember_me');
 
-            $authRequest = new AuthRequest();
-            $authRequest = $form->serializeData($authRequest);
-            $authRequest->setRemember($rememberMe);
+            $request = new AuthRequest();
+            $request = $form->serializeData($request);
+            $request->setRemember($rememberMe);
 
-            $authService = $this->getContainer()->get('user.auth');
-            $authResponse = $authService->process($authRequest);
+            $service = $this->getContainer()->get('user.auth');
+            $response = $service->process($request);
+
+            if(!$response->isSuccess()){
+                $this->addFlash('danger', 'Authentication failed. Incorrect e-mail address or password.');
+                return $this->render('user/signin.html.twig');
+            }
+
+            if(!$response->isEnabled()){
+                $this->addFlash('danger', 'Account is not activated. Check your mailbox for confirmation mail.');
+                return $this->render('user/signin.html.twig');
+            }
 
             $session = new Session();
 
-            if(!$authResponse->isSuccess()){
-                $session->getFlashBag()->set('danger', 'Authentication failed. Incorrect e-mail address or password.');
-                return $this->render('user/signin.html.twig');
-            }
-
-            if(!$authResponse->isEnabled()){
-                $session->getFlashBag()->set('danger', 'Account is not activated. Check your mailbox for confirmation mail.');
-                return $this->render('user/signin.html.twig');
-            }
-
             $session->set('is_granted', true);
-            $session->set('user', $authResponse->getUser());
+            $session->set('user', $response->getUser());
 
             if($rememberMe){
-                $cookie['identifier'] = $authResponse->getUser()->getRememberIdentifier();
-                $cookie['token'] = $authResponse->getRememberToken();
+                $cookie['identifier'] = $response->getUser()->getRememberIdentifier();
+                $cookie['token'] = $response->getRememberToken();
 
                 $this->getResponse()->headers->setCookie(new Cookie('remember', serialize($cookie), strtotime('now + 1 week')));
             }
@@ -114,16 +114,16 @@ class UserController extends AbstractController
         if($this->getRequest()->cookies->has('remember') && !$session->has('is_granted')){
             $cookie = unserialize($this->getRequest()->cookies->get('remember'));
 
-            $authRequest = new RememberedAuthRequest();
-            $authRequest->setRememberIdentifier($cookie['identifier']);
-            $authRequest->setRememberToken($cookie['token']);
+            $request = new RememberedAuthRequest();
+            $request->setRememberIdentifier($cookie['identifier']);
+            $request->setRememberToken($cookie['token']);
 
-            $authService = $this->getContainer()->get('user.remembered_auth');
-            $authResponse = $authService->process($authRequest);
+            $service = $this->getContainer()->get('user.remembered_auth');
+            $response = $service->process($request);
 
-            if($authResponse->isSuccess()){
+            if($response->isSuccess()){
                 $session->set('is_granted', true);
-                $session->set('user', $authResponse->getUser());
+                $session->set('user', $response->getUser());
 
                 $this->getResponse()->headers->setCookie(new Cookie('remember', serialize($cookie), strtotime('now + 1 week')));
             }
@@ -150,19 +150,18 @@ class UserController extends AbstractController
         $form = new FormHandler();
 
         if($form->handle($this->getRequest())){
-            $signupRequest = new SignupRequest();
-            $signupRequest = $form->serializeData($signupRequest);
-            $signupService = $this->getContainer()->get('user.signup');
-            $response = $signupService->process($signupRequest);
+            $request = new SignupRequest();
+            $request = $form->serializeData($request);
 
-            $session = new Session();
+            $service = $this->getContainer()->get('user.signup');
+            $response = $service->process($request);
 
             if($response->isSuccess()){
-                $session->getFlashBag()->set('success', 'Account created successfully. Check your mailbox for confirmation mail.');
+                $this->addFlash('success', 'Account created successfully. Check your mailbox for confirmation mail.');
                 return $this->redirectToAction('Default:index');
             }
 
-            $session->getFlashBag()->set('danger', 'Something went wrong.');
+            $this->addFlash('danger', 'Something went wrong.');
         }
 
         return $this->render('user/signup.html.twig');
@@ -178,13 +177,13 @@ class UserController extends AbstractController
      */
     public function emailCheckAction()
     {
-        $checkerRequest = new EmailCheckRequest();
-        $checkerRequest->setEmail($this->getRequest()->request->get('email'));
+        $request = new EmailCheckRequest();
+        $request->setEmail($this->getRequest()->request->get('email'));
 
-        $checkerService = $this->getContainer()->get('user.email_check');
-        $checkerResponse = $checkerService->process($checkerRequest);
+        $service = $this->getContainer()->get('user.email_check');
+        $response = $service->process($request);
 
-        if(!$checkerResponse->isSuccess()){
+        if(!$response->isSuccess()){
             return $this->json(['This email address is already taken.']);
         }
 
@@ -200,20 +199,18 @@ class UserController extends AbstractController
      */
     public function signupConfirmationAction(string $token)
     {
-        $confirmationRequest = new SignupConfirmationRequest();
-        $confirmationRequest->setToken($token);
+        $request = new SignupConfirmationRequest();
+        $request->setToken($token);
 
-        $confirmationService = $this->getContainer()->get('user.signup_confirmation');
-        $confirmationResponse = $confirmationService->process($confirmationRequest);
+        $service = $this->getContainer()->get('user.signup_confirmation');
+        $response = $service->process($request);
 
-        $session = new Session();
-
-        if($confirmationResponse->isAlreadyActive()){
-            $session->getFlashBag()->set('warning', 'This account is already active.');
-        } elseif (!$confirmationResponse->isSuccess()){
-            $session->getFlashBag()->set('warning', 'Invalid confirmation token.');
+        if($response->isAlreadyActive()){
+            $this->addFlash('warning', 'This account is already active.');
+        } elseif (!$response->isSuccess()){
+            $this->addFlash('warning', 'Invalid confirmation token.');
         } else {
-            $session->getFlashBag()->set('success', 'Account activated successfully. Now you can sign in!');
+            $this->addFlash('success', 'Account activated successfully. Now you can sign in!');
         }
 
         return $this->redirectToAction('Default:index');

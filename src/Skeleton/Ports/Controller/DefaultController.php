@@ -14,7 +14,7 @@ class DefaultController extends AbstractController
 {
     /**
      * Default index action
-     * Route: /default/index and /
+     * Routes: /default/index, /default, /
      *
      * @return Response
      *

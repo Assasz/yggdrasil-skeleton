@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class ErrorController
  *
- * Executes HTTP errors actions, feel free to customize as needed
- * Can be extended with code 4xx and 5xx actions
+ * Executes HTTP errors actions
+ * Can be extended with code 4xx and 5xx actions, feel free to customize as needed
  *
  * @package Skeleton\Ports\Controller
  */
