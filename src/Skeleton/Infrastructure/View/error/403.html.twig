@@ -1,8 +1,8 @@
 {% extends 'layout/default.html.twig' %}
 
-{% block title %}Access denied{% endblock %}
+{% block title %}Forbidden{% endblock %}
 
 {% block content %}
     <h1 class="text-danger pt-5">403</h1>
-    <p>{{ message|default('Access denied.') }}</p>
+    <p>{{ message|default('Forbidden.') }}</p>
 {% endblock %}

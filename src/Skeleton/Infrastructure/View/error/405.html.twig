@@ -1,0 +1,8 @@
+{% extends 'layout/default.html.twig' %}
+
+{% block title %}Method not allowed{% endblock %}
+
+{% block content %}
+    <h1 class="text-danger pt-5">405</h1>
+    <p>{{ message|default('Method not allowed.') }}</p>
+{% endblock %}
