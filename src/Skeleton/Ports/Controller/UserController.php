@@ -109,9 +109,7 @@ class UserController extends AbstractController
      */
     public function authCookiePassiveAction()
     {
-        $session = new Session();
-
-        if($this->getRequest()->cookies->has('remember') && !$session->has('is_granted')){
+        if($this->getRequest()->cookies->has('remember') && !$this->isGranted()){
             $cookie = unserialize($this->getRequest()->cookies->get('remember'));
 
             $request = new RememberedAuthRequest();
@@ -122,6 +120,7 @@ class UserController extends AbstractController
             $response = $service->process($request);
 
             if($response->isSuccess()){
+                $session = new Session();
                 $session->set('is_granted', true);
                 $session->set('user', $response->getUser());
 
