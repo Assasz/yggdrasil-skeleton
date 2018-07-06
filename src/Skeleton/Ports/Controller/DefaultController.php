@@ -22,7 +22,7 @@ class DefaultController extends AbstractController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         return $this->render('default/index.html.twig');
     }

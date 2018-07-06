@@ -34,17 +34,18 @@ class AuthService extends AbstractService implements ServiceInterface
 
         $response = new AuthResponse();
 
-        if($user !== null) {
+        if (!empty($user)) {
             if (password_verify($request->getPassword(), $user->getPassword())) {
                 $response->setSuccess(true);
                 $response->setUser($user);
 
-                if($user->getEnabled() == '0'){
+                if ($user->getEnabled() == '0') {
                     $response->setEnabled(false);
+                    
                     return $response;
                 }
 
-                if($request->getRemember()){
+                if ($request->isRemembered()) {
                     $rememberToken = bin2hex(random_bytes(32));
                     $hash = password_hash($rememberToken, PASSWORD_BCRYPT);
 

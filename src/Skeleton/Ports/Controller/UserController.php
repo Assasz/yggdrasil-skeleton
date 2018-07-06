@@ -36,29 +36,31 @@ class UserController extends AbstractController
      */
     public function signinAction()
     {
-        if($this->isGranted()){
+        if ($this->isGranted()) {
             return $this->redirectToAction('Default:index');
         }
 
         $form = new FormHandler();
 
-        if($form->handle($this->getRequest())){
+        if ($form->handle($this->getRequest())) {
             $rememberMe = $form->hasData('remember_me');
 
             $request = new AuthRequest();
             $request = $form->serializeData($request);
-            $request->setRemember($rememberMe);
+            $request->setRemembered($rememberMe);
 
             $service = $this->getContainer()->get('user.auth');
             $response = $service->process($request);
 
-            if(!$response->isSuccess()){
+            if (!$response->isSuccess()) {
                 $this->addFlash('danger', 'Authentication failed. Incorrect e-mail address or password.');
+
                 return $this->render('user/signin.html.twig');
             }
 
-            if(!$response->isEnabled()){
+            if (!$response->isEnabled()) {
                 $this->addFlash('danger', 'Account is not activated. Check your mailbox for confirmation mail.');
+
                 return $this->render('user/signin.html.twig');
             }
 
@@ -67,7 +69,7 @@ class UserController extends AbstractController
             $session->set('is_granted', true);
             $session->set('user', $response->getUser());
 
-            if($rememberMe){
+            if ($rememberMe) {
                 $cookie['identifier'] = $response->getUser()->getRememberIdentifier();
                 $cookie['token'] = $response->getRememberToken();
 
@@ -86,16 +88,16 @@ class UserController extends AbstractController
      *
      * @return RedirectResponse
      */
-    public function signoutAction()
+    public function signoutAction(): RedirectResponse
     {
-        if(!$this->isGranted()){
+        if (!$this->isGranted()) {
             return $this->redirectToAction('Default:index');
         }
 
         $session = new Session();
         $session->invalidate();
 
-        if($this->getResponse()->headers->has('set-cookie') || $this->getRequest()->cookies->has('remember')){
+        if ($this->getResponse()->headers->has('set-cookie') || $this->getRequest()->cookies->has('remember')) {
             $this->getResponse()->headers->clearCookie('remember');
         }
 
@@ -107,9 +109,9 @@ class UserController extends AbstractController
      *
      * @return Response
      */
-    public function authCookiePassiveAction()
+    public function authCookiePassiveAction(): Response
     {
-        if($this->getRequest()->cookies->has('remember') && !$this->isGranted()){
+        if ($this->getRequest()->cookies->has('remember') && !$this->isGranted()) {
             $cookie = unserialize($this->getRequest()->cookies->get('remember'));
 
             $request = new RememberedAuthRequest();
@@ -119,7 +121,7 @@ class UserController extends AbstractController
             $service = $this->getContainer()->get('user.remembered_auth');
             $response = $service->process($request);
 
-            if($response->isSuccess()){
+            if ($response->isSuccess()) {
                 $session = new Session();
                 $session->set('is_granted', true);
                 $session->set('user', $response->getUser());
@@ -136,27 +138,29 @@ class UserController extends AbstractController
      * Route: /user/signup
      *
      * @return RedirectResponse|Response
+     *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
     public function signupAction()
     {
-        if($this->isGranted()){
+        if ($this->isGranted()) {
             return $this->redirectToAction('Default:index');
         }
 
         $form = new FormHandler();
 
-        if($form->handle($this->getRequest())){
+        if ($form->handle($this->getRequest())) {
             $request = new SignupRequest();
             $request = $form->serializeData($request);
 
             $service = $this->getContainer()->get('user.signup');
             $response = $service->process($request);
 
-            if($response->isSuccess()){
+            if ($response->isSuccess()) {
                 $this->addFlash('success', 'Account created successfully. Check your mailbox for confirmation mail.');
+
                 return $this->redirectToAction('Default:index');
             }
 
@@ -174,7 +178,7 @@ class UserController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function emailCheckAction()
+    public function emailCheckAction(): JsonResponse
     {
         $request = new EmailCheckRequest();
         $request->setEmail($this->getRequest()->request->get('email'));
@@ -182,11 +186,11 @@ class UserController extends AbstractController
         $service = $this->getContainer()->get('user.email_check');
         $response = $service->process($request);
 
-        if(!$response->isSuccess()){
+        if (!$response->isSuccess()) {
             return $this->json(['This email address is already taken.']);
         }
 
-        return $this->json(["true"]);
+        return $this->json(['true']);
     }
 
     /**
@@ -196,7 +200,7 @@ class UserController extends AbstractController
      * @param string $token
      * @return RedirectResponse
      */
-    public function signupConfirmationAction(string $token)
+    public function signupConfirmationAction(string $token): RedirectResponse
     {
         $request = new SignupConfirmationRequest();
         $request->setToken($token);
@@ -204,9 +208,9 @@ class UserController extends AbstractController
         $service = $this->getContainer()->get('user.signup_confirmation');
         $response = $service->process($request);
 
-        if($response->isAlreadyActive()){
+        if ($response->isAlreadyActive()) {
             $this->addFlash('warning', 'This account is already active.');
-        } elseif (!$response->isSuccess()){
+        } elseif (!$response->isSuccess()) {
             $this->addFlash('warning', 'Invalid confirmation token.');
         } else {
             $this->addFlash('success', 'Account activated successfully. Now you can sign in!');

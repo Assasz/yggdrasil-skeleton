@@ -30,7 +30,7 @@ class EmailCheckService extends AbstractService implements ServiceInterface
 
         $response = new EmailCheckResponse();
 
-        if(count($users) < 1){
+        if (count($users) < 1) {
             $response->setSuccess(true);
         }
 

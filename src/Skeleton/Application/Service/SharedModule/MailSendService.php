@@ -32,7 +32,7 @@ class MailSendService extends AbstractService implements ServiceInterface
 
         $response = new MailSendResponse();
 
-        if($this->getMailer()->send($message)){
+        if ($this->getMailer()->send($message)) {
             $response->setSuccess(true);
         }
 

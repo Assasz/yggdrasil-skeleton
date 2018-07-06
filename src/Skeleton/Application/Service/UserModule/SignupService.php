@@ -39,25 +39,27 @@ class SignupService extends AbstractService implements ServiceInterface
         $errors = $this->getValidator()->validate($user);
         $response = new SignupResponse();
 
-        if(count($errors) < 1){
+        if (count($errors) < 1) {
             $link = $this->getRouter()->getQuery('User:signupConfirmation', [$user->getConfirmationToken()]);
-            $body = 'Hi '.$user->getUsername().'! Click <a href="'.$link.'">here</a> to activate your account.<br><br>Best regards, your Team.';
+            $body = $this->getTemplateEngine()->render('mail/signup_confirmation.html.twig', [
+                'username' => $user->getUsername(),
+                'link' => $link
+            ]);
 
-            $mailSenderRequest = new MailSendRequest();
-            $mailSenderRequest->setSubject('Sign up confirmation');
-            $mailSenderRequest->setBody($body);
-            $mailSenderRequest->setSender(['team@application.com' => 'Application Team']);
-            $mailSenderRequest->setReceivers([$user->getEmail() => $user->getUsername()]);
+            $mailSendRequest = new MailSendRequest();
+            $mailSendRequest->setSubject('Sign up confirmation');
+            $mailSendRequest->setBody($body);
+            $mailSendRequest->setSender(['team@application.com' => 'Application Team']);
+            $mailSendRequest->setReceivers([$user->getEmail() => $user->getUsername()]);
 
-            $mailSenderService = $this->getContainer()->get('shared.mail_send');
-            $mailSenderResponse = $mailSenderService->process($mailSenderRequest);
+            $mailSendService = $this->getContainer()->get('shared.mail_send');
+            $mailSendResponse = $mailSendService->process($mailSendRequest);
 
-            if($mailSenderResponse->isSuccess()) {
+            if ($mailSendResponse->isSuccess()) {
                 $user->setPassword(password_hash($request->getPassword(), PASSWORD_BCRYPT));
 
-                $entityManager = $this->getEntityManager();
-                $entityManager->persist($user);
-                $entityManager->flush();
+                $this->getEntityManager()->persist($user);
+                $this->getEntityManager()->flush();
 
                 $response->setSuccess(true);
             }

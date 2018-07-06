@@ -33,7 +33,7 @@ class AuthRequest implements ServiceRequestInterface
      *
      * @var bool
      */
-    private $remember;
+    private $remembered;
 
     /**
      * Returns user email address
@@ -80,18 +80,18 @@ class AuthRequest implements ServiceRequestInterface
      *
      * @return bool
      */
-    public function getRemember(): bool
+    public function isRemembered(): bool
     {
-        return $this->remember;
+        return $this->remembered;
     }
 
     /**
      * Sets "remember me" flag
      *
-     * @param bool $remember
+     * @param bool $remembered
      */
-    public function setRemember(bool $remember): void
+    public function setRemembered(bool $remembered): void
     {
-        $this->remember = $remember;
+        $this->remembered = $remembered;
     }
 }

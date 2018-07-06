@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
@@ -21,5 +21,5 @@ try {
 
     $application->run();
 } catch (Exception $e) {
-    echo 'Console error: '.$e->getMessage();
+    echo 'Console error: ' . $e->getMessage();
 }

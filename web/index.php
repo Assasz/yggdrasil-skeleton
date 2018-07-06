@@ -1,12 +1,13 @@
 <?php
+
 define('BASE_URL', 'http://localhost/yggdrasil-skeleton/web/');
 define('DEBUG', true);
 
-if(!DEBUG) {
+if (!DEBUG) {
     ini_set('display_errors', 0);
 }
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
 use Skeleton\Infrastructure\Config\AppConfiguration;

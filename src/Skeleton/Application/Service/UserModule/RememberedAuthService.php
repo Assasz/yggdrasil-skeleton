@@ -30,8 +30,8 @@ class RememberedAuthService extends AbstractService implements ServiceInterface
 
         $response = new RememberedAuthResponse();
 
-        if($user !== null){
-            if(password_verify($request->getRememberToken(), $user->getRememberToken())){
+        if (!empty($user)) {
+            if (password_verify($request->getRememberToken(), $user->getRememberToken())) {
                 $response->setSuccess(true);
                 $response->setUser($user);
             }
