@@ -31,12 +31,13 @@ class SignupService extends AbstractService implements ServiceInterface
      */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
-        $user = new User();
-        $user->setEmail($request->getEmail());
-        $user->setUsername($request->getUsername());
-        $user->setPassword($request->getPassword());
+        $user = (new User())
+            ->setEmail($request->getEmail())
+            ->setUsername($request->getUsername())
+            ->setPassword($request->getPassword());
 
         $errors = $this->getValidator()->validate($user);
+
         $response = new SignupResponse();
 
         if (count($errors) < 1) {
@@ -46,11 +47,11 @@ class SignupService extends AbstractService implements ServiceInterface
                 'link' => $link
             ]);
 
-            $mailSendRequest = new MailSendRequest();
-            $mailSendRequest->setSubject('Sign up confirmation');
-            $mailSendRequest->setBody($body);
-            $mailSendRequest->setSender(['team@application.com' => 'Application Team']);
-            $mailSendRequest->setReceivers([$user->getEmail() => $user->getUsername()]);
+            $mailSendRequest = (new MailSendRequest())
+                ->setSubject('Sign up confirmation')
+                ->setBody($body)
+                ->setSender(['team@application.com' => 'Application Team'])
+                ->setReceivers([$user->getEmail() => $user->getUsername()]);
 
             $mailSendService = $this->getContainer()->get('shared.mail_send');
             $mailSendResponse = $mailSendService->process($mailSendRequest);

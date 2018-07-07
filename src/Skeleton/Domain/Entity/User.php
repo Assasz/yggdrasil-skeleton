@@ -71,7 +71,7 @@ class User
     private $enabled;
 
     /**
-     * User confirmation token
+     * User sign up confirmation token
      *
      * @Column(type="string", length=255)
      * @var string $confirmationToken
@@ -116,10 +116,13 @@ class User
      * Sets user username
      *
      * @param string $username
+     * @return User
      */
-    public function setUsername(string $username): void
+    public function setUsername(string $username): User
     {
         $this->username = $username;
+
+        return $this;
     }
 
     /**
@@ -136,10 +139,13 @@ class User
      * Sets user email
      *
      * @param string $email
+     * @return User
      */
-    public function setEmail(string $email): void
+    public function setEmail(string $email): User
     {
         $this->email = $email;
+
+        return $this;
     }
 
     /**
@@ -156,10 +162,13 @@ class User
      * Sets user password
      *
      * @param string $password
+     * @return User
      */
-    public function setPassword(string $password): void
+    public function setPassword(string $password): User
     {
         $this->password = $password;
+
+        return $this;
     }
 
     /**
@@ -176,10 +185,13 @@ class User
      * Sets user remember token
      *
      * @param string $token
+     * @return User
      */
-    public function setRememberToken(string $token): void
+    public function setRememberToken(string $token): User
     {
         $this->rememberToken = $token;
+
+        return $this;
     }
 
     /**
@@ -196,10 +208,13 @@ class User
      * Sets user remember identifier
      *
      * @param string $rememberIdentifier
+     * @return User
      */
-    public function setRememberIdentifier(string $rememberIdentifier): void
+    public function setRememberIdentifier(string $rememberIdentifier): User
     {
         $this->rememberIdentifier = $rememberIdentifier;
+
+        return $this;
     }
 
     /**
@@ -216,10 +231,13 @@ class User
      * Sets user enabled status
      *
      * @param string $enabled
+     * @return User
      */
-    public function setEnabled(string $enabled): void
+    public function setEnabled(string $enabled): User
     {
         $this->enabled = $enabled;
+
+        return $this;
     }
 
     /**
@@ -236,9 +254,12 @@ class User
      * Sets user confirmation token
      *
      * @param string $confirmationToken
+     * @return User
      */
-    public function setConfirmationToken(string $confirmationToken): void
+    public function setConfirmationToken(string $confirmationToken): User
     {
         $this->confirmationToken = $confirmationToken;
+
+        return $this;
     }
 }

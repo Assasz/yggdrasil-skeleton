@@ -66,10 +66,13 @@ class MailSendRequest implements ServiceRequestInterface
      * Sets mail subject
      *
      * @param string $subject
+     * @return MailSendRequest
      */
-    public function setSubject(string $subject): void
+    public function setSubject(string $subject): MailSendRequest
     {
         $this->subject = $subject;
+
+        return $this;
     }
 
     /**
@@ -86,10 +89,13 @@ class MailSendRequest implements ServiceRequestInterface
      * Sets mail body
      *
      * @param string $body
+     * @return MailSendRequest
      */
-    public function setBody(string $body)
+    public function setBody(string $body): MailSendRequest
     {
         $this->body = $body;
+
+        return $this;
     }
 
     /**
@@ -106,10 +112,13 @@ class MailSendRequest implements ServiceRequestInterface
      * Sets set of senders
      *
      * @param array $sender
+     * @return MailSendRequest
      */
-    public function setSender(array $sender)
+    public function setSender(array $sender): MailSendRequest
     {
         $this->sender = $sender;
+
+        return $this;
     }
 
     /**
@@ -126,9 +135,12 @@ class MailSendRequest implements ServiceRequestInterface
      * Sets set of receivers
      *
      * @param array $receivers
+     * @return MailSendRequest
      */
-    public function setReceivers(array $receivers)
+    public function setReceivers(array $receivers): MailSendRequest
     {
         $this->receivers = $receivers;
+
+        return $this;
     }
 }

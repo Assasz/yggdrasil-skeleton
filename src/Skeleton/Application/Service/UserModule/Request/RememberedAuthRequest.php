@@ -41,10 +41,13 @@ class RememberedAuthRequest implements ServiceRequestInterface
      * Sets remember token
      *
      * @param string $rememberToken
+     * @return RememberedAuthRequest
      */
-    public function setRememberToken(string $rememberToken): void
+    public function setRememberToken(string $rememberToken): RememberedAuthRequest
     {
         $this->rememberToken = $rememberToken;
+
+        return $this;
     }
 
     /**
@@ -61,9 +64,12 @@ class RememberedAuthRequest implements ServiceRequestInterface
      * Sets remember identifier
      *
      * @param string $rememberIdentifier
+     * @return RememberedAuthRequest
      */
-    public function setRememberIdentifier(string $rememberIdentifier): void
+    public function setRememberIdentifier(string $rememberIdentifier): RememberedAuthRequest
     {
         $this->rememberIdentifier = $rememberIdentifier;
+
+        return $this;
     }
 }

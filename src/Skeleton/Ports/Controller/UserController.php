@@ -114,9 +114,9 @@ class UserController extends AbstractController
         if ($this->getRequest()->cookies->has('remember') && !$this->isGranted()) {
             $cookie = unserialize($this->getRequest()->cookies->get('remember'));
 
-            $request = new RememberedAuthRequest();
-            $request->setRememberIdentifier($cookie['identifier']);
-            $request->setRememberToken($cookie['token']);
+            $request = (new RememberedAuthRequest())
+                ->setRememberIdentifier($cookie['identifier'])
+                ->setRememberToken($cookie['token']);
 
             $service = $this->getContainer()->get('user.remembered_auth');
             $response = $service->process($request);
