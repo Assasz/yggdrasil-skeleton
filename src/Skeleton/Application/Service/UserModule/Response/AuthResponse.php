@@ -67,10 +67,13 @@ class AuthResponse implements ServiceResponseInterface
      * Sets result of service processing
      *
      * @param bool $success
+     * @return AuthResponse
      */
-    public function setSuccess(bool $success): void
+    public function setSuccess(bool $success): AuthResponse
     {
         $this->success = $success;
+
+        return $this;
     }
 
     /**
@@ -87,10 +90,13 @@ class AuthResponse implements ServiceResponseInterface
      * Sets authenticated user instance
      *
      * @param User $user
+     * @return AuthResponse
      */
-    public function setUser(User $user): void
+    public function setUser(User $user): AuthResponse
     {
         $this->user = $user;
+
+        return $this;
     }
 
     /**
@@ -107,10 +113,13 @@ class AuthResponse implements ServiceResponseInterface
      * Sets remember me token
      *
      * @param string $rememberToken
+     * @return AuthResponse
      */
-    public function setRememberToken(string $rememberToken): void
+    public function setRememberToken(string $rememberToken): AuthResponse
     {
         $this->rememberToken = $rememberToken;
+
+        return $this;
     }
 
     /**
@@ -127,9 +136,12 @@ class AuthResponse implements ServiceResponseInterface
      * Sets user enabled status
      *
      * @param bool $enabled
+     * @return AuthResponse
      */
-    public function setEnabled(bool $enabled): void
+    public function setEnabled(bool $enabled): AuthResponse
     {
         $this->enabled = $enabled;
+
+        return $this;
     }
 }

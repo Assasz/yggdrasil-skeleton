@@ -44,9 +44,12 @@ class EmailCheckResponse implements ServiceResponseInterface
      * Sets result of service processing
      *
      * @param bool $success
+     * @return EmailCheckResponse
      */
-    public function setSuccess(bool $success): void
+    public function setSuccess(bool $success): EmailCheckResponse
     {
         $this->success = $success;
+
+        return $this;
     }
 }

@@ -52,10 +52,13 @@ class RememberedAuthResponse implements ServiceResponseInterface
      * Sets result of service processing
      *
      * @param bool $success
+     * @return RememberedAuthResponse
      */
-    public function setSuccess(bool $success): void
+    public function setSuccess(bool $success): RememberedAuthResponse
     {
         $this->success = $success;
+
+        return $this;
     }
 
     /**
@@ -72,9 +75,12 @@ class RememberedAuthResponse implements ServiceResponseInterface
      * Sets authenticated user instance
      *
      * @param User $user
+     * @return RememberedAuthResponse
      */
-    public function setUser(User $user): void
+    public function setUser(User $user): RememberedAuthResponse
     {
         $this->user = $user;
+
+        return $this;
     }
 }

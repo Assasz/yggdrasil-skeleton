@@ -30,14 +30,17 @@ class AuthService extends AbstractService implements ServiceInterface
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
         $entityManager = $this->getEntityManager();
-        $user = $entityManager->getRepository('Entity:User')->findOneByEmail($request->getEmail());
+        $user = $entityManager
+            ->getRepository('Entity:User')
+            ->findOneByEmail($request->getEmail());
 
         $response = new AuthResponse();
 
         if (!empty($user)) {
             if (password_verify($request->getPassword(), $user->getPassword())) {
-                $response->setSuccess(true);
-                $response->setUser($user);
+                $response
+                    ->setSuccess(true)
+                    ->setUser($user);
 
                 if ($user->getEnabled() == '0') {
                     $response->setEnabled(false);

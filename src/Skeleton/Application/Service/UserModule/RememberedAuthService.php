@@ -26,15 +26,17 @@ class RememberedAuthService extends AbstractService implements ServiceInterface
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
         $entityManager = $this->getEntityManager();
-        $user = $entityManager->getRepository('Entity:User')
+        $user = $entityManager
+            ->getRepository('Entity:User')
             ->findOneByRememberIdentifier($request->getRememberIdentifier());
 
         $response = new RememberedAuthResponse();
 
         if (!empty($user)) {
             if (password_verify($request->getRememberToken(), $user->getRememberToken())) {
-                $response->setSuccess(true);
-                $response->setUser($user);
+                $response
+                    ->setSuccess(true)
+                    ->setUser($user);
             }
         }
 

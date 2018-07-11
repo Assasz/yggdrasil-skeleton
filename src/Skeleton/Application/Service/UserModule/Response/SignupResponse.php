@@ -44,9 +44,12 @@ class SignupResponse implements ServiceResponseInterface
      * Sets result of service processing
      *
      * @param bool $success
+     * @return SignupResponse
      */
-    public function setSuccess(bool $success): void
+    public function setSuccess(bool $success): SignupResponse
     {
         $this->success = $success;
+
+        return $this;
     }
 }

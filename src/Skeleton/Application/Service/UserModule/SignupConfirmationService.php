@@ -29,7 +29,9 @@ class SignupConfirmationService extends AbstractService implements ServiceInterf
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
         $entityManager = $this->getEntityManager();
-        $user = $entityManager->getRepository('Entity:User')->findOneByConfirmationToken($request->getToken());
+        $user = $entityManager
+            ->getRepository('Entity:User')
+            ->findOneByConfirmationToken($request->getToken());
 
         $response = new SignupConfirmationResponse();
 

@@ -52,10 +52,13 @@ class SignupConfirmationResponse implements ServiceResponseInterface
      * Sets result of service processing
      *
      * @param bool $success
+     * @return SignupConfirmationResponse
      */
-    public function setSuccess(bool $success): void
+    public function setSuccess(bool $success): SignupConfirmationResponse
     {
         $this->success = $success;
+
+        return $this;
     }
 
     /**
@@ -72,9 +75,12 @@ class SignupConfirmationResponse implements ServiceResponseInterface
      * Sets activation status of user account
      *
      * @param bool $alreadyActive
+     * @return SignupConfirmationResponse
      */
-    public function setAlreadyActive(bool $alreadyActive): void
+    public function setAlreadyActive(bool $alreadyActive): SignupConfirmationResponse
     {
         $this->alreadyActive = $alreadyActive;
+
+        return $this;
     }
 }
