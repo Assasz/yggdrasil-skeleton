@@ -48,10 +48,13 @@ class SignupRequest implements ServiceRequestInterface
      * Sets user email address
      *
      * @param string $email
+     * @return SignupRequest
      */
-    public function setEmail(string $email): void
+    public function setEmail(string $email): SignupRequest
     {
         $this->email = $email;
+
+        return $this;
     }
 
     /**
@@ -68,10 +71,13 @@ class SignupRequest implements ServiceRequestInterface
      * Sets user username
      *
      * @param string $username
+     * @return SignupRequest
      */
-    public function setUsername(string $username): void
+    public function setUsername(string $username): SignupRequest
     {
         $this->username = $username;
+
+        return $this;
     }
 
     /**
@@ -88,9 +94,12 @@ class SignupRequest implements ServiceRequestInterface
      * Sets user password
      *
      * @param string $password
+     * @return SignupRequest
      */
-    public function setPassword(string $password): void
+    public function setPassword(string $password): SignupRequest
     {
         $this->password = $password;
+
+        return $this;
     }
 }

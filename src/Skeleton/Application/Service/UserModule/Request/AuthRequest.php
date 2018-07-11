@@ -49,10 +49,13 @@ class AuthRequest implements ServiceRequestInterface
      * Sets user email address
      *
      * @param string $email
+     * @return AuthRequest
      */
-    public  function setEmail(string $email): void
+    public  function setEmail(string $email): AuthRequest
     {
         $this->email = $email;
+
+        return $this;
     }
 
     /**
@@ -69,10 +72,13 @@ class AuthRequest implements ServiceRequestInterface
      * Sets user password
      *
      * @param string $password
+     * @return AuthRequest
      */
-    public function setPassword(string $password): void
+    public function setPassword(string $password): AuthRequest
     {
         $this->password = $password;
+
+        return $this;
     }
 
     /**
@@ -89,9 +95,12 @@ class AuthRequest implements ServiceRequestInterface
      * Sets "remember me" flag
      *
      * @param bool $remembered
+     * @return AuthRequest
      */
-    public function setRemembered(bool $remembered): void
+    public function setRemembered(bool $remembered): AuthRequest
     {
         $this->remembered = $remembered;
+
+        return $this;
     }
 }

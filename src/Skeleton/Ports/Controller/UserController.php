@@ -46,8 +46,8 @@ class UserController extends AbstractController
             $rememberMe = $form->hasData('remember_me');
 
             $request = new AuthRequest();
-            $request = $form->serializeData($request);
-            $request->setRemembered($rememberMe);
+            $request = $form->serializeData($request)
+                ->setRemembered($rememberMe);
 
             $service = $this->getContainer()->get('user.auth');
             $response = $service->process($request);
@@ -180,8 +180,8 @@ class UserController extends AbstractController
      */
     public function emailCheckAction(): JsonResponse
     {
-        $request = new EmailCheckRequest();
-        $request->setEmail($this->getRequest()->request->get('email'));
+        $request = (new EmailCheckRequest())
+            ->setEmail($this->getRequest()->request->get('email'));
 
         $service = $this->getContainer()->get('user.email_check');
         $response = $service->process($request);
@@ -202,8 +202,8 @@ class UserController extends AbstractController
      */
     public function signupConfirmationAction(string $token): RedirectResponse
     {
-        $request = new SignupConfirmationRequest();
-        $request->setToken($token);
+        $request = (new SignupConfirmationRequest())
+            ->setToken($token);
 
         $service = $this->getContainer()->get('user.signup_confirmation');
         $response = $service->process($request);

@@ -34,9 +34,12 @@ class EmailCheckRequest implements ServiceRequestInterface
      * Sets email address
      *
      * @param string $email
+     * @return EmailCheckRequest
      */
-    public function setEmail(string $email): void
+    public function setEmail(string $email): EmailCheckRequest
     {
         $this->email = $email;
+
+        return $this;
     }
 }

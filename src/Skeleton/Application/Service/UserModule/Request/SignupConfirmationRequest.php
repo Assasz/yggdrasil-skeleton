@@ -34,9 +34,12 @@ class SignupConfirmationRequest implements ServiceRequestInterface
      * Sets confirmation token
      *
      * @param string $token
+     * @return SignupConfirmationRequest
      */
-    public function setToken(string $token): void
+    public function setToken(string $token): SignupConfirmationRequest
     {
         $this->token = $token;
+
+        return $this;
     }
 }
