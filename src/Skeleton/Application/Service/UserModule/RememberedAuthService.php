@@ -18,15 +18,14 @@ use Yggdrasil\Core\Service\ServiceResponseInterface;
 class RememberedAuthService extends AbstractService implements ServiceInterface
 {
     /**
-     * Authenticates user by remember me cookie
+     * Authenticates remembered user
      *
      * @param ServiceRequestInterface $request
      * @return ServiceResponseInterface
      */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
-        $entityManager = $this->getEntityManager();
-        $user = $entityManager
+        $user = $this->getEntityManager()
             ->getRepository('Entity:User')
             ->findOneByRememberIdentifier($request->getRememberIdentifier());
 

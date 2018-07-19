@@ -28,8 +28,7 @@ class SignupConfirmationService extends AbstractService implements ServiceInterf
      */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
-        $entityManager = $this->getEntityManager();
-        $user = $entityManager
+        $user = $this->getEntityManager()
             ->getRepository('Entity:User')
             ->findOneByConfirmationToken($request->getToken());
 
@@ -43,7 +42,7 @@ class SignupConfirmationService extends AbstractService implements ServiceInterf
             }
 
             $user->setEnabled('1');
-            $entityManager->flush();
+            $this->getEntityManager()->flush();
 
             $response->setSuccess(true);
         }

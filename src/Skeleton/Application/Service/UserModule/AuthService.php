@@ -29,8 +29,7 @@ class AuthService extends AbstractService implements ServiceInterface
      */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
-        $entityManager = $this->getEntityManager();
-        $user = $entityManager
+        $user = $this->getEntityManager()
             ->getRepository('Entity:User')
             ->findOneByEmail($request->getEmail());
 
@@ -53,7 +52,7 @@ class AuthService extends AbstractService implements ServiceInterface
                     $hash = password_hash($rememberToken, PASSWORD_BCRYPT);
 
                     $user->setRememberToken($hash);
-                    $entityManager->flush();
+                    $this->getEntityManager()->flush();
 
                     $response->setRememberToken($rememberToken);
                 }

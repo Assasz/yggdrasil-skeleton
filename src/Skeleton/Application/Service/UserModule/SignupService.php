@@ -41,7 +41,10 @@ class SignupService extends AbstractService implements ServiceInterface
         $response = new SignupResponse();
 
         if (count($errors) < 1) {
-            $link = $this->getRouter()->getQuery('User:signupConfirmation', [$user->getConfirmationToken()]);
+            $link = $this->getRouter()->getQuery('User:signupConfirmation', [
+                $user->getConfirmationToken()
+            ]);
+
             $body = $this->getTemplateEngine()->render('mail/signup_confirmation.html.twig', [
                 'username' => $user->getUsername(),
                 'link' => $link

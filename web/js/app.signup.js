@@ -33,10 +33,8 @@ function loadSignupActions(){
                     },
                     dataFilter: function(data) {
                         var response = JSON.parse(data);
-                        if(response === "true") {
-                            return true;
-                        }
-                        return "\"" + response + "\"";
+
+                        return (response === "true") ? true : "\"" + response + "\"";
                     }
                 },
                 required: true,
