@@ -1,14 +1,6 @@
-$(document).ready(function () {
-    loadSignupActions();
-});
-
-$(document).on('pjax:end', function () {
-    loadSignupActions();
-});
-
-function loadSignupActions(){
-    $(document).on('click', '[data-action="show-password"]', function () {
-        if($('#password').attr('type') == 'password'){
+app.actions.signup = function() {
+    $('[data-action="show-password"]').click(function () {
+        if($('#password').attr('type') === 'password'){
             $('#password').attr('type', 'text');
             $('#toggle-password').html('<span class="fa fa-fw fa-eye-slash" aria-hidden="true"></span>\n' +
                 '<span class="offscreen">Hide password</span>');
@@ -67,4 +59,6 @@ function loadSignupActions(){
             error.appendTo( element.parent() );
         }
     });
-}
+};
+
+app.run('signup');
