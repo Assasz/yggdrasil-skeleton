@@ -1,6 +1,9 @@
-app.actions.signup = function() {
+/**
+ * Show password action
+ */
+app.register('showPassword', function() {
     $('[data-action="show-password"]').click(function () {
-        if($('#password').attr('type') === 'password'){
+        if ($('#password').attr('type') === 'password') {
             $('#password').attr('type', 'text');
             $('#toggle-password').html('<span class="fa fa-fw fa-eye-slash" aria-hidden="true"></span>\n' +
                 '<span class="offscreen">Hide password</span>');
@@ -10,12 +13,17 @@ app.actions.signup = function() {
                 '<span class="offscreen">Show password</span>');
         }
     });
+});
 
+/**
+ * Validate form action
+ */
+app.register('validateForm', function() {
     $("#signup_form").validate({
         rules: {
             email: {
                 remote: {
-                    url: emailCheckRoute,
+                    url: 'emailcheck',
                     type: "post",
                     dataType: "json",
                     data: {
@@ -59,6 +67,7 @@ app.actions.signup = function() {
             error.appendTo( element.parent() );
         }
     });
-};
+});
 
-app.run('signup');
+app.run('showPassword')
+    .run('validateForm');

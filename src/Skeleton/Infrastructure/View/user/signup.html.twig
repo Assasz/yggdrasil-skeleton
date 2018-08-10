@@ -43,8 +43,5 @@
 {% endblock %}
 
 {% block js %}
-    <script>
-        var emailCheckRoute = '{{ path('User:emailCheck') }}';
-    </script>
-    <script src="{{ asset('js/app.signup.js') }}"></script>
+    <script src="{{ asset('js/actions/signup.js') }}"></script>
 {% endblock %}
