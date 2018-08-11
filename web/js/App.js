@@ -99,11 +99,15 @@ class App {
     /**
      * Uses given plugin
      *
-     * @param name Name of plugin
+     * @param {string} plugin Name of plugin
      * @return {object}
      */
-    use(name) {
-        return this.plugins[name];
+    use(plugin) {
+        if (typeof this.plugins[plugin] === 'undefined') {
+            console.error(plugin + ' plugin doesn\'t exist.');
+        }
+
+        return this.plugins[plugin];
     }
 }
 
