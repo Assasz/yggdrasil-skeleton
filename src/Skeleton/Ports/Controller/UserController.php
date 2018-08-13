@@ -49,8 +49,7 @@ class UserController extends AbstractController
             $request = $form->serializeData($request)
                 ->setRemembered($rememberMe);
 
-            $service = $this->getContainer()->get('user.auth');
-            $response = $service->process($request);
+            $response = $this->getService('user.auth')->process($request);
 
             if (!$response->isSuccess()) {
                 $this->addFlash('danger', 'Authentication failed. Incorrect e-mail address or password.');
@@ -118,8 +117,7 @@ class UserController extends AbstractController
                 ->setRememberIdentifier($cookie['identifier'])
                 ->setRememberToken($cookie['token']);
 
-            $service = $this->getContainer()->get('user.remembered_auth');
-            $response = $service->process($request);
+            $response = $this->getService('user.remembered_auth')->process($request);
 
             if ($response->isSuccess()) {
                 $session = new Session();
@@ -155,8 +153,7 @@ class UserController extends AbstractController
             $request = new SignupRequest();
             $request = $form->serializeData($request);
 
-            $service = $this->getContainer()->get('user.signup');
-            $response = $service->process($request);
+            $response = $this->getService('user.signup')->process($request);
 
             if ($response->isSuccess()) {
                 $this->addFlash('success', 'Account created successfully. Check your mailbox for confirmation mail.');
@@ -183,8 +180,7 @@ class UserController extends AbstractController
         $request = (new EmailCheckRequest())
             ->setEmail($this->getRequest()->request->get('email'));
 
-        $service = $this->getContainer()->get('user.email_check');
-        $response = $service->process($request);
+        $response = $this->getService('user.email_check')->process($request);
 
         if (!$response->isSuccess()) {
             return $this->json(['This email address is already taken.']);
@@ -205,8 +201,7 @@ class UserController extends AbstractController
         $request = (new SignupConfirmationRequest())
             ->setToken($token);
 
-        $service = $this->getContainer()->get('user.signup_confirmation');
-        $response = $service->process($request);
+        $response = $this->getService('user.signup_confirmation')->process($request);
 
         if ($response->isAlreadyActive()) {
             $this->addFlash('warning', 'This account is already active.');

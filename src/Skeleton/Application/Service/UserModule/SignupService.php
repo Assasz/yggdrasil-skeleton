@@ -56,8 +56,7 @@ class SignupService extends AbstractService implements ServiceInterface
                 ->setSender(['team@application.com' => 'Application Team'])
                 ->setReceivers([$user->getEmail() => $user->getUsername()]);
 
-            $mailSendService = $this->getContainer()->get('shared.mail_send');
-            $mailSendResponse = $mailSendService->process($mailSendRequest);
+            $mailSendResponse = $this->getService('shared.mail_send')->process($mailSendRequest);
 
             if ($mailSendResponse->isSuccess()) {
                 $user->setPassword(password_hash($request->getPassword(), PASSWORD_BCRYPT));
