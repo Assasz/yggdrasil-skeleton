@@ -17,7 +17,6 @@
     "assasz/yggdrasil": "dev-master",
     "symfony/console": "^4.0",
     "symfony/validator": "^4.0",
-    "league/container": "^2.4",
     "swiftmailer/swiftmailer": "^6.0",
     "symfony/yaml": "^4.0"
   }
