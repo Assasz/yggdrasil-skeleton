@@ -33,6 +33,7 @@ class UserController extends AbstractController
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
+     * @throws \Exception
      */
     public function signinAction()
     {
@@ -86,6 +87,8 @@ class UserController extends AbstractController
      * Route: /user/signout
      *
      * @return RedirectResponse
+     *
+     * @throws \Exception
      */
     public function signoutAction(): RedirectResponse
     {
@@ -107,6 +110,8 @@ class UserController extends AbstractController
      * Remember me cookie authentication passive action
      *
      * @return Response
+     *
+     * @throws \Exception
      */
     public function authCookiePassiveAction(): Response
     {
@@ -140,6 +145,7 @@ class UserController extends AbstractController
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
+     * @throws \Exception
      */
     public function signupAction()
     {
@@ -174,6 +180,8 @@ class UserController extends AbstractController
      * Used by jQuery validation to indicate if email address is already taken or not
      *
      * @return JsonResponse
+     *
+     * @throws \Exception
      */
     public function emailCheckAction(): JsonResponse
     {
@@ -195,6 +203,8 @@ class UserController extends AbstractController
      *
      * @param string $token
      * @return RedirectResponse
+     *
+     * @throws \Exception
      */
     public function signupConfirmationAction(string $token): RedirectResponse
     {
