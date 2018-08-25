@@ -41,7 +41,7 @@ class YjaxPlugin {
     /**
      * Calls remote GET action
      *
-     * @param {string}        action  Alias of remote action like Controller:action
+     * @param {string}        action  Alias of remote action like [API:]Controller:action
      * @param {array}         params  Remote action parameters
      * @param {function|null} success On success callback
      * @param {function|null} error   On error callback
@@ -67,7 +67,7 @@ class YjaxPlugin {
             };
 
         $.each(options, function (key, value) {
-            request.push({key: value});
+            request[key] = value;
         });
 
         $.ajax(request);
@@ -108,7 +108,7 @@ class YjaxPlugin {
             };
 
         $.each(options, function (key, value) {
-            request.push({key: value});
+            request[key] = value;
         });
 
         $.ajax(request);
@@ -149,7 +149,7 @@ class YjaxPlugin {
             };
 
         $.each(options, function (key, value) {
-            request.push({key: value});
+            request[key] = value;
         });
 
         $.ajax(request);
@@ -187,7 +187,7 @@ class YjaxPlugin {
             };
 
         $.each(options, function (key, value) {
-            request.push({key: value});
+            request[key] = value;
         });
 
         $.ajax(request);
