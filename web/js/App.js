@@ -7,6 +7,7 @@ class App {
      * Initializes properties
      */
     constructor() {
+        this.isPjax = false;
         this.actions = {};
         this.plugins = {};
     }
@@ -27,6 +28,8 @@ class App {
             });
         });
 
+        this.isPjax = true;
+
         return this;
     }
 
@@ -36,6 +39,12 @@ class App {
      * @returns {App}
      */
     initNProgress() {
+        if (!this.isPjax) {
+            console.warn('Pjax is not initialised and NProgress will not run.');
+
+            return this;
+        }
+
         $(document).ready(function () {
             $(document).on('pjax:send', function () {
                 NProgress.start();
@@ -68,17 +77,21 @@ class App {
     run(action) {
         if (typeof this.actions[action] === 'undefined') {
             console.error(action + ' action doesn\'t exist.');
+
+            return this;
         }
 
-        let that = this;
+        let self = this;
 
         $(document).ready(function () {
-            that.actions[action]();
+            self.actions[action]();
         });
 
-        $(document).on('pjax:end', function () {
-            that.actions[action]();
-        });
+        if (this.isPjax) {
+            $(document).on('pjax:end', function () {
+                self.actions[action]();
+            });
+        }
 
         return this;
     }
@@ -100,14 +113,15 @@ class App {
      * Uses given plugin
      *
      * @param {string} plugin Name of plugin
-     * @return {object}
+     * @return {object|null}
      */
     use(plugin) {
         if (typeof this.plugins[plugin] === 'undefined') {
             console.error(plugin + ' plugin doesn\'t exist.');
+
+            return null;
         }
 
         return this.plugins[plugin];
     }
 }
-

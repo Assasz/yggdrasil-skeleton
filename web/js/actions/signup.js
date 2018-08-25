@@ -19,6 +19,10 @@ app.register('showPassword', function() {
  * Validate form action
  */
 app.register('validateForm', function() {
+    const normalizer = function(value) {
+        return $.trim(value);
+    };
+
     $("#signup_form").validate({
         rules: {
             email: {
@@ -32,31 +36,24 @@ app.register('validateForm', function() {
                         }
                     },
                     dataFilter: function(data) {
-                        var response = JSON.parse(data);
-
+                        let response = JSON.parse(data);
                         return (response === "true") ? true : "\"" + response + "\"";
                     }
                 },
                 required: true,
                 email: true,
-                normalizer: function(value) {
-                    return $.trim(value);
-                }
+                normalizer: normalizer
             },
             username: {
                 required: true,
                 minlength: 2,
                 maxlength: 36,
-                normalizer: function(value) {
-                    return $.trim(value);
-                }
+                normalizer: normalizer
             },
             password: {
                 required: true,
                 minlength: 6,
-                normalizer: function(value) {
-                    return $.trim(value);
-                }
+                normalizer: normalizer
             }
         },
         onkeyup: false,
@@ -69,5 +66,4 @@ app.register('validateForm', function() {
     });
 });
 
-app.run('showPassword')
-    .run('validateForm');
+app.run('showPassword').run('validateForm');
