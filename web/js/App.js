@@ -63,18 +63,27 @@ class App {
      *
      * @param {string} name
      * @param {function} action
+     * @returns {App}
      */
     register(name, action) {
         this.actions[name] = action;
+
+        return this;
     }
 
     /**
      * Runs given action
      *
-     * @param {string} action Name of action
+     * @param {string|null} action Name of action - if null, last registered action will be run
      * @returns {App}
      */
-    run(action) {
+    run(action = null) {
+        if (null === action) {
+            let actionsKeys = Object.keys(this.actions);
+
+            action = actionsKeys[actionsKeys.length - 1];
+        }
+
         if (typeof this.actions[action] === 'undefined') {
             console.error(action + ' action doesn\'t exist.');
 

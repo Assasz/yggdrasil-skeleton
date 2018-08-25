@@ -13,7 +13,7 @@ app.register('showPassword', function() {
                 '<span class="offscreen">Show password</span>');
         }
     });
-});
+}).run();
 
 /**
  * Validate form action
@@ -64,6 +64,4 @@ app.register('validateForm', function() {
             error.appendTo( element.parent() );
         }
     });
-});
-
-app.run('showPassword').run('validateForm');
+}).run();
