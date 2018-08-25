@@ -15,7 +15,7 @@ class App {
     /**
      * Initializes Pjax
      *
-     * @returns {App}
+     * @return {App}
      */
     initPjax() {
         $(document).ready(function () {
@@ -36,7 +36,7 @@ class App {
     /**
      * Initializes NProgress
      *
-     * @returns {App}
+     * @return {App}
      */
     initNProgress() {
         if (!this.isPjax) {
@@ -63,7 +63,7 @@ class App {
      *
      * @param {string} name
      * @param {function} action
-     * @returns {App}
+     * @return {App}
      */
     register(name, action) {
         this.actions[name] = action;
@@ -75,7 +75,7 @@ class App {
      * Runs given action
      *
      * @param {string|null} action Name of action - if null, last registered action will be run
-     * @returns {App}
+     * @return {App}
      */
     run(action = null) {
         if (null === action) {

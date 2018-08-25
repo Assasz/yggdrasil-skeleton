@@ -5,4 +5,5 @@
  */
 const app = (new App())
     .initPjax()
-    .initNProgress();
+    .initNProgress()
+    .mount('yjax', new YjaxPlugin());
