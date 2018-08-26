@@ -1,21 +1,27 @@
 /**
  * Yjax plugin
  *
- * Performs request on remote
+ * Performs requests on remote
  */
 class YjaxPlugin {
 
     /**
      * Initializes plugin
+     *
+     * @param {string|null} host Hostname of remote - if null, Yjax will try to resolve it automatically
      */
-    constructor() {
-        this.host = window.location.protocol + '//' + window.location.host;
+    constructor(host = null) {
+        if (null !== host) {
+            this.host = host;
+        } else {
+            this.host = window.location.protocol + '//' + window.location.host;
 
-        if ('http://localhost' === this.host) {
-            let pathArray = window.location.pathname.split('/');
+            if ('http://localhost' === this.host) {
+                let pathArray = window.location.pathname.split('/');
 
-            if (pathArray.length > 3) {
-                this.host = [this.host, pathArray[1], pathArray[2]].join('/');
+                if (pathArray.length > 3) {
+                    this.host = [this.host, pathArray[1], pathArray[2]].join('/');
+                }
             }
         }
 
@@ -193,5 +199,14 @@ class YjaxPlugin {
         $.ajax(request);
 
         return true;
+    }
+
+    /**
+     * Registers on error callback
+     *
+     * @param {function} callback
+     */
+    onError (callback) {
+        $(document).ajaxError((typeof callback === 'function') ? callback : function () {});
     }
 }

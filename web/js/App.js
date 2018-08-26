@@ -35,12 +35,21 @@ class App {
 
     /**
      * Initializes NProgress
+     * Ij Pjax is not initialized, Ajax events will be handled instead
      *
      * @return {App}
      */
     initNProgress() {
         if (!this.isPjax) {
-            console.warn('Pjax is not initialised and NProgress will not run.');
+            $(document).ready(function () {
+                $(document).ajaxStart(function() {
+                    NProgress.start();
+                });
+
+                $(document).ajaxComplete(function() {
+                    NProgress.done();
+                });
+            });
 
             return this;
         }
