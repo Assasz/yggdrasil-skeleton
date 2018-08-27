@@ -26,10 +26,13 @@ class YjaxPlugin {
         }
 
         this.loadRoutes();
+        this.onError();
     }
 
     /**
      * Loads routes from remote
+     *
+     * @return {YjaxPlugin}
      */
     loadRoutes() {
         let self = this;
@@ -40,8 +43,14 @@ class YjaxPlugin {
             async: false,
             success: function (routes) {
                 self.routes = routes;
+            },
+            error: function () {
+                console.error('Unable to load routes from remote.');
+                self.routes = {};
             }
-        })
+        });
+
+        return this;
     }
 
     /**
@@ -204,9 +213,19 @@ class YjaxPlugin {
     /**
      * Registers on error callback
      *
-     * @param {function} callback
+     * @param {function|null} callback Sets default callback if null
      */
-    onError (callback) {
-        $(document).ajaxError((typeof callback === 'function') ? callback : function () {});
+    onError (callback = null) {
+        $(document).ajaxError((typeof callback === 'function') ? callback : function (event, jqXHR) {
+            let status = jqXHR.status;
+
+            if (jqXHR.getResponseHeader("Content-Type").indexOf('json') && 500 === status) {
+                console.error(JSON.parse(jqXHR.responseText).error.message);
+
+                return;
+            }
+
+            console.error(status + ' HTTP response.');
+        });
     }
 }
