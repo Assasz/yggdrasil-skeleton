@@ -25,8 +25,8 @@ class YjaxPlugin {
             }
         }
 
-        this.loadRoutes();
-        this.onError();
+        this.loadRoutes()
+            .onError();
     }
 
     /**
@@ -61,7 +61,7 @@ class YjaxPlugin {
      * @param {function|null} success On success callback
      * @param {function|null} error   On error callback
      * @param {object|null}   options Set of ajax options
-     * @return {boolean}
+     * @return {boolean}              Returns false is action route doesn't exist
      */
     get (action, params = [], success = null, error = null, options = null) {
         if (typeof this.routes[action] === 'undefined') {
@@ -99,7 +99,7 @@ class YjaxPlugin {
      * @param {function|null} success On success callback
      * @param {function|null} error   On error callback
      * @param {object|null}   options Set of ajax options
-     * @return {boolean}
+     * @return {boolean}              Returns false is action route doesn't exist
      */
     post (action, data, params = [], success = null, error = null, options = null) {
         if (typeof this.routes[action] === 'undefined') {
@@ -140,7 +140,7 @@ class YjaxPlugin {
      * @param {function|null} success On success callback
      * @param {function|null} error   On error callback
      * @param {object|null}   options Set of ajax options
-     * @return {boolean}
+     * @return {boolean}              Returns false is action route doesn't exist
      */
     put (action, data, params = [], success = null, error = null, options = null) {
         if (typeof this.routes[action] === 'undefined') {
@@ -180,7 +180,7 @@ class YjaxPlugin {
      * @param {function|null} success On success callback
      * @param {function|null} error   On error callback
      * @param {object|null}   options Set of ajax options
-     * @return {boolean}
+     * @return {boolean}              Returns false is action route doesn't exist
      */
     delete (action, params = [], success = null, error = null, options = null) {
         if (typeof this.routes[action] === 'undefined') {
