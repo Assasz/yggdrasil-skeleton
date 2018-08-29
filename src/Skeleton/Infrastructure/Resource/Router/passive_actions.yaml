@@ -1,0 +1,2 @@
+passive_actions:
+  user.auth_cookie: User:authCookie
