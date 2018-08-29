@@ -93,7 +93,7 @@ class YjaxPlugin {
     /**
      * Calls remote POST action
      *
-     * @param {string}        action  Alias of remote action like Controller:action
+     * @param {string}        action  Alias of remote action like [API:]Controller:action
      * @param {object}        data    Data to send
      * @param {array}         params  Remote action parameters
      * @param {function|null} success On success callback
@@ -134,7 +134,7 @@ class YjaxPlugin {
     /**
      * Calls remote PUT action
      *
-     * @param {string}        action  Alias of remote action like Controller:action
+     * @param {string}        action  Alias of remote action like [API:]Controller:action
      * @param {object}        data    Data to send
      * @param {array}         params  Remote action parameters
      * @param {function|null} success On success callback
@@ -175,7 +175,7 @@ class YjaxPlugin {
     /**
      * Calls remote DELETE action
      *
-     * @param {string}        action  Alias of remote action like Controller:action
+     * @param {string}        action  Alias of remote action like [API:]Controller:action
      * @param {array}         params  Remote action parameters
      * @param {function|null} success On success callback
      * @param {function|null} error   On error callback
@@ -217,15 +217,13 @@ class YjaxPlugin {
      */
     onError (callback = null) {
         $(document).ajaxError((typeof callback === 'function') ? callback : function (event, jqXHR) {
-            let status = jqXHR.status;
-
-            if (jqXHR.getResponseHeader("Content-Type").indexOf('json') && 500 === status) {
+            if (jqXHR.getResponseHeader("Content-Type").indexOf('json') && 500 === jqXHR.status) {
                 console.error(JSON.parse(jqXHR.responseText).error.message);
 
                 return;
             }
 
-            console.error(status + ' HTTP response.');
+            console.error(jqXHR.status + ' HTTP response.');
         });
     }
 }
