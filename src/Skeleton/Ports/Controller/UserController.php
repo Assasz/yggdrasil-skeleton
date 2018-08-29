@@ -64,10 +64,7 @@ class UserController extends AbstractController
                 return $this->render('user/signin.html.twig');
             }
 
-            $session = new Session();
-
-            $session->set('is_granted', true);
-            $session->set('user', $response->getUser());
+            $this->startUserSession($response->getUser());
 
             if ($rememberMe) {
                 $cookie['identifier'] = $response->getUser()->getRememberIdentifier();
@@ -96,8 +93,7 @@ class UserController extends AbstractController
             return $this->redirectToAction('Default:index');
         }
 
-        $session = new Session();
-        $session->invalidate();
+        $this->invalidateSession();
 
         if ($this->getResponse()->headers->has('set-cookie') || $this->getRequest()->cookies->has('remember')) {
             $this->getResponse()->headers->clearCookie('remember');
@@ -125,9 +121,7 @@ class UserController extends AbstractController
             $response = $this->getService('user.remembered_auth')->process($request);
 
             if ($response->isSuccess()) {
-                $session = new Session();
-                $session->set('is_granted', true);
-                $session->set('user', $response->getUser());
+                $this->startUserSession($response->getUser());
 
                 $this->getResponse()->headers->setCookie(new Cookie('remember', serialize($cookie), strtotime('now + 1 week')));
             }
