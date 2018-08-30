@@ -11,26 +11,48 @@
     {% endfor %}
 
     <div class="col-lg-4 col-sm-6 col-xs-12">
-        <form id="signin_form" method="post" action="{{ path('User:signin') }}" data-pjax>
+        {{ begin_form('signin_form', path('User:signin')) }}
             <fieldset>
                 <legend>Sign in to <a href="{{ path('Default:index') }}">{{ _appname }}</a></legend>
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="email@domain.com" autofocus>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="remember_me" name="remember_me" value="true" checked>
-                    <label class="custom-control-label" for="remember_me">Remember me</label>
-                </div>
-                {{ csrf_token() }}
+
+                {{ form_field('email', 'Email address', 'email', {
+                    'wrapper': {
+                        'class': 'form-group'
+                    },
+                    'input': {
+                        'class': 'form-control',
+                        'placeholder': 'email@domain.com',
+                        'autofocus': 'autofocus'
+                    }
+                }) }}
+
+                {{ form_field('password', 'Password', 'password', {
+                    'wrapper': {
+                        'class': 'form-group'
+                    },
+                    'input': {
+                        'class': 'form-control',
+                        'placeholder': 'Password'
+                    }
+                }) }}
+
+                {{ form_field('remember_me', 'Remember me', 'checkbox', {
+                    'wrapper': {
+                        'class': 'custom-control custom-checkbox'
+                    },
+                    'input': {
+                        'value': 'true',
+                        'class': 'custom-control-input',
+                        'checked': 'checked'
+                    },
+                    'label': {
+                        'class': 'custom-control-label'
+                    }
+                }) }}
 
                 <p class="mb-0 mt-2">Don't have account yet? Sign up <a href="{{ path('User:signup') }}">here!</a></p>
             </fieldset>
             <button type="submit" class="btn btn-primary mt-3">Sign in</button>
-        </form>
+        {{ end_form() }}
     </div>
 {% endblock %}
