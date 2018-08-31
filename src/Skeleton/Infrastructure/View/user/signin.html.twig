@@ -16,7 +16,7 @@
             <fieldset>
                 <legend>Sign in to <a href="{{ path('Default:index') }}">{{ _appname }}</a></legend>
 
-                {{ form_field('email', 'Email address', 'email', {
+                {{ form_field('email', 'Email address', '', 'email', {
                     'wrapper': {
                         'class': 'form-group'
                     },
@@ -27,7 +27,7 @@
                     }
                 }) }}
 
-                {{ form_field('password', 'Password', 'password', {
+                {{ form_field('password', 'Password', '', 'password', {
                     'wrapper': {
                         'class': 'form-group'
                     },
@@ -37,7 +37,7 @@
                     }
                 }) }}
 
-                {{ form_field('remember_me', 'Remember me', 'checkbox', {
+                {{ form_field('remember_me', 'Remember me', '', 'checkbox', {
                     'wrapper': {
                         'class': 'custom-control custom-checkbox'
                     },
