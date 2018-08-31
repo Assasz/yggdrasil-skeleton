@@ -11,17 +11,32 @@
     {% endfor %}
 
     <div class="col-lg-4 col-sm-6 col-xs-12">
-        <form id="signup_form" method="post" action="{{ path('User:signup') }}" data-pjax>
+        {{ begin_form('signup_form', path('User:signup')) }}
+
             <fieldset>
                 <legend>Sign up to <a href="{{ path('Default:index') }}">{{ _appname }}</a></legend>
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="email@domain.com" autofocus autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Something unique" autocomplete="off">
-                </div>
+
+                {{ form_field('email', 'Email address', 'email', {
+                    'wrapper': {
+                        'class': 'form-group'
+                    },
+                    'input': {
+                        'class': 'form-control',
+                        'placeholder': 'email@domain.com',
+                        'autofocus': 'autofocus'
+                    }
+                }) }}
+
+                {{ form_field('username', 'Username', 'text', {
+                    'wrapper': {
+                        'class': 'form-group'
+                    },
+                    'input': {
+                        'class': 'form-control',
+                        'placeholder': 'Something unique'
+                    }
+                }) }}
+
                 <div class="form-group">
                     <label for="password">Password</label>
                     <div class="input-group">
@@ -32,13 +47,16 @@
                         </div>
                     </div>
                 </div>
-                {{ csrf_token() }}
 
                 <p class="mt-2">By clicking on "Sign up" below, you are agreeing to the <a href="#">Terms of Service</a> and the <a href="#">Privacy Policy.</a></p>
                 <p class="mb-0 mt-2">Already have an account? Sign in <a href="{{ path('User:signin') }}">here!</a></p>
             </fieldset>
-            <button type="submit" class="btn btn-primary mt-3">Sign up</button>
-        </form>
+
+            {{ button('signup_button', 'Sign up', 'submit', {
+                'class': 'btn btn-primary mt-3'
+            }) }}
+
+        {{ end_form() }}
     </div>
 {% endblock %}
 

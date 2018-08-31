@@ -12,6 +12,7 @@
 
     <div class="col-lg-4 col-sm-6 col-xs-12">
         {{ begin_form('signin_form', path('User:signin')) }}
+
             <fieldset>
                 <legend>Sign in to <a href="{{ path('Default:index') }}">{{ _appname }}</a></legend>
 
@@ -50,9 +51,13 @@
                     }
                 }) }}
 
-                <p class="mb-0 mt-2">Don't have account yet? Sign up <a href="{{ path('User:signup') }}">here!</a></p>
+                <p class="mb-0 mt-2">Don't have an account yet? Sign up <a href="{{ path('User:signup') }}">here!</a></p>
             </fieldset>
-            <button type="submit" class="btn btn-primary mt-3">Sign in</button>
+
+            {{ button('signin_button', 'Sign in', 'submit', {
+                'class': 'btn btn-primary mt-3'
+            }) }}
+
         {{ end_form() }}
     </div>
 {% endblock %}
