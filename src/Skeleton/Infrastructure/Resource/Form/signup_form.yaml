@@ -1,0 +1,28 @@
+fields:
+  email:
+    wrapper:
+      class: form-group
+    label:
+      text: Email address
+    input:
+      type: email
+      class: form-control
+      placeholder: email@domain.com
+      autofocus: autofocus
+    caption:
+      text: We'll never share your email with anyone else.
+      class: form-text text-muted
+
+  username:
+    wrapper:
+      class: form-group
+    label:
+      text: Username
+    input:
+      class: form-control
+      placeholder: Something unique
+
+  signup_button:
+    text: Sign up
+    type: submit
+    class: btn btn-primary mt-3

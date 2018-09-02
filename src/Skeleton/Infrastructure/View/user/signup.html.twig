@@ -16,29 +16,9 @@
             <fieldset>
                 <legend>Sign up to <a href="{{ path('Default:index') }}">{{ _appname }}</a></legend>
 
-                {{ form_field('email', 'Email address', 'We\'ll never share your email with anyone else.', 'email', {
-                    'wrapper': {
-                        'class': 'form-group'
-                    },
-                    'input': {
-                        'class': 'form-control',
-                        'placeholder': 'email@domain.com',
-                        'autofocus': 'autofocus'
-                    },
-                    'caption': {
-                        'class': 'form-text text-muted'
-                    }
-                }) }}
+                {{ form_field('email') }}
 
-                {{ form_field('username', 'Username', '', 'text', {
-                    'wrapper': {
-                        'class': 'form-group'
-                    },
-                    'input': {
-                        'class': 'form-control',
-                        'placeholder': 'Something unique'
-                    }
-                }) }}
+                {{ form_field('username') }}
 
                 <div class="form-group">
                     <label for="password">Password</label>
@@ -55,9 +35,7 @@
                 <p class="mb-0 mt-2">Already have an account? Sign in <a href="{{ path('User:signin') }}">here!</a></p>
             </fieldset>
 
-            {{ button('signup_button', 'Sign up', 'submit', {
-                'class': 'btn btn-primary mt-3'
-            }) }}
+            {{ button('signup_button') }}
 
         {{ end_form() }}
     </div>

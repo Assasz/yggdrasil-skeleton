@@ -16,47 +16,16 @@
             <fieldset>
                 <legend>Sign in to <a href="{{ path('Default:index') }}">{{ _appname }}</a></legend>
 
-                {{ form_field('email', 'Email address', '', 'email', {
-                    'wrapper': {
-                        'class': 'form-group'
-                    },
-                    'input': {
-                        'class': 'form-control',
-                        'placeholder': 'email@domain.com',
-                        'autofocus': 'autofocus'
-                    }
-                }) }}
+                {{ form_field('email') }}
 
-                {{ form_field('password', 'Password', '', 'password', {
-                    'wrapper': {
-                        'class': 'form-group'
-                    },
-                    'input': {
-                        'class': 'form-control',
-                        'placeholder': 'Password'
-                    }
-                }) }}
+                {{ form_field('password') }}
 
-                {{ form_field('remember_me', 'Remember me', '', 'checkbox', {
-                    'wrapper': {
-                        'class': 'custom-control custom-checkbox'
-                    },
-                    'input': {
-                        'value': 'true',
-                        'class': 'custom-control-input',
-                        'checked': 'checked'
-                    },
-                    'label': {
-                        'class': 'custom-control-label'
-                    }
-                }) }}
+                {{ form_field('remember_me') }}
 
                 <p class="mb-0 mt-2">Don't have an account yet? Sign up <a href="{{ path('User:signup') }}">here!</a></p>
             </fieldset>
 
-            {{ button('signin_button', 'Sign in', 'submit', {
-                'class': 'btn btn-primary mt-3'
-            }) }}
+            {{ button('signin_button') }}
 
         {{ end_form() }}
     </div>

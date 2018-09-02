@@ -1,0 +1,38 @@
+fields:
+  email:
+    wrapper:
+      class: form-group
+    label:
+      text: Email address
+    input:
+      type: email
+      class: form-control
+      placeholder: email@domain.com
+      autofocus: autofocus
+
+  password:
+    wrapper:
+      class: form-group
+    label:
+      text: Password
+    input:
+      type: password
+      class: form-control
+      placeholder: Strong password
+
+  remember_me:
+    wrapper:
+      class: custom-control custom-checkbox
+    label:
+      text: Remember me
+      class: custom-control-label
+    input:
+      type: checkbox
+      class: custom-control-input
+      checked: checked
+
+  signin_button:
+    text: Sign in
+    type: submit
+    class: btn btn-primary mt-3
+
