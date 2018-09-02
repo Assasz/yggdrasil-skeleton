@@ -95,7 +95,7 @@ class UserController extends AbstractController
 
         $this->invalidateSession();
 
-        if ($this->getResponse()->headers->has('set-cookie') || $this->getRequest()->cookies->has('remember')) {
+        if ($this->getRequest()->cookies->has('remember')) {
             $this->getResponse()->headers->clearCookie('remember');
         }
 

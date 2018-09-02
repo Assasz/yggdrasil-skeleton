@@ -53,7 +53,7 @@ class SignupService extends AbstractService implements ServiceInterface
             $mailSendRequest = (new MailSendRequest())
                 ->setSubject('Sign up confirmation')
                 ->setBody($body)
-                ->setSender(['team@application.com' => 'Application Team'])
+                ->setSender(['skeleton@yggdrasil.com' => 'Yggdrasil Skeleton'])
                 ->setReceivers([$user->getEmail() => $user->getUsername()]);
 
             $mailSendResponse = $this->getService('shared.mail_send')->process($mailSendRequest);
