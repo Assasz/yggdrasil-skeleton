@@ -63,12 +63,12 @@ class User
     private $rememberIdentifier;
 
     /**
-     * User enabled status
+     * User account status (enabled or not)
      *
      * @Column(type="string", columnDefinition="ENUM('0', '1')")
      * @var string $enabled
      */
-    private $enabled;
+    private $isEnabled;
 
     /**
      * User sign up confirmation token
@@ -87,9 +87,10 @@ class User
      */
     public function __construct()
     {
-        $this->rememberIdentifier = bin2hex(random_bytes(32));
-        $this->enabled = '0';
-        $this->confirmationToken = bin2hex(random_bytes(32));
+        $this
+          ->setRememberIdentifier(bin2hex(random_bytes(32)))
+          ->setConfirmationToken(bin2hex(random_bytes(32)))
+          ->setEnabled('0');
     }
 
     /**
@@ -218,24 +219,24 @@ class User
     }
 
     /**
-     * Returns user enabled status
+     * Returns user account status
      *
      * @return string
      */
-    public function getEnabled(): string
+    public function isEnabled(): string
     {
-        return $this->enabled;
+        return $this->isEnabled;
     }
 
     /**
-     * Sets user enabled status
+     * Sets user account status
      *
      * @param string $enabled
      * @return User
      */
     public function setEnabled(string $enabled): User
     {
-        $this->enabled = $enabled;
+        $this->isEnabled = $enabled;
 
         return $this;
     }
