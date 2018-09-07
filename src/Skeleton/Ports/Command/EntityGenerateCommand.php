@@ -75,9 +75,7 @@ class EntityGenerateCommand extends Command
             $propertyTypes[] = $helper->ask($input, $output, $questionSet['propertyType']);
         } while ($helper->ask($input, $output, $questionSet['continue']));
 
-        for ($i = 0; $i < count($propertyNames); $i++) {
-            $properties[$propertyNames[$i]] = $propertyTypes[$i];
-        }
+        $properties = array_combine($propertyNames, $propertyTypes);
 
         $configuration = $this->appConfiguration->getConfiguration();
         $entityNamespace = rtrim($configuration['entity_manager']['entity_namespace'], '\\');
