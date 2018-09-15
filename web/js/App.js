@@ -10,6 +10,7 @@ class App {
         this.isPjax = false;
         this.actions = {};
         this.plugins = {};
+        this.storage = {};
     }
 
     /**
@@ -187,5 +188,34 @@ class App {
         }
 
         return this.plugins[plugin];
+    }
+
+    /**
+     * Stores data in storage
+     *
+     * @param {string} key   Key of data
+     * @param {*}      value Value of data
+     * @return {App}
+     */
+    store(key, value) {
+        this.storage[key] = value;
+
+        return this;
+    }
+
+    /**
+     * Retrieves data from storage
+     *
+     * @param {string} key Key of data
+     * @return {*}
+     */
+    retrieve(key) {
+        if (typeof this.storage[key] === 'undefined') {
+            console.error(key + ' data doesn\'t exist in storage.');
+
+            return null;
+        }
+
+        return this.storage[key];
     }
 }
