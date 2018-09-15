@@ -115,8 +115,9 @@ class App {
             if ('no-event' === self.actions[action].event) {
                 self.actions[action].callback();
             } else {
-                $('[data-action="' + action + '"]').bind(
+                $('body').on(
                     self.actions[action].event,
+                    '[data-action="' + action + '"]',
                     self.actions[action].callback
                 );
             }
@@ -127,8 +128,9 @@ class App {
                 if ('no-event' === self.actions[action].event) {
                     self.actions[action].callback();
                 } else {
-                    $('[data-action="' + action + '"]').bind(
+                    $('body').off().on(
                         self.actions[action].event,
+                        '[data-action="' + action + '"]',
                         self.actions[action].callback
                     );
                 }
