@@ -1,1 +1,5 @@
 [2018-09-15 16:12:37] An exception occurred in driver: SQLSTATE[HY000] [1045] Access denied for user 'USERNAME'@'localhost' (using password: YES) at line 113 in C:\xampp\htdocs\yggdrasil-skeleton\vendor\doctrine\dbal\lib\Doctrine\DBAL\Driver\AbstractMySQLDriver.php
+[2018-09-15 20:18:20] An exception occurred while executing 'SELECT t0.id AS id_1, t0.username AS username_2, t0.email AS email_3, t0.password AS password_4, t0.rememberToken AS rememberToken_5, t0.rememberIdentifier AS rememberIdentifier_6, t0.isEnabled AS isEnabled_7, t0.confirmationToken AS confirmationToken_8 FROM `user` t0 WHERE t0.email = ? LIMIT 1' with params ["contact@pawelantosiak.com"]:
+
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 't0.isEnabled' in 'field list' at line 80 in C:\xampp\htdocs\yggdrasil-skeleton\vendor\doctrine\dbal\lib\Doctrine\DBAL\Driver\AbstractMySQLDriver.php
+[2018-09-15 20:19:27] Return value of Skeleton\Domain\Entity\User::isEnabled() must be of the type string, null returned at line 228 in C:\xampp\htdocs\yggdrasil-skeleton\src\Skeleton\Domain\Entity\User.php

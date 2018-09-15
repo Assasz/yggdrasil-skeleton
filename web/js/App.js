@@ -40,7 +40,17 @@ class App {
      * @return {App}
      */
     initNProgress() {
-        if (!this.isPjax) {
+        if (this.isPjax) {
+            $(document).ready(function () {
+                $(document).on('pjax:send', function () {
+                    NProgress.start();
+                });
+
+                $(document).on('pjax:end', function () {
+                    NProgress.done();
+                });
+            });
+        } else {
             $(document).ready(function () {
                 $(document).ajaxStart(function() {
                     NProgress.start();
@@ -50,19 +60,7 @@ class App {
                     NProgress.done();
                 });
             });
-
-            return this;
         }
-
-        $(document).ready(function () {
-            $(document).on('pjax:send', function () {
-                NProgress.start();
-            });
-
-            $(document).on('pjax:end', function () {
-                NProgress.done();
-            });
-        });
 
         return this;
     }
@@ -111,24 +109,40 @@ class App {
 
         let self = this;
 
-        $(document).ready(function () {
-            if ('no-event' === self.actions[action].event) {
-                self.actions[action].callback();
-            } else {
-                $('body').on(
-                    self.actions[action].event,
-                    '[data-action="' + action + '"]',
-                    self.actions[action].callback
-                );
-            }
-        });
-
         if (this.isPjax) {
-            $(document).on('pjax:end', function () {
+            $(document).ready(function () {
                 if ('no-event' === self.actions[action].event) {
                     self.actions[action].callback();
                 } else {
-                    $('body').off().on(
+                    $('#pjax-container').on(
+                        self.actions[action].event,
+                        '[data-action="' + action + '"]',
+                        self.actions[action].callback
+                    );
+                }
+
+                $(document).on('pjax:start', function () {
+                   $('#pjax-container').off();
+                });
+
+                $(document).on('pjax:end', function () {
+                    if ('no-event' === self.actions[action].event) {
+                        self.actions[action].callback();
+                    } else {
+                        $('#pjax-container').on(
+                            self.actions[action].event,
+                            '[data-action="' + action + '"]',
+                            self.actions[action].callback
+                        );
+                    }
+                });
+            });
+        } else {
+            $(document).ready(function () {
+                if ('no-event' === self.actions[action].event) {
+                    self.actions[action].callback();
+                } else {
+                    $(document).on(
                         self.actions[action].event,
                         '[data-action="' + action + '"]',
                         self.actions[action].callback
