@@ -1,24 +1,22 @@
 /**
- * Show password action
+ * Show password click action
  */
-app.register('showPassword', function() {
-    $('[data-action="show-password"]').click(function () {
-        if ($('#password').attr('type') === 'password') {
-            $('#password').attr('type', 'text');
-            $('#toggle-password').html('<span class="fa fa-fw fa-eye-slash" aria-hidden="true"></span>\n' +
-                '<span class="offscreen">Hide password</span>');
-        } else {
-            $('#password').attr('type', 'password');
-            $('#toggle-password').html('<span class="fa fa-fw fa-eye" aria-hidden="true"></span>\n' +
-                '<span class="offscreen">Show password</span>');
-        }
-    });
+app.register('showPassword', 'click', function() {
+    if ($('#password').attr('type') === 'password') {
+        $('#password').attr('type', 'text');
+        $('#toggle-password').html('<span class="fa fa-fw fa-eye-slash" aria-hidden="true"></span>\n' +
+            '<span class="offscreen">Hide password</span>');
+    } else {
+        $('#password').attr('type', 'password');
+        $('#toggle-password').html('<span class="fa fa-fw fa-eye" aria-hidden="true"></span>\n' +
+            '<span class="offscreen">Show password</span>');
+    }
 }).run();
 
 /**
  * Validate form action
  */
-app.register('validateForm', function() {
+app.register('validateForm', 'no-event', function() {
     const normalizer = function(value) {
         return $.trim(value);
     };
