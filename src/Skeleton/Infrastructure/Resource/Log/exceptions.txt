@@ -1,0 +1,1 @@
+[2018-09-15 16:12:37] An exception occurred in driver: SQLSTATE[HY000] [1045] Access denied for user 'USERNAME'@'localhost' (using password: YES) at line 113 in C:\xampp\htdocs\yggdrasil-skeleton\vendor\doctrine\dbal\lib\Doctrine\DBAL\Driver\AbstractMySQLDriver.php

@@ -76,6 +76,12 @@ class App {
      * @return {App}
      */
     register(name, event, callback) {
+        if (typeof this.actions[name] !== 'undefined') {
+            console.error(name + ' action already exist.');
+
+            return this;
+        }
+
         this.actions[name] = {
             event: event,
             callback: callback
@@ -109,9 +115,8 @@ class App {
             if ('no-event' === self.actions[action].event) {
                 self.actions[action].callback();
             } else {
-                $(document).on(
+                $('[data-action="' + action + '"]').bind(
                     self.actions[action].event,
-                    '[data-action="' + action + '"]',
                     self.actions[action].callback
                 );
             }
@@ -122,9 +127,8 @@ class App {
                 if ('no-event' === self.actions[action].event) {
                     self.actions[action].callback();
                 } else {
-                    $(document).on(
+                    $('[data-action="' + action + '"]').bind(
                         self.actions[action].event,
-                        '[data-action="' + action + '"]',
                         self.actions[action].callback
                     );
                 }
@@ -142,6 +146,12 @@ class App {
      * @return {App}
      */
     mount(name, plugin) {
+        if (typeof this.plugins[name] !== 'undefined') {
+            console.error(name + ' plugin already exist.');
+
+            return this;
+        }
+
         this.plugins[name] = plugin;
 
         return this;
