@@ -41,8 +41,8 @@ class App {
      * @return {App}
      */
     initNProgress() {
-        if (this.isPjax) {
-            $(document).ready(function () {
+        $(document).ready(function () {
+            if (this.isPjax) {
                 $(document).on('pjax:send', function () {
                     NProgress.start();
                 });
@@ -50,9 +50,7 @@ class App {
                 $(document).on('pjax:end', function () {
                     NProgress.done();
                 });
-            });
-        } else {
-            $(document).ready(function () {
+            } else {
                 $(document).ajaxStart(function() {
                     NProgress.start();
                 });
@@ -60,8 +58,8 @@ class App {
                 $(document).ajaxComplete(function() {
                     NProgress.done();
                 });
-            });
-        }
+            }
+        });
 
         return this;
     }
@@ -110,8 +108,8 @@ class App {
 
         let self = this;
 
-        if (this.isPjax) {
-            $(document).ready(function () {
+        $(document).ready(function () {
+            if (this.isPjax) {
                 if ('no-event' === self.actions[action].event) {
                     self.actions[action].callback();
                 } else {
@@ -137,9 +135,7 @@ class App {
                         );
                     }
                 });
-            });
-        } else {
-            $(document).ready(function () {
+            } else {
                 if ('no-event' === self.actions[action].event) {
                     self.actions[action].callback();
                 } else {
@@ -149,8 +145,8 @@ class App {
                         self.actions[action].callback
                     );
                 }
-            });
-        }
+            }
+        });
 
         return this;
     }
