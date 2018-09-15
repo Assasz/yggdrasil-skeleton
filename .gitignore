@@ -1,3 +1,5 @@
 /.idea
 /vendor
 composer.lock
+/src/Skeleton/Infrastructure/Config/config.ini
+/src/Skeleton/Infrastructure/Resource/Log/*
