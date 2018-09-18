@@ -90,7 +90,7 @@ class App {
     /**
      * Runs given action
      *
-     * @param {string|null} action Name of action - if null, last registered action will be run
+     * @param {?string} action Name of action - if null, last registered action will be run
      * @return {App}
      */
     run(action = null) {
@@ -174,7 +174,7 @@ class App {
      * Uses given plugin
      *
      * @param {string} plugin Name of plugin
-     * @return {object|null}
+     * @return {?object}
      */
     use(plugin) {
         if (typeof this.plugins[plugin] === 'undefined') {
@@ -206,12 +206,6 @@ class App {
      * @return {*}
      */
     retrieve(key) {
-        if (typeof this.storage[key] === 'undefined') {
-            console.error(key + ' data doesn\'t exist in storage.');
-
-            return null;
-        }
-
-        return this.storage[key];
+        return this.storage[key] || null;
     }
 }

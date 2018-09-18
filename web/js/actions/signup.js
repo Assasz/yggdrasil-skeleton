@@ -1,14 +1,16 @@
 /**
- * Show password click action
+ * Toggle password action
  */
-app.register('showPassword', 'click', function() {
-    if ($('#password').attr('type') === 'password') {
-        $('#password').attr('type', 'text');
-        $('#toggle-password').html('<span class="fa fa-fw fa-eye-slash" aria-hidden="true"></span>\n' +
+app.register('togglePassword', 'click', function() {
+    let pass = $('#password');
+
+    if (pass.attr('type') === 'password') {
+        pass.attr('type', 'text');
+        $(this).html('<span class="fa fa-fw fa-eye-slash" aria-hidden="true"></span>\n' +
             '<span class="offscreen">Hide password</span>');
     } else {
-        $('#password').attr('type', 'password');
-        $('#toggle-password').html('<span class="fa fa-fw fa-eye" aria-hidden="true"></span>\n' +
+        pass.attr('type', 'password');
+        $(this).html('<span class="fa fa-fw fa-eye" aria-hidden="true"></span>\n' +
             '<span class="offscreen">Show password</span>');
     }
 }).run();
@@ -17,7 +19,7 @@ app.register('showPassword', 'click', function() {
  * Validate form action
  */
 app.register('validateForm', 'no-event', function() {
-    const normalizer = function(value) {
+    let normalizer =  function(value) {
         return $.trim(value);
     };
 
