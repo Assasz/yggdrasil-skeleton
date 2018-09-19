@@ -9,12 +9,9 @@ if (!DEBUG) {
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
-use Skeleton\Infrastructure\Config\AppConfiguration;
+use Skeleton\Infrastructure\Configuration\AppConfiguration;
 use Yggdrasil\Core\Kernel;
 
-$appConfiguration = new AppConfiguration();
-$kernel = new Kernel($appConfiguration);
-
-$request = Request::createFromGlobals();
-$response = $kernel->handle($request);
-$response->send();
+(new Kernel(new AppConfiguration()))
+    ->handle(Request::createFromGlobals())
+    ->send();

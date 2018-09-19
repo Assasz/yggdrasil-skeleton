@@ -1,6 +1,6 @@
 <?php
 
-namespace Skeleton\Infrastructure\Config;
+namespace Skeleton\Infrastructure\Configuration;
 
 use Yggdrasil\Core\Configuration\AbstractConfiguration;
 use Yggdrasil\Core\Configuration\ConfigurationInterface;
@@ -28,7 +28,7 @@ class AppConfiguration extends AbstractConfiguration implements ConfigurationInt
      */
     protected function getConfigPath(): string
     {
-        return 'Skeleton/Infrastructure/Config';
+        return 'Skeleton/Infrastructure/Configuration';
     }
 
     /**
