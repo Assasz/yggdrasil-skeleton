@@ -17,7 +17,7 @@ use Yggdrasil\Core\Driver\ValidatorDriver;
  *
  * Manages configuration of application
  *
- * @package Skeleton\Infrastructure\Config
+ * @package Skeleton\Infrastructure\Configuration
  */
 class AppConfiguration extends AbstractConfiguration implements ConfigurationInterface
 {
