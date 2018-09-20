@@ -88,9 +88,9 @@ class User
     public function __construct()
     {
         $this
-          ->setRememberIdentifier(bin2hex(random_bytes(32)))
-          ->setConfirmationToken(bin2hex(random_bytes(32)))
-          ->setEnabled('0');
+            ->setRememberIdentifier(bin2hex(random_bytes(32)))
+            ->setConfirmationToken(bin2hex(random_bytes(32)))
+            ->setEnabled('0');
     }
 
     /**
