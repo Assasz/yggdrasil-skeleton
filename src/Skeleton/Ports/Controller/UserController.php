@@ -173,22 +173,22 @@ class UserController extends AbstractController
      *
      * Used by jQuery validation to indicate if email address is already taken or not
      *
-     * @return JsonResponse
+     * @return JsonResponse|Response
      *
      * @throws \Exception
      */
-    public function emailCheckAction(): JsonResponse
+    public function emailCheckAction()
     {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            return $this->badRequest();
+        }
+
         $request = (new EmailCheckRequest())
             ->setEmail($this->getRequest()->request->get('email'));
 
         $response = $this->getService('user.email_check')->process($request);
 
-        if (!$response->isSuccess()) {
-            return $this->json(['This email address is already taken.']);
-        }
-
-        return $this->json(['true']);
+        return $this->json([($response->isSuccess()) ? 'true' : 'This email address is already taken.']);
     }
 
     /**
