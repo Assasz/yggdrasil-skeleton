@@ -1,4 +1,4 @@
-{% set base = (is_pjax(_request)) ? 'base_pjax.html.twig' : 'base.html.twig' %}
+{% set base = (_request is defined and is_pjax(_request)) ? 'base_pjax.html.twig' : 'base.html.twig' %}
 
 {% extends base %}
 
