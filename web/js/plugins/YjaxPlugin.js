@@ -25,7 +25,8 @@ class YjaxPlugin {
             }
         }
 
-        this.loadRoutes().onError();
+        this.loadRoutes()
+            .onError();
     }
 
     /**
@@ -217,10 +218,8 @@ class YjaxPlugin {
      */
     onError (callback = null) {
         $(document).ajaxError((typeof callback === 'function') ? callback : function (event, jqXHR) {
-            let response = JSON.parse(jqXHR.responseText);
-
-            if (typeof response.error !== 'undefined') {
-                console.error(response.error.message);
+            if (jqXHR.getResponseHeader("Content-Type").indexOf('json') && 500 === jqXHR.status) {
+                console.error(JSON.parse(jqXHR.responseText).error.message);
 
                 return;
             }
