@@ -1,0 +1,2 @@
+[2018-09-21 12:02:22] Return value of Skeleton\Domain\Entity\User::getId() must be of the type integer, null returned at line 105 in C:\xampp\htdocs\yggdrasil-skeleton\src\Skeleton\Domain\Entity\User.php
+[2018-09-21 12:04:33] Return value of Skeleton\Domain\Entity\User::getId() must be of the type integer, null returned at line 105 in C:\xampp\htdocs\yggdrasil-skeleton\src\Skeleton\Domain\Entity\User.php
