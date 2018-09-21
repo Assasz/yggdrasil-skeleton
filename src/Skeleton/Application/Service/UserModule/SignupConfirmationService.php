@@ -35,7 +35,7 @@ class SignupConfirmationService extends AbstractService implements ServiceInterf
         $response = new SignupConfirmationResponse();
 
         if (!empty($user)) {
-            if ('1' === $user->isEnabled()) {
+            if ($user->isEnabled()) {
                 return $response->setAlreadyActive(true);
             }
 

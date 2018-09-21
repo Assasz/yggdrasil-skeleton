@@ -41,7 +41,7 @@ class AuthService extends AbstractService implements ServiceInterface
                     ->setSuccess(true)
                     ->setUser($user);
 
-                if ('0' === $user->isEnabled()) {
+                if (!$user->isEnabled()) {
                     return $response->setEnabled(false);
                 }
 
