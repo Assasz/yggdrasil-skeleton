@@ -217,12 +217,14 @@ class YjaxPlugin {
      */
     onError (callback = null) {
         $(document).ajaxError((typeof callback === 'function') ? callback : function (event, jqXHR) {
-            let response = JSON.parse(jqXHR.responseText);
+            if (typeof jqXHR.responseText === "object") {
+                let response = JSON.parse(jqXHR.responseText);
 
-            if (typeof response.error !== 'undefined') {
-                console.error(response.error.message);
+                if (typeof response.error !== 'undefined') {
+                    console.error(response.error.message);
 
-                return;
+                    return;
+                }
             }
 
             console.error(jqXHR.status + ' HTTP response.');
