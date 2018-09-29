@@ -4,6 +4,7 @@ namespace Skeleton\Infrastructure\Configuration;
 
 use Yggdrasil\Core\Configuration\AbstractConfiguration;
 use Yggdrasil\Core\Configuration\ConfigurationInterface;
+use Yggdrasil\Core\Driver\CacheDriver;
 use Yggdrasil\Core\Driver\ContainerDriver;
 use Yggdrasil\Core\Driver\EntityManagerDriver;
 use Skeleton\Infrastructure\Driver\ExceptionHandlerDriver;
@@ -45,7 +46,9 @@ class AppConfiguration extends AbstractConfiguration implements ConfigurationInt
             'templateEngine' => TemplateEngineDriver::class,
             'container' => ContainerDriver::class,
             'validator' => ValidatorDriver::class,
-            'mailer' => MailerDriver::class
+            'mailer' => MailerDriver::class,
+            // Uncomment if have Redis installed
+            // 'cache' => CacheDriver::class,
         ];
     }
 }
