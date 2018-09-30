@@ -16,13 +16,14 @@ class App {
     /**
      * Initializes Pjax
      *
+     * @param {?object} options Pjax options
      * @return {App}
      */
-    initPjax() {
+    initPjax(options = null) {
         $(document).ready(function () {
-            $(document).pjax('a:not([data-no-pjax])', '#pjax-container', {
+            $(document).pjax('a:not([data-no-pjax])', '#pjax-container', (options === null) ? {
                 'timeout': 5000
-            });
+            } : options);
 
             $(document).on('submit', 'form[data-pjax]', function (event) {
                 $.pjax.submit(event, '#pjax-container');

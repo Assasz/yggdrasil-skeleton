@@ -40,6 +40,7 @@ class YjaxPlugin {
             url: self.host + '/api/yjax/routes',
             dataType: 'json',
             async: false,
+            headers: {'X-YJAX': true},
             success: function (routes) {
                 self.routes = routes;
             },
@@ -75,10 +76,13 @@ class YjaxPlugin {
                 url: url,
                 dataType: 'json',
                 success: (typeof success === 'function') ? success : function () {},
-                error: (typeof error === 'function') ? error : function () {
+                error: (typeof error === 'function') ? error : function (event, jqXHR, ajaxSettings, thrownError) {
                     console.error('GET request failed on remote ' + action + '.');
+                    $(document).trigger('yjax:error', [event, jqXHR, ajaxSettings, thrownError]);
                 },
             };
+
+        request['headers'] = {'X-YJAX': true};
 
         $.each(options, function (key, value) {
             request[key] = value;
@@ -116,10 +120,13 @@ class YjaxPlugin {
                 dataType: 'json',
                 contentType: 'application/json',
                 success: (typeof success === 'function') ? success : function () {},
-                error: (typeof error === 'function') ? error : function () {
+                error: (typeof error === 'function') ? error : function (event, jqXHR, ajaxSettings, thrownError) {
                     console.error('POST request failed on remote ' + action + '.');
+                    $(document).trigger('yjax:error', [event, jqXHR, ajaxSettings, thrownError]);
                 },
             };
+
+        request['headers'] = {'X-YJAX': true};
 
         $.each(options, function (key, value) {
             request[key] = value;
@@ -157,10 +164,13 @@ class YjaxPlugin {
                 dataType: 'json',
                 contentType: 'application/json',
                 success: (typeof success === 'function') ? success : function () {},
-                error: (typeof error === 'function') ? error : function () {
+                error: (typeof error === 'function') ? error : function (event, jqXHR, ajaxSettings, thrownError) {
                     console.error('PUT request failed on remote ' + action + '.');
+                    $(document).trigger('yjax:error', [event, jqXHR, ajaxSettings, thrownError]);
                 },
             };
+
+        request['headers'] = {'X-YJAX': true};
 
         $.each(options, function (key, value) {
             request[key] = value;
@@ -195,10 +205,13 @@ class YjaxPlugin {
                 method: 'DELETE',
                 dataType: 'json',
                 success: (typeof success === 'function') ? success : function () {},
-                error: (typeof error === 'function') ? error : function () {
+                error: (typeof error === 'function') ? error : function (event, jqXHR, ajaxSettings, thrownError) {
                     console.error('DELETE request failed on remote ' + action + '.');
+                    $(document).trigger('yjax:error', [event, jqXHR, ajaxSettings, thrownError]);
                 },
             };
+
+        request['headers'] = {'X-YJAX': true};
 
         $.each(options, function (key, value) {
             request[key] = value;
@@ -216,7 +229,7 @@ class YjaxPlugin {
      * @param {?function} callback Sets default callback if null
      */
     onError (callback = null) {
-        $(document).ajaxError((typeof callback === 'function') ? callback : function (event, jqXHR) {
+        $(document).on('yjax:error', (typeof callback === 'function') ? callback : function (event, jqXHR) {
             if (typeof jqXHR.responseText === "object") {
                 let response = JSON.parse(jqXHR.responseText);
 
