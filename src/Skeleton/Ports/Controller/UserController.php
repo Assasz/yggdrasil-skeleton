@@ -14,6 +14,7 @@ use Yggdrasil\Core\Form\FormHandler;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Yggdrasil\Core\Service\ServiceRequestWrapper;
 
 /**
  * Class UserController
@@ -44,11 +45,10 @@ class UserController extends AbstractController
         $form = new FormHandler();
 
         if ($form->handle($this->getRequest())) {
-            $rememberMe = $form->hasData('remember_me');
+            $isRemembered = $form->hasData('remember_me');
 
             $request = new AuthRequest();
-            $request = $form->serializeData($request)
-                ->setRemembered($rememberMe);
+            $request = ServiceRequestWrapper::wrap($request, $form->getDataCollection())->setRemembered($isRemembered);
 
             $response = $this->getService('user.auth')->process($request);
 
@@ -66,11 +66,13 @@ class UserController extends AbstractController
 
             $this->startUserSession($response->getUser());
 
-            if ($rememberMe) {
+            if ($isRemembered) {
                 $cookie['identifier'] = $response->getUser()->getRememberIdentifier();
                 $cookie['token'] = $response->getRememberToken();
 
-                $this->getResponse()->headers->setCookie(new Cookie('remember', serialize($cookie), strtotime('now + 1 week')));
+                $this->getResponse()->headers->setCookie(
+                    new Cookie('remember', serialize($cookie), strtotime('now + 1 week'))
+                );
             }
 
             return $this->redirectToAction('Default:index');
@@ -151,7 +153,7 @@ class UserController extends AbstractController
 
         if ($form->handle($this->getRequest())) {
             $request = new SignupRequest();
-            $request = $form->serializeData($request);
+            $request = ServiceRequestWrapper::wrap($request, $form->getDataCollection());
 
             $response = $this->getService('user.signup')->process($request);
 
