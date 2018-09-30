@@ -7,7 +7,8 @@ class App {
      * Initializes properties
      */
     constructor() {
-        this.isPjax = false;
+        this.isPjaxInitialized = false;
+        this.isNProgressInitialized = false;
         this.actions = {};
         this.plugins = {};
         this.storage = {};
@@ -30,7 +31,8 @@ class App {
             });
         });
 
-        this.isPjax = true;
+        this.isPjaxInitialized = true;
+        this.onPjaxError();
 
         return this;
     }
@@ -43,7 +45,7 @@ class App {
      */
     initNProgress() {
         $(document).ready(function () {
-            if (this.isPjax) {
+            if (this.isPjaxInitialized) {
                 $(document).on('pjax:send', function () {
                     NProgress.start();
                 });
@@ -62,7 +64,40 @@ class App {
             }
         });
 
+        this.isNProgressInitialized = true;
+
         return this;
+    }
+
+    /**
+     * Registers Pjax on error callback
+     *
+     * @param {?function} callback Sets default callback if null
+     */
+    onPjaxError(callback = null) {
+        if (!this.isPjaxInitialized) {
+            console.error('Pjax is not initialized.')
+
+            return;
+        }
+
+        let self = this;
+
+        $(document).ready(function () {
+            $(document).on('pjax:error', (typeof callback === 'function') ? callback : function (xhr, textStatus) {
+                if (textStatus.getResponseHeader('Content-Type').indexOf('html') > -1) {
+                    let container = $(textStatus.responseText).filter('#pjax-container');
+
+                    if (container.length) {
+                        $('#pjax-container').replaceWith($(container));
+                    }
+                }
+
+                if (self.isNProgressInitialized) {
+                    NProgress.done();
+                }
+            });
+        });
     }
 
     /**
@@ -110,7 +145,7 @@ class App {
         let self = this;
 
         $(document).ready(function () {
-            if (this.isPjax) {
+            if (this.isPjaxInitialized) {
                 if ('no-event' === self.actions[action].event) {
                     self.actions[action].callback();
                 } else {
