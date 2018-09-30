@@ -90,6 +90,8 @@ class App {
 
                     if (container.length) {
                         $('#pjax-container').replaceWith($(container));
+                    } else {
+                        document.write(textStatus.responseText);
                     }
                 }
 
