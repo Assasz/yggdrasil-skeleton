@@ -39,7 +39,7 @@ class UserController extends AbstractController
     public function signinAction()
     {
         if ($this->isGranted()) {
-            return $this->redirectToAction('Default:index');
+            return $this->redirectToAction();
         }
 
         $form = new FormHandler();
@@ -75,7 +75,7 @@ class UserController extends AbstractController
                 );
             }
 
-            return $this->redirectToAction('Default:index');
+            return $this->redirectToAction();
         }
 
         return $this->render('user/signin.html.twig');
@@ -92,7 +92,7 @@ class UserController extends AbstractController
     public function signoutAction(): RedirectResponse
     {
         if (!$this->isGranted()) {
-            return $this->redirectToAction('Default:index');
+            return $this->redirectToAction();
         }
 
         $this->invalidateSession();
@@ -101,7 +101,7 @@ class UserController extends AbstractController
             $this->getResponse()->headers->clearCookie('remember');
         }
 
-        return $this->redirectToAction('Default:index');
+        return $this->redirectToAction();
     }
 
     /**
@@ -146,7 +146,7 @@ class UserController extends AbstractController
     public function signupAction()
     {
         if ($this->isGranted()) {
-            return $this->redirectToAction('Default:index');
+            return $this->redirectToAction();
         }
 
         $form = new FormHandler();
@@ -160,7 +160,7 @@ class UserController extends AbstractController
             if ($response->isSuccess()) {
                 $this->addFlash('success', 'Account created successfully. Check your mailbox for confirmation mail.');
 
-                return $this->redirectToAction('Default:index');
+                return $this->redirectToAction();
             }
 
             $this->addFlash('danger', 'Something went wrong.');
@@ -217,6 +217,6 @@ class UserController extends AbstractController
             $this->addFlash('success', 'Account activated successfully. Now you can sign in!');
         }
 
-        return $this->redirectToAction('Default:index');
+        return $this->redirectToAction();
     }
 }
