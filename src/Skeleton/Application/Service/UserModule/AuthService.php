@@ -23,37 +23,38 @@ class AuthService extends AbstractService implements ServiceInterface
      * @param ServiceRequestInterface $request
      * @return ServiceResponseInterface
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Exception
      */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
-        $user = $this->getEntityManager()
+        $user = $this
+            ->getEntityManager()
             ->getRepository('Entity:User')
             ->findOneByEmail($request->getEmail());
 
         $response = new AuthResponse();
 
-        if (!empty($user)) {
-            if (password_verify($request->getPassword(), $user->getPassword())) {
-                $response
-                    ->setSuccess(true)
-                    ->setUser($user);
+        if (empty($user)) {
+            return $response;
+        }
 
-                if (!$user->isEnabled()) {
-                    return $response->setEnabled(false);
-                }
+        if (password_verify($request->getPassword(), $user->getPassword())) {
+            $response
+                ->setSuccess(true)
+                ->setUser($user);
 
-                if ($request->isRemembered()) {
-                    $rememberToken = bin2hex(random_bytes(32));
-                    $hash = password_hash($rememberToken, PASSWORD_BCRYPT);
+            if (!$user->isEnabled()) {
+                return $response->setEnabled(false);
+            }
 
-                    $user->setRememberToken($hash);
-                    $this->getEntityManager()->flush();
+            if ($request->isRemembered()) {
+                $rememberToken = bin2hex(random_bytes(32));
+                $hash = password_hash($rememberToken, PASSWORD_BCRYPT);
 
-                    $response->setRememberToken($rememberToken);
-                }
+                $user->setRememberToken($hash);
+                $this->getEntityManager()->flush();
+
+                $response->setRememberToken($rememberToken);
             }
         }
 

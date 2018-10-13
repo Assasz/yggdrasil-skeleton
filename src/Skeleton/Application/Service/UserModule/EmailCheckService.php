@@ -25,7 +25,8 @@ class EmailCheckService extends AbstractService implements ServiceInterface
      */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
-        $users = $this->getEntityManager()
+        $users = $this
+            ->getEntityManager()
             ->getRepository('Entity:User')
             ->findByEmail($request->getEmail());
 

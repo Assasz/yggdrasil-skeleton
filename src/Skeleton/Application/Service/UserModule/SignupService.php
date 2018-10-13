@@ -25,8 +25,6 @@ class SignupService extends AbstractService implements ServiceInterface
      * @param ServiceRequestInterface $request
      * @return ServiceResponseInterface
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Exception
      */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface

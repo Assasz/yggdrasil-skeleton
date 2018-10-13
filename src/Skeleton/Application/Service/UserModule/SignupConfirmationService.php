@@ -22,29 +22,27 @@ class SignupConfirmationService extends AbstractService implements ServiceInterf
      *
      * @param ServiceRequestInterface $request
      * @return ServiceResponseInterface
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
-        $user = $this->getEntityManager()
+        $user = $this
+            ->getEntityManager()
             ->getRepository('Entity:User')
             ->findOneByConfirmationToken($request->getToken());
 
         $response = new SignupConfirmationResponse();
 
-        if (!empty($user)) {
-            if ($user->isEnabled()) {
-                return $response->setAlreadyActive(true);
-            }
-
-            $user->setEnabled('1');
-            $this->getEntityManager()->flush();
-
-            $response->setSuccess(true);
+        if (empty($user)) {
+            return $response;
         }
 
-        return $response;
+        if ($user->isEnabled()) {
+            return $response->setAlreadyActive(true);
+        }
+
+        $user->setEnabled('1');
+        $this->getEntityManager()->flush();
+
+        return $response->setSuccess(true);
     }
 }
