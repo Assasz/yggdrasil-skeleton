@@ -51,7 +51,7 @@ class AuthRequest implements ServiceRequestInterface
      * @param string $email
      * @return AuthRequest
      */
-    public  function setEmail(string $email): AuthRequest
+    public function setEmail(string $email): AuthRequest
     {
         $this->email = $email;
 

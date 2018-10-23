@@ -6,6 +6,7 @@ use Symfony\Component\Console\Application;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Skeleton\Infrastructure\Configuration\AppConfiguration;
 use Skeleton\Ports\Command\EntityGenerateCommand;
+use Yggdrasil\Component\NidhoggComponent\Command\WampServerCommand;
 
 try {
     $application = new Application('Yggdrasil CLI', 'dev');
@@ -20,14 +21,16 @@ try {
 
             $application->setHelperSet($helperSet);
             ConsoleRunner::addCommands($application);
+
             break;
         default:
             // register commands here
             $application->add(new EntityGenerateCommand($appConfiguration));
+
             break;
     }
 
     $application->run();
 } catch (Throwable $t) {
-    echo 'Console error: ' . $t->getMessage();
+    echo "Console error: {$t->getMessage()} at line {$t->getLine()} in {$t->getFile()}";
 }

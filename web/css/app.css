@@ -25,7 +25,7 @@
 #toggle-password:hover {
   cursor: pointer; }
 
-div.is-invalid {
+span.is-invalid {
   color: #D9831F;
   width: 100%;
   font-size: 80%;

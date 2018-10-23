@@ -14,7 +14,7 @@
         {{ begin_form('signin_form', path('User:signin')) }}
 
             <fieldset>
-                <legend>Sign in to <a href="{{ path('Default:index') }}">{{ _appname }}</a></legend>
+                <legend>Sign in to <a href="{{ path() }}">{{ _appname }}</a></legend>
 
                 {{ form_field('email') }}
 

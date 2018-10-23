@@ -2,7 +2,7 @@
  * Toggle password action
  */
 app.register('togglePassword', 'click', function() {
-    let pass = $('#password');
+    const pass = $('#password');
 
     if (pass.attr('type') === 'password') {
         pass.attr('type', 'text');
@@ -19,7 +19,7 @@ app.register('togglePassword', 'click', function() {
  * Validate form action
  */
 app.register('validateForm', 'no-event', function() {
-    let normalizer =  function(value) {
+    const normalizer = function(value) {
         return $.trim(value);
     };
 
@@ -59,9 +59,6 @@ app.register('validateForm', 'no-event', function() {
         onkeyup: false,
         errorClass: "is-invalid",
         validClass: "is-valid",
-        errorElement: "div",
-        errorPlacement: function(error, element) {
-            error.appendTo( element.parent() );
-        }
+        errorElement: "span",
     });
 }).run();
