@@ -6,7 +6,7 @@ use Symfony\Component\Console\Application;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Skeleton\Infrastructure\Configuration\AppConfiguration;
 use Yggdrasil\Component\DoctrineComponent\EntityGenerateCommand;
-use Yggdrasil\Core\Service\ServicePortGenerateCommand;
+use Yggdrasil\Core\Service\Utils\ServicePortGenerateCommand;
 
 try {
     $consoleApplication = new Application('Yggdrasil CLI', 'dev');

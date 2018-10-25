@@ -7,14 +7,13 @@ use Skeleton\Application\Service\UserModule\Request\RememberedAuthRequest;
 use Skeleton\Application\Service\UserModule\Request\SignupConfirmationRequest;
 use Skeleton\Application\Service\UserModule\Request\SignupRequest;
 use Skeleton\Application\Service\UserModule\Request\AuthRequest;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Yggdrasil\Core\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Yggdrasil\Core\Form\FormHandler;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Yggdrasil\Core\Service\ServiceRequestWrapper;
+use Yggdrasil\Core\Service\Utils\ServiceRequestWrapper;
 
 /**
  * Class UserController
@@ -31,9 +30,6 @@ class UserController extends AbstractController
      *
      * @return RedirectResponse|Response
      *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      * @throws \Exception
      */
     public function signinAction()
@@ -138,9 +134,6 @@ class UserController extends AbstractController
      *
      * @return RedirectResponse|Response
      *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      * @throws \Exception
      */
     public function signupAction()

@@ -19,10 +19,6 @@ class ErrorController extends AbstractController
      * Bad Request action
      *
      * @return Response
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function code400Action(): Response
     {
@@ -35,10 +31,6 @@ class ErrorController extends AbstractController
      * Forbidden action
      *
      * @return Response
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function code403Action(): Response
     {
@@ -51,10 +43,6 @@ class ErrorController extends AbstractController
      * Not Found action
      *
      * @return Response
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function code404Action(): Response
     {
@@ -67,10 +55,6 @@ class ErrorController extends AbstractController
      * Method Not Allowed action
      *
      * @return Response
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function code405Action(): Response
     {
@@ -83,10 +67,6 @@ class ErrorController extends AbstractController
      * Default error action
      *
      * @return Response
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function defaultAction(): Response
     {
