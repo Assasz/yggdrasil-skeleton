@@ -60,5 +60,8 @@ app.register('validateForm', 'no-event', function() {
         errorClass: "is-invalid",
         validClass: "is-valid",
         errorElement: "span",
+        errorPlacement: function(error, element) {
+            error.appendTo( element.parent() );
+        }
     });
 }).run();
