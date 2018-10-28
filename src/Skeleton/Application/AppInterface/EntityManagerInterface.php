@@ -15,7 +15,7 @@ use Doctrine\Common\Persistence\ObjectRepository;
 interface EntityManagerInterface
 {
     /**
-     * Return given repository
+     * Returns given repository
      *
      * @param string $name Name of repository
      * @return ObjectRepository|EntityRepository
