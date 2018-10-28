@@ -25,10 +25,9 @@ class MailSendService extends AbstractService implements ServiceInterface
      */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
-        $message = (new \Swift_Message($request->getSubject()))
-            ->setFrom($request->getSender())
-            ->setTo($request->getReceivers())
-            ->setBody($request->getBody(), 'text/html');
+        $message = $this->getMailer()->createMessage(
+            $request->getSubject(), $request->getSender(), $request->getReceivers(), $request->getBody()
+        );
 
         $response = new MailSendResponse();
 

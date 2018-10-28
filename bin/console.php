@@ -16,9 +16,11 @@ try {
 
     switch (true) {
         case in_array($consoleModule, ['dbal', 'orm']):
-            $helperSet = ConsoleRunner::createHelperSet($appConfiguration->loadDriver('entityManager'));
-            $consoleApplication->setHelperSet($helperSet);
+            $helperSet = ConsoleRunner::createHelperSet(
+                $appConfiguration->loadDriver('entityManager')->getComponentInstance()
+            );
 
+            $consoleApplication->setHelperSet($helperSet);
             ConsoleRunner::addCommands($consoleApplication);
 
             break;

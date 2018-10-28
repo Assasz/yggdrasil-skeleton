@@ -4,14 +4,14 @@ namespace Skeleton\Infrastructure\Configuration;
 
 use Yggdrasil\Core\Configuration\AbstractConfiguration;
 use Yggdrasil\Core\Configuration\ConfigurationInterface;
-use Yggdrasil\Core\Driver\CacheDriver;
-use Yggdrasil\Core\Driver\ContainerDriver;
-use Yggdrasil\Core\Driver\EntityManagerDriver;
+use Skeleton\Infrastructure\Driver\CacheDriver;
+use Skeleton\Infrastructure\Driver\ContainerDriver;
+use Skeleton\Infrastructure\Driver\EntityManagerDriver;
 use Skeleton\Infrastructure\Driver\ExceptionHandlerDriver;
-use Yggdrasil\Core\Driver\MailerDriver;
-use Yggdrasil\Core\Driver\RouterDriver;
-use Yggdrasil\Core\Driver\TemplateEngineDriver;
-use Yggdrasil\Core\Driver\ValidatorDriver;
+use Skeleton\Infrastructure\Driver\MailerDriver;
+use Skeleton\Infrastructure\Driver\RouterDriver;
+use Skeleton\Infrastructure\Driver\TemplateEngineDriver;
+use Skeleton\Infrastructure\Driver\ValidatorDriver;
 
 /**
  * Class AppConfiguration

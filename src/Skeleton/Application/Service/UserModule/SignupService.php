@@ -34,11 +34,9 @@ class SignupService extends AbstractService implements ServiceInterface
             ->setUsername($request->getUsername())
             ->setPassword($request->getPassword());
 
-        $errors = $this->getValidator()->validate($user);
-
         $response = new SignupResponse();
 
-        if (count($errors) < 1) {
+        if ($this->getValidator()->isValid($user)) {
             $link = $this->getRouter()->getQuery('User:signupConfirmation', [
                 $user->getConfirmationToken()
             ]);
@@ -54,7 +52,7 @@ class SignupService extends AbstractService implements ServiceInterface
                 ->setSender(['skeleton@yggdrasil.com' => 'Yggdrasil Skeleton'])
                 ->setReceivers([$user->getEmail() => $user->getUsername()]);
 
-            $mailSendResponse = $this->getService('shared.mail_send')->process($mailSendRequest);
+            $mailSendResponse = $this->getContainer()->getService('shared.mail_send')->process($mailSendRequest);
 
             if ($mailSendResponse->isSuccess()) {
                 $user->setPassword(password_hash($request->getPassword(), PASSWORD_BCRYPT));
