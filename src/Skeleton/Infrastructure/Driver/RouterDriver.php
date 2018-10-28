@@ -35,14 +35,14 @@ class RouterDriver extends AbstractDriver implements DriverInterface, RouterInte
     private function __clone() {}
 
     /**
-     * Returns instance of router driver
+     * Installs router driver
      *
      * @param ConfigurationInterface $appConfiguration Configuration needed to configure router
      * @return DriverInterface
      *
      * @throws MissingConfigurationException if default_controller, default_action, controller_namespace, base_url or resource_path are not configured
      */
-    public static function getInstance(ConfigurationInterface $appConfiguration): DriverInterface
+    public static function install(ConfigurationInterface $appConfiguration): DriverInterface
     {
         if (self::$driverInstance === null) {
             $requiredConfig = ['default_controller', 'default_action', 'controller_namespace', 'base_url', 'resource_path'];
@@ -53,7 +53,9 @@ class RouterDriver extends AbstractDriver implements DriverInterface, RouterInte
 
             $configuration = $appConfiguration->getConfiguration();
 
-            $passiveActions = Yaml::parseFile(dirname(__DIR__, 4) . '/src/' . $configuration['router']['resource_path'] . '/passive_actions.yaml');
+            $passiveActions = Yaml::parseFile(
+                dirname(__DIR__, 4) . '/src/' . $configuration['router']['resource_path'] . '/passive_actions.yaml'
+            );
 
             $routingConfig = (new RoutingConfiguration())
                 ->setBaseUrl($configuration['router']['base_url'])
@@ -62,9 +64,7 @@ class RouterDriver extends AbstractDriver implements DriverInterface, RouterInte
                 ->setDefaultAction($configuration['router']['default_action'])
                 ->setPassiveActions($passiveActions ?? ['passive_actions' => []]);
 
-            $router = new Router($routingConfig);
-
-            self::$routerInstance = $router;
+            self::$routerInstance = new Router($routingConfig);
             self::$driverInstance = new RouterDriver();
         }
 

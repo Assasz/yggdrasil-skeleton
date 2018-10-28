@@ -38,14 +38,14 @@ class MailerDriver implements DriverInterface, MailerInterface
     private function __clone() {}
 
     /**
-     * Returns instance of mailer driver
+     * Installs mailer driver
      *
      * @param ConfigurationInterface $appConfiguration Configuration needed to configure mailer
      * @return DriverInterface
      *
      * @throws MissingConfigurationException if host, username or password are not configured
      */
-    public static function getInstance(ConfigurationInterface $appConfiguration): DriverInterface
+    public static function install(ConfigurationInterface $appConfiguration): DriverInterface
     {
         if (self::$driverInstance === null) {
             $requiredConfig = ['host', 'username', 'password'];
@@ -56,19 +56,15 @@ class MailerDriver implements DriverInterface, MailerInterface
 
             $configuration = $appConfiguration->getConfiguration();
 
-            $transport = new \Swift_SmtpTransport(
+            $transport = (new \Swift_SmtpTransport(
                 $configuration['mailer']['host'],
                 $configuration['mailer']['port'] ?? 465,
                 $configuration['mailer']['encryption'] ?? 'ssl'
-            );
-
-            $transport
+            ))
                 ->setUsername($configuration['mailer']['username'])
                 ->setPassword($configuration['mailer']['password']);
 
-            $mailer = new \Swift_Mailer($transport);
-
-            self::$mailerInstance = $mailer;
+            self::$mailerInstance = new \Swift_Mailer($transport);
             self::$driverInstance = new MailerDriver();
         }
 

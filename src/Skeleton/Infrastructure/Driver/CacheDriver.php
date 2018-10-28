@@ -37,14 +37,14 @@ class CacheDriver implements DriverInterface
     private function __clone() {}
 
     /**
-     * Returns instance of cache driver
+     * Installs cache driver
      *
      * @param ConfigurationInterface $appConfiguration Configuration needed to configure cache
      * @return DriverInterface
      *
      * @throws MissingConfigurationException if redis_host or redis_port is not configured
      */
-    public static function getInstance(ConfigurationInterface $appConfiguration): DriverInterface
+    public static function install(ConfigurationInterface $appConfiguration): DriverInterface
     {
         if (self::$driverInstance === null) {
             $requiredConfig = ['redis_host', 'redis_port'];

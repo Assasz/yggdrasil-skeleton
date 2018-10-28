@@ -40,14 +40,14 @@ class ValidatorDriver implements DriverInterface, ValidatorInterface
     private function __clone() {}
 
     /**
-     * Returns instance of validator driver
+     * Installs validator driver
      *
      * @param ConfigurationInterface $appConfiguration Configuration needed to configure validator
      * @return DriverInterface
      *
      * @throws MissingConfigurationException if resource_path is not configured
      */
-    public static function getInstance(ConfigurationInterface $appConfiguration): DriverInterface
+    public static function install(ConfigurationInterface $appConfiguration): DriverInterface
     {
         if (self::$driverInstance === null) {
             if (!$appConfiguration->isConfigured(['resource_path'], 'validator')) {
@@ -56,11 +56,11 @@ class ValidatorDriver implements DriverInterface, ValidatorInterface
 
             $configuration = $appConfiguration->getConfiguration();
 
-            $validationPath = dirname(__DIR__, 4) .
-                '/src/' . $configuration['validator']['resource_path'] . '/validation.yaml';
+            $constraintsPath = dirname(__DIR__, 4) .
+                '/src/' . $configuration['validator']['resource_path'] . '/constraints.yaml';
 
             $validator = Validation::createValidatorBuilder()
-                ->addYamlMapping($validationPath)
+                ->addYamlMapping($constraintsPath)
                 ->getValidator();
 
             self::$validatorInstance = $validator;
@@ -73,7 +73,7 @@ class ValidatorDriver implements DriverInterface, ValidatorInterface
     /**
      * Checks if given entity object is valid or not
      *
-     * @param object $entity
+     * @param object $entity Entity object to validate
      * @return bool
      */
     public function isValid(object $entity): bool

@@ -47,7 +47,7 @@ class EntityManagerDriver implements DriverInterface, EntityManagerInterface
     private function __clone() {}
 
     /**
-     * Returns instance of entity manager driver
+     * Installs entity manager driver
      *
      * @param ConfigurationInterface $appConfiguration Configuration needed to configure entity manager
      * @return DriverInterface
@@ -56,7 +56,7 @@ class EntityManagerDriver implements DriverInterface, EntityManagerInterface
      * @throws DBALException
      * @throws ORMException
      */
-    public static function getInstance(ConfigurationInterface $appConfiguration): DriverInterface
+    public static function install(ConfigurationInterface $appConfiguration): DriverInterface
     {
         if (self::$driverInstance === null) {
             $requiredConfig = ['db_name', 'db_user', 'db_password', 'db_host', 'entity_namespace'];

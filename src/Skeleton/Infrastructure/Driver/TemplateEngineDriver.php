@@ -35,16 +35,16 @@ class TemplateEngineDriver extends AbstractDriver implements DriverInterface, Te
     private function __clone() {}
 
     /**
-     * Returns instance of template engine driver
+     * Installs template engine driver
      *
      * @param ConfigurationInterface $appConfiguration Configuration needed to configure template engine
      * @return DriverInterface
      *
      * @throws MissingConfigurationException if view_path, form_path or application_name is not configured
      */
-    public static function getInstance(ConfigurationInterface $appConfiguration): DriverInterface
+    public static function install(ConfigurationInterface $appConfiguration): DriverInterface
     {
-        if (self::$engineInstance === null) {
+        if (self::$driverInstance === null) {
             $requiredConfig = ['view_path', 'form_path', 'application_name'];
 
             if (!$appConfiguration->isConfigured($requiredConfig, 'template_engine')) {
@@ -58,7 +58,10 @@ class TemplateEngineDriver extends AbstractDriver implements DriverInterface, Te
             $formPath = $basePath . $configuration['template_engine']['form_path'];
 
             $loader = new \Twig_Loader_Filesystem($viewPath);
-            $twig = new \Twig_Environment($loader, ['cache' => (!DEBUG) ? dirname(__DIR__, 7) . '/var/twig' : false]);
+            $twig   = new \Twig_Environment(
+                $loader, ['cache' => (!DEBUG) ? dirname(__DIR__, 4) . '/var/twig' : false]
+            );
+
             $router = $appConfiguration->loadDriver('router')->getComponentInstance();
 
             $twig->addExtension(new StandardExtension($configuration['template_engine']['application_name']));

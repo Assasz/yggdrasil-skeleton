@@ -39,14 +39,14 @@ class ExceptionHandlerDriver implements DriverInterface
     private function __clone() {}
 
     /**
-     * Returns instance of exception handler driver
+     * Installs exception handler driver
      *
      * @param ConfigurationInterface $appConfiguration Configuration needed to configure exception handler
      * @return DriverInterface
      *
      * @throws MissingConfigurationException if handler or log_path is not configured
      */
-    public static function getInstance(ConfigurationInterface $appConfiguration): DriverInterface
+    public static function install(ConfigurationInterface $appConfiguration): DriverInterface
     {
         if (self::$driverInstance === null) {
             $requiredConfig = ['handler', 'log_path'];

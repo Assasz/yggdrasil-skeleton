@@ -44,7 +44,7 @@ class ContainerDriver implements DriverInterface, ContainerInterface
     private function __clone() {}
 
     /**
-     * Returns instance of container driver
+     * Installs container driver
      *
      * @param ConfigurationInterface $appConfiguration Configuration needed to configure container
      * @return DriverInterface
@@ -52,7 +52,7 @@ class ContainerDriver implements DriverInterface, ContainerInterface
      * @throws MissingConfigurationException if resource_path is not configured
      * @throws \Exception
      */
-    public static function getInstance(ConfigurationInterface $appConfiguration): DriverInterface
+    public static function install(ConfigurationInterface $appConfiguration): DriverInterface
     {
         if (self::$driverInstance === null) {
             if (!$appConfiguration->isConfigured(['resource_path'], 'container')) {
