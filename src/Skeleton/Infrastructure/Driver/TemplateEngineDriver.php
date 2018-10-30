@@ -84,7 +84,7 @@ class TemplateEngineDriver extends AbstractDriver implements DriverInterface, Te
      */
     public function render(string $view, array $params = []): string
     {
-        self::$engineInstance->render($view, $params);
+        return self::$engineInstance->render($view, $params);
     }
 
     /**
