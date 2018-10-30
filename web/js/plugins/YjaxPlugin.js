@@ -25,32 +25,9 @@ class YjaxPlugin {
             }
         }
 
-        this.loadRoutes().onError();
-    }
+        this.routes = {};
 
-    /**
-     * Loads routes from remote
-     *
-     * @return {YjaxPlugin}
-     */
-    loadRoutes() {
-        let self = this;
-
-        $.ajax({
-            url: self.host + '/api/yjax/routes',
-            dataType: 'json',
-            async: false,
-            headers: {'X-YJAX': true},
-            success: function (routes) {
-                self.routes = routes;
-            },
-            error: function () {
-                console.error('Unable to load routes from remote.');
-                self.routes = {};
-            }
-        });
-
-        return this;
+        this.onError();
     }
 
     /**

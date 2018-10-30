@@ -49,9 +49,8 @@ class AuthService extends AbstractService implements ServiceInterface
 
             if ($request->isRemembered()) {
                 $rememberToken = bin2hex(random_bytes(32));
-                $hash = password_hash($rememberToken, PASSWORD_BCRYPT);
 
-                $user->setRememberToken($hash);
+                $user->setRememberToken(password_hash($rememberToken, PASSWORD_BCRYPT));
                 $this->getEntityManager()->flush();
 
                 $response->setRememberToken($rememberToken);

@@ -26,7 +26,10 @@ class MailSendService extends AbstractService implements ServiceInterface
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
         $message = $this->getMailer()->createMessage(
-            $request->getSubject(), $request->getSender(), $request->getReceivers(), $request->getBody()
+            $request->getSubject(),
+            $request->getSender(),
+            $request->getReceivers(),
+            $request->getBody()
         );
 
         $response = new MailSendResponse();

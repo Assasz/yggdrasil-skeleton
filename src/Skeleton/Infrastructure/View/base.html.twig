@@ -34,6 +34,12 @@
         <script src="{{ asset('js/App.js') }}"></script>
         <script src="{{ asset('js/plugins/YjaxPlugin.js') }}"></script>
         <script src="{{ asset('js/app.instance.js') }}"></script>
+
+        {# if have yjax plugin enabled #}
+        <script>
+            app.use('yjax').routes = {{ query_map()|json_encode|raw }};
+        </script>
+
         {% block js %}{% endblock %}
     </body>
 </html>
