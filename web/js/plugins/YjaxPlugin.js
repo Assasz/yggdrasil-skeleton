@@ -8,9 +8,10 @@ class YjaxPlugin {
     /**
      * Initializes plugin
      *
-     * @param {?string} host Hostname of remote - if null, Yjax will try to resolve it automatically
+     * @param {?string} host           Hostname of remote - if null, Yjax will try to resolve it automatically
+     * @param {?string} routesProvider Remote action to load routes from - if null, routes will not be loaded in this stage
      */
-    constructor(host = null) {
+    constructor(host = null, routesProvider = null) {
         if (null !== host) {
             this.host = host;
         } else {
@@ -20,14 +21,42 @@ class YjaxPlugin {
                 let pathArray = window.location.pathname.split('/');
 
                 if (pathArray.length > 3) {
-                    this.host = [this.host, pathArray[1], pathArray[2]].join('/');
+                  this.host = [this.host, pathArray[1], pathArray[2]].join('/');
                 }
             }
         }
 
-        this.routes = {};
+        if (null !== routesProvider) {
+            this.loadRoutes(routesProvider);
+        }
 
         this.onError();
+    }
+
+    /**
+     * Loads routes from remote
+     *
+     * @param {string} action Remote action to load routes from
+     * @return {YjaxPlugin}
+     */
+    loadRoutes(action) {
+        let self = this;
+
+        $.ajax({
+            url: self.host + action,
+            dataType: 'json',
+            async: false,
+            headers: {'X-YJAX': true},
+            success: function (routes) {
+                self.routes = routes;
+            },
+            error: function () {
+                console.error('Unable to load routes from remote.');
+                self.routes = {};
+            }
+        });
+
+        return this;
     }
 
     /**
