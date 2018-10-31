@@ -35,7 +35,8 @@
         <script src="{{ asset('js/plugins/YjaxPlugin.js') }}"></script>
         <script src="{{ asset('js/app.instance.js') }}"></script>
 
-        {# if have yjax plugin enabled #}
+        {# just pass routes to YjaxPlugin here instead of making synchronous call on remote #}
+        {# remove it if yjax is unmounted #}
         <script>
             app.use('yjax').routes = {{ query_map()|json_encode|raw }};
         </script>
