@@ -2,7 +2,7 @@
 
 namespace Skeleton\Infrastructure\Driver;
 
-use Skeleton\Application\AppInterface\ValidatorInterface;
+use Skeleton\Application\DriverInterface\ValidatorInterface;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
 use Yggdrasil\Core\Configuration\ConfigurationInterface;

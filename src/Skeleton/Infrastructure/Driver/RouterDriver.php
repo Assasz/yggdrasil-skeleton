@@ -2,7 +2,7 @@
 
 namespace Skeleton\Infrastructure\Driver;
 
-use Skeleton\Application\AppInterface\RouterInterface;
+use Skeleton\Application\DriverInterface\RouterInterface;
 use Symfony\Component\Yaml\Yaml;
 use Yggdrasil\Core\Configuration\ConfigurationInterface;
 use Yggdrasil\Core\Driver\DriverInterface;

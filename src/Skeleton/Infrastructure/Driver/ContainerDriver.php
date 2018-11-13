@@ -2,7 +2,7 @@
 
 namespace Skeleton\Infrastructure\Driver;
 
-use Skeleton\Application\AppInterface\ContainerInterface;
+use Skeleton\Application\DriverInterface\ContainerInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Skeleton\Application\AppInterface;
+namespace Skeleton\Application\DriverInterface;
 
 use Yggdrasil\Core\Exception\NotServiceReturnedException;
 use Yggdrasil\Core\Exception\ServiceNotFoundException;
@@ -9,7 +9,7 @@ use Yggdrasil\Core\Service\ServiceInterface;
 /**
  * Interface ContainerInterface
  *
- * @package Skeleton\Application\AppInterface
+ * @package Skeleton\Application\DriverInterface
  */
 interface ContainerInterface
 {

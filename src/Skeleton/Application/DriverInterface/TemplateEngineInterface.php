@@ -1,11 +1,11 @@
 <?php
 
-namespace Skeleton\Application\AppInterface;
+namespace Skeleton\Application\DriverInterface;
 
 /**
  * Interface TemplateEngineInterface
  *
- * @package Skeleton\Application\AppInterface
+ * @package Skeleton\Application\DriverInterface
  */
 interface TemplateEngineInterface
 {

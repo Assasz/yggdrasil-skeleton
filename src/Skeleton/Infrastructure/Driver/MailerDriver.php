@@ -2,7 +2,7 @@
 
 namespace Skeleton\Infrastructure\Driver;
 
-use Skeleton\Application\AppInterface\MailerInterface;
+use Skeleton\Application\DriverInterface\MailerInterface;
 use Yggdrasil\Core\Configuration\ConfigurationInterface;
 use Yggdrasil\Core\Driver\DriverInterface;
 use Yggdrasil\Core\Exception\MissingConfigurationException;

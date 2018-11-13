@@ -2,7 +2,7 @@
 
 namespace Skeleton\Infrastructure\Driver;
 
-use Skeleton\Application\AppInterface\TemplateEngineInterface;
+use Skeleton\Application\DriverInterface\TemplateEngineInterface;
 use Yggdrasil\Component\TwigComponent\FormExtension;
 use Yggdrasil\Component\TwigComponent\RoutingExtension;
 use Yggdrasil\Component\TwigComponent\StandardExtension;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Skeleton\Application\AppInterface;
+namespace Skeleton\Application\DriverInterface;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -10,7 +10,7 @@ use Doctrine\Common\Persistence\ObjectRepository;
 /**
  * Interface EntityManagerInterface
  *
- * @package Skeleton\Application\AppInterface
+ * @package Skeleton\Application\DriverInterface
  */
 interface EntityManagerInterface
 {
