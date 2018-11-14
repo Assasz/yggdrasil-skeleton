@@ -56,8 +56,7 @@ class ValidatorDriver implements DriverInterface, ValidatorInterface
 
             $configuration = $appConfiguration->getConfiguration();
 
-            $constraintsPath = dirname(__DIR__, 4) .
-                '/src/' . $configuration['validator']['resource_path'] . '/constraints.yaml';
+            $constraintsPath = dirname(__DIR__, 4) . '/src/' . $configuration['validator']['resource_path'] . '/constraints.yaml';
 
             $validator = Validation::createValidatorBuilder()
                 ->addYamlMapping($constraintsPath)

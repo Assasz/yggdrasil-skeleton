@@ -88,17 +88,6 @@ class TemplateEngineDriver extends AbstractDriver implements DriverInterface, Te
     }
 
     /**
-     * Displays given view
-     *
-     * @param string $view
-     * @param array $params
-     */
-    public function display(string $view, array $params = []): void
-    {
-        self::$engineInstance->display($view, $params);
-    }
-
-    /**
      * Adds global to template engine
      *
      * @param string $name
