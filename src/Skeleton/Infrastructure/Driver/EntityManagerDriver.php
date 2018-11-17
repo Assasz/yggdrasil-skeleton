@@ -6,6 +6,7 @@ use Doctrine\Common\Cache\RedisCache;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityRepository;
@@ -77,9 +78,13 @@ class EntityManagerDriver implements DriverInterface, EntityManagerInterface
                 'charset'  => $configuration['entity_manager']['db_charset'] ?? 'UTF8'
             ];
 
-            $entityPath = [dirname(__DIR__, 4) . '/src/' . $configuration['entity_manager']['entity_namespace'] . '/'];
+            $driver = new SimplifiedYamlDriver([
+                dirname(__DIR__, 4) . '/src/' . $configuration['entity_manager']['resource_path']
+                => $configuration['entity_manager']['entity_namespace']
+            ]);
 
-            $config = Setup::createAnnotationMetadataConfiguration($entityPath);
+            $config = Setup::createConfiguration();
+            $config->setMetadataDriverImpl($driver);
             $config->addEntityNamespace('Entity', $configuration['entity_manager']['entity_namespace']);
 
             if (!DEBUG && $appConfiguration->hasDriver('cache')) {

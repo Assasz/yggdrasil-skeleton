@@ -5,9 +5,6 @@ namespace Skeleton\Domain\Entity;
 /**
  * User entity
  *
- * @Entity(repositoryClass="Skeleton\Application\Repository\UserRepository")
- * @Table(name="`user`")
- *
  * @package Skeleton\Domain\Entity
  */
 class User
@@ -15,9 +12,6 @@ class User
     /**
      * User ID
      *
-     * @Id
-     * @Column(type="integer")
-     * @GeneratedValue(strategy="AUTO")
      * @var int $id
      */
     private $id;
@@ -25,7 +19,6 @@ class User
     /**
      * User username
      *
-     * @Column(type="string", length=36)
      * @var string $username
      */
     private $username;
@@ -33,7 +26,6 @@ class User
     /**
      * User email address
      *
-     * @Column(type="string", length=255, unique=true)
      * @var string $email
      */
     private $email;
@@ -41,7 +33,6 @@ class User
     /**
      * User password
      *
-     * @Column(type="string", length=255)
      * @var string $password
      */
     private $password;
@@ -49,15 +40,13 @@ class User
     /**
      * User remember token
      *
-     * @Column(type="string", length=255, nullable=true)
-     * @var null|string $rememberToken
+     * @var string? $rememberToken
      */
     private $rememberToken;
 
     /**
      * User remember identifier
      *
-     * @Column(type="string", length=255)
      * @var string $rememberIdentifier
      */
     private $rememberIdentifier;
@@ -65,7 +54,6 @@ class User
     /**
      * User account status (enabled or not)
      *
-     * @Column(type="string", columnDefinition="ENUM('0', '1')")
      * @var string $enabled
      */
     private $isEnabled;
@@ -73,7 +61,6 @@ class User
     /**
      * User sign up confirmation token
      *
-     * @Column(type="string", length=255)
      * @var string $confirmationToken
      */
     private $confirmationToken;
@@ -175,7 +162,7 @@ class User
     /**
      * Returns user remember token
      *
-     * @return null|string
+     * @return string?
      */
     public function getRememberToken(): ?string
     {
