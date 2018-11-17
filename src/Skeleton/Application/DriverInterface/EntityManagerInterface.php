@@ -15,12 +15,12 @@ use Doctrine\Common\Persistence\ObjectRepository;
 interface EntityManagerInterface
 {
     /**
-     * Returns given repository
+     * Returns given entity repository
      *
      * @param string $name Name of repository
-     * @return ObjectRepository|EntityRepository
+     * @return EntityRepository
      */
-    public function getRepository(string $name);
+    public function getRepository(string $name): EntityRepository;
 
     /**
      * Persists given entity object

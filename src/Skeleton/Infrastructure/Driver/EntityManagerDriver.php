@@ -119,12 +119,12 @@ class EntityManagerDriver implements DriverInterface, EntityManagerInterface
     }
 
     /**
-     * Return given repository
+     * Return given entity repository
      *
      * @param string $name Name of repository
-     * @return ObjectRepository|EntityRepository
+     * @return EntityRepository
      */
-    public function getRepository(string $name)
+    public function getRepository(string $name): EntityRepository
     {
         return self::$managerInstance->getRepository($name);
     }
