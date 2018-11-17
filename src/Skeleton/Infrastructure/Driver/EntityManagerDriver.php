@@ -11,7 +11,6 @@ use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\OptimisticLockException;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Skeleton\Application\DriverInterface\EntityManagerInterface;
 use Yggdrasil\Core\Configuration\ConfigurationInterface;
 use Yggdrasil\Core\Driver\DriverInterface;
@@ -53,14 +52,14 @@ class EntityManagerDriver implements DriverInterface, EntityManagerInterface
      * @param ConfigurationInterface $appConfiguration Configuration needed to configure entity manager
      * @return DriverInterface
      *
-     * @throws MissingConfigurationException if db_name, db_host, db_user, db_password or entity_namespace are not configured
+     * @throws MissingConfigurationException if db_name, db_host, db_user, db_password, entity_namespace or resource_path are not configured
      * @throws DBALException
      * @throws ORMException
      */
     public static function install(ConfigurationInterface $appConfiguration): DriverInterface
     {
         if (self::$driverInstance === null) {
-            $requiredConfig = ['db_name', 'db_user', 'db_password', 'db_host', 'entity_namespace'];
+            $requiredConfig = ['db_name', 'db_user', 'db_password', 'db_host', 'entity_namespace', 'resource_path'];
 
             if (!$appConfiguration->isConfigured($requiredConfig, 'entity_manager')) {
                 throw new MissingConfigurationException($requiredConfig, 'entity_manager');

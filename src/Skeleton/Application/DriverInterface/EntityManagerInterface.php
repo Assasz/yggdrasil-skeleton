@@ -5,7 +5,6 @@ namespace Skeleton\Application\DriverInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Doctrine\Common\Persistence\ObjectRepository;
 
 /**
  * Interface EntityManagerInterface
