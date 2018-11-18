@@ -28,7 +28,7 @@ class SignupConfirmationService extends AbstractService implements ServiceInterf
         $user = $this
             ->getEntityManager()
             ->getRepository('Entity:User')
-            ->findOneByConfirmationToken($request->getToken());
+            ->findOneBy(['confirmationToken' => $request->getToken()]);
 
         $response = new SignupConfirmationResponse();
 

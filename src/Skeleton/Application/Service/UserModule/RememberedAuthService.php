@@ -28,7 +28,7 @@ class RememberedAuthService extends AbstractService implements ServiceInterface
         $user = $this
             ->getEntityManager()
             ->getRepository('Entity:User')
-            ->findOneByRememberIdentifier($request->getRememberIdentifier());
+            ->findOneBy(['rememberIdentifier' => $request->getRememberIdentifier()]);
 
         $response = new RememberedAuthResponse();
 

@@ -30,7 +30,7 @@ class AuthService extends AbstractService implements ServiceInterface
         $user = $this
             ->getEntityManager()
             ->getRepository('Entity:User')
-            ->findOneByEmail($request->getEmail());
+            ->findOneBy(['email' => $request->getEmail()]);
 
         $response = new AuthResponse();
 
