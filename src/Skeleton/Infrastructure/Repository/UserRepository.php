@@ -8,7 +8,7 @@ use Skeleton\Application\RepositoryInterface\UserRepositoryInterface;
 /**
  * Class UserRepository
  *
- * Repository of user entity
+ * Repository of User entity
  *
  * @package Skeleton\Infrastructure\Repository
  */

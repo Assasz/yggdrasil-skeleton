@@ -41,14 +41,14 @@ class AppConfiguration extends AbstractConfiguration implements ConfigurationInt
     {
         return [
             'exceptionHandler' => ExceptionHandlerDriver::class,
-            'router' => RouterDriver::class,
-            'entityManager' => EntityManagerDriver::class,
-            'templateEngine' => TemplateEngineDriver::class,
-            'container' => ContainerDriver::class,
-            'validator' => ValidatorDriver::class,
-            'mailer' => MailerDriver::class,
+            'router'           => RouterDriver::class,
+            'entityManager'    => EntityManagerDriver::class,
+            'templateEngine'   => TemplateEngineDriver::class,
+            'container'        => ContainerDriver::class,
+            'validator'        => ValidatorDriver::class,
+            'mailer'           => MailerDriver::class,
             // Uncomment if have Redis installed
-            // 'cache' => CacheDriver::class,
+            // 'cache'            => CacheDriver::class,
         ];
     }
 }

@@ -72,7 +72,7 @@ class ErrorController extends AbstractController
     {
         return $this->render('error/default.html.twig', [
             'message' => $this->getResponse()->getContent(),
-            'status' => $this->getResponse()->getStatusCode()
+            'status'  => $this->getResponse()->getStatusCode()
         ]);
     }
 }

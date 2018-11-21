@@ -43,7 +43,7 @@ class SignupService extends AbstractService implements ServiceInterface
 
             $body = $this->getTemplateEngine()->render('mail/signup_confirmation.html.twig', [
                 'username' => $user->getUsername(),
-                'link' => $link
+                'link'     => $link
             ]);
 
             $mailSendRequest = (new MailSendRequest())

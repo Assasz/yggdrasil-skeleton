@@ -63,7 +63,7 @@ class ValidatorDriver implements DriverInterface, ValidatorInterface
                 ->getValidator();
 
             self::$validatorInstance = $validator;
-            self::$driverInstance = new ValidatorDriver();
+            self::$driverInstance    = new ValidatorDriver();
         }
 
         return self::$driverInstance;

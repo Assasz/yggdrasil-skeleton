@@ -64,7 +64,7 @@ class UserController extends AbstractController
 
             if ($isRemembered) {
                 $cookie['identifier'] = $response->getUser()->getRememberIdentifier();
-                $cookie['token'] = $response->getRememberToken();
+                $cookie['token']      = $response->getRememberToken();
 
                 $this->getResponse()->headers->setCookie(
                     new Cookie('remember', serialize($cookie), strtotime('now + 1 week'))
@@ -121,7 +121,9 @@ class UserController extends AbstractController
             if ($response->isSuccess()) {
                 $this->startUserSession($response->getUser());
 
-                $this->getResponse()->headers->setCookie(new Cookie('remember', serialize($cookie), strtotime('now + 1 week')));
+                $this->getResponse()->headers->setCookie(
+                    new Cookie('remember', serialize($cookie), strtotime('now + 1 week'))
+                );
             }
         }
 

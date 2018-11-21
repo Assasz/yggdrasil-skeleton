@@ -77,9 +77,10 @@ class EntityManagerDriver implements DriverInterface, EntityManagerInterface
                 'charset'  => $configuration['entity_manager']['db_charset'] ?? 'UTF8'
             ];
 
+            $fullResourcePath = dirname(__DIR__, 4) . '/src/' . $configuration['entity_manager']['resource_path'];
+
             $driver = new SimplifiedYamlDriver([
-                dirname(__DIR__, 4) . '/src/' . $configuration['entity_manager']['resource_path']
-                => $configuration['entity_manager']['entity_namespace']
+                $fullResourcePath => $configuration['entity_manager']['entity_namespace']
             ]);
 
             $config = Setup::createConfiguration();
@@ -101,7 +102,7 @@ class EntityManagerDriver implements DriverInterface, EntityManagerInterface
             $connection->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
 
             self::$managerInstance = EntityManager::create($connection, $config);
-            self::$driverInstance = new EntityManagerDriver();
+            self::$driverInstance  = new EntityManagerDriver();
         }
 
         return self::$driverInstance;
