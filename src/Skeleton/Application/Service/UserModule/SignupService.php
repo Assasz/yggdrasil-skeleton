@@ -2,6 +2,12 @@
 
 namespace Skeleton\Application\Service\UserModule;
 
+use Skeleton\Application\DriverInterface\ContainerInterface;
+use Skeleton\Application\DriverInterface\EntityManagerInterface;
+use Skeleton\Application\DriverInterface\RouterInterface;
+use Skeleton\Application\DriverInterface\TemplateEngineInterface;
+use Skeleton\Application\DriverInterface\ValidatorInterface;
+use Skeleton\Application\Exception\BrokenContractException;
 use Skeleton\Application\Service\SharedModule\Request\MailSendRequest;
 use Skeleton\Application\Service\UserModule\Response\SignupResponse;
 use Skeleton\Domain\Entity\User;
@@ -29,6 +35,8 @@ class SignupService extends AbstractService implements ServiceInterface
      */
     public function process(ServiceRequestInterface $request): ServiceResponseInterface
     {
+        $this->validateContracts();
+
         $user = (new User())
             ->setEmail($request->getEmail())
             ->setUsername($request->getUsername())
@@ -65,5 +73,27 @@ class SignupService extends AbstractService implements ServiceInterface
         }
 
         return $response;
+    }
+
+    /**
+     * Validates contracts between service and external suppliers
+     *
+     * @throws BrokenContractException
+     */
+    private function validateContracts(): void
+    {
+        $contracts = [
+            ValidatorInterface::class      => $this->getValidator(),
+            RouterInterface::class         => $this->getRouter(),
+            TemplateEngineInterface::class => $this->getTemplateEngine(),
+            ContainerInterface::class      => $this->getContainer(),
+            EntityManagerInterface::class  => $this->getEntityManager()
+        ];
+
+        foreach ($contracts as $contract => $supplier) {
+            if (!is_subclass_of($supplier, $contract)) {
+                throw new BrokenContractException($contract);
+            }
+        }
     }
 }
