@@ -36,8 +36,7 @@ app.register('validateForm', 'no-event', function() {
                         }
                     },
                     dataFilter: function(data) {
-                        let response = JSON.parse(data);
-                        return (response === "true") ? true : "\"" + response + "\"";
+                        return (JSON.parse(data) === "true") ? true : "\"" + JSON.parse(data) + "\"";
                     }
                 },
                 required: true,
@@ -61,7 +60,7 @@ app.register('validateForm', 'no-event', function() {
         validClass: "is-valid",
         errorElement: "span",
         errorPlacement: function(error, element) {
-            error.appendTo( element.parent() );
+            error.appendTo(element.parent());
         }
     });
 }).run();
