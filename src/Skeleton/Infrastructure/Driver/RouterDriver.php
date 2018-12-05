@@ -62,6 +62,7 @@ class RouterDriver extends AbstractDriver implements DriverInterface, RouterInte
                 ->setControllerNamespace($configuration['router']['controller_namespace'])
                 ->setDefaultController($configuration['router']['default_controller'])
                 ->setDefaultAction($configuration['router']['default_action'])
+                ->setDefaultNotFoundMsg($configuration['router']['default_not_found_msg'] ?? 'Not found.')
                 ->setPassiveActions($passiveActions ?? ['passive_actions' => []]);
 
             self::$routerInstance = new Router($routingConfig);
