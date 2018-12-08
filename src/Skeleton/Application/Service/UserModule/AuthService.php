@@ -5,11 +5,9 @@ namespace Skeleton\Application\Service\UserModule;
 use Skeleton\Application\DriverInterface\EntityManagerInterface;
 use Skeleton\Application\Exception\BrokenContractException;
 use Skeleton\Application\RepositoryInterface\UserRepositoryInterface;
+use Skeleton\Application\Service\UserModule\Request\AuthRequest;
 use Skeleton\Application\Service\UserModule\Response\AuthResponse;
 use Yggdrasil\Core\Service\AbstractService;
-use Yggdrasil\Core\Service\ServiceInterface;
-use Yggdrasil\Core\Service\ServiceRequestInterface;
-use Yggdrasil\Core\Service\ServiceResponseInterface;
 
 /**
  * Class AuthService
@@ -18,17 +16,17 @@ use Yggdrasil\Core\Service\ServiceResponseInterface;
  *
  * @package Skeleton\Application\Service\UserModule
  */
-class AuthService extends AbstractService implements ServiceInterface
+class AuthService extends AbstractService
 {
     /**
      * Authenticates user
      *
-     * @param ServiceRequestInterface $request
-     * @return ServiceResponseInterface
+     * @param AuthRequest $request
+     * @return AuthResponse
      *
      * @throws \Exception
      */
-    public function process(ServiceRequestInterface $request): ServiceResponseInterface
+    public function process(AuthRequest $request): AuthResponse
     {
         $this->validateContracts();
 

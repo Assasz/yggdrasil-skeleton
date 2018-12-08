@@ -5,11 +5,9 @@ namespace Skeleton\Application\Service\UserModule;
 use Skeleton\Application\DriverInterface\EntityManagerInterface;
 use Skeleton\Application\Exception\BrokenContractException;
 use Skeleton\Application\RepositoryInterface\UserRepositoryInterface;
+use Skeleton\Application\Service\UserModule\Request\EmailCheckRequest;
 use Skeleton\Application\Service\UserModule\Response\EmailCheckResponse;
 use Yggdrasil\Core\Service\AbstractService;
-use Yggdrasil\Core\Service\ServiceInterface;
-use Yggdrasil\Core\Service\ServiceRequestInterface;
-use Yggdrasil\Core\Service\ServiceResponseInterface;
 
 /**
  * Class EmailCheckService
@@ -18,15 +16,15 @@ use Yggdrasil\Core\Service\ServiceResponseInterface;
  *
  * @package Skeleton\Application\Service\UserModule
  */
-class EmailCheckService extends AbstractService implements ServiceInterface
+class EmailCheckService extends AbstractService
 {
     /**
      * Checks if email address is already taken by another user
      *
-     * @param ServiceRequestInterface $request
-     * @return ServiceResponseInterface
+     * @param EmailCheckRequest $request
+     * @return EmailCheckResponse
      */
-    public function process(ServiceRequestInterface $request): ServiceResponseInterface
+    public function process(EmailCheckRequest $request): EmailCheckResponse
     {
         $this->validateContracts();
 

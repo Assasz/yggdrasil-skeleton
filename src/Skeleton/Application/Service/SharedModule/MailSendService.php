@@ -4,11 +4,9 @@ namespace Skeleton\Application\Service\SharedModule;
 
 use Skeleton\Application\DriverInterface\MailerInterface;
 use Skeleton\Application\Exception\BrokenContractException;
+use Skeleton\Application\Service\SharedModule\Request\MailSendRequest;
 use Skeleton\Application\Service\SharedModule\Response\MailSendResponse;
 use Yggdrasil\Core\Service\AbstractService;
-use Yggdrasil\Core\Service\ServiceInterface;
-use Yggdrasil\Core\Service\ServiceRequestInterface;
-use Yggdrasil\Core\Service\ServiceResponseInterface;
 
 /**
  * Class MailSendService
@@ -17,15 +15,15 @@ use Yggdrasil\Core\Service\ServiceResponseInterface;
  *
  * @package Skeleton\Application\Service\SharedModule
  */
-class MailSendService extends AbstractService implements ServiceInterface
+class MailSendService extends AbstractService
 {
     /**
      * Sends mails
      *
-     * @param ServiceRequestInterface $request
-     * @return ServiceResponseInterface
+     * @param MailSendRequest $request
+     * @return MailSendResponse
      */
-    public function process(ServiceRequestInterface $request): ServiceResponseInterface
+    public function process(MailSendRequest $request): MailSendResponse
     {
         $this->validateContracts();
 

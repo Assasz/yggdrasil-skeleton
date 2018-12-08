@@ -9,12 +9,10 @@ use Skeleton\Application\DriverInterface\TemplateEngineInterface;
 use Skeleton\Application\DriverInterface\ValidatorInterface;
 use Skeleton\Application\Exception\BrokenContractException;
 use Skeleton\Application\Service\SharedModule\Request\MailSendRequest;
+use Skeleton\Application\Service\UserModule\Request\SignupRequest;
 use Skeleton\Application\Service\UserModule\Response\SignupResponse;
 use Skeleton\Domain\Entity\User;
 use Yggdrasil\Core\Service\AbstractService;
-use Yggdrasil\Core\Service\ServiceInterface;
-use Yggdrasil\Core\Service\ServiceRequestInterface;
-use Yggdrasil\Core\Service\ServiceResponseInterface;
 
 /**
  * Class SignupService
@@ -23,17 +21,17 @@ use Yggdrasil\Core\Service\ServiceResponseInterface;
  *
  * @package Skeleton\Application\Service\UserModule
  */
-class SignupService extends AbstractService implements ServiceInterface
+class SignupService extends AbstractService
 {
     /**
      * Registers user
      *
-     * @param ServiceRequestInterface $request
-     * @return ServiceResponseInterface
+     * @param SignupRequest $request
+     * @return SignupResponse
      *
      * @throws \Exception
      */
-    public function process(ServiceRequestInterface $request): ServiceResponseInterface
+    public function process(SignupRequest $request): SignupResponse
     {
         $this->validateContracts();
 

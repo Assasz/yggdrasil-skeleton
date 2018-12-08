@@ -5,11 +5,9 @@ namespace Skeleton\Application\Service\UserModule;
 use Skeleton\Application\DriverInterface\EntityManagerInterface;
 use Skeleton\Application\Exception\BrokenContractException;
 use Skeleton\Application\RepositoryInterface\UserRepositoryInterface;
+use Skeleton\Application\Service\UserModule\Request\SignupConfirmationRequest;
 use Skeleton\Application\Service\UserModule\Response\SignupConfirmationResponse;
 use Yggdrasil\Core\Service\AbstractService;
-use Yggdrasil\Core\Service\ServiceInterface;
-use Yggdrasil\Core\Service\ServiceRequestInterface;
-use Yggdrasil\Core\Service\ServiceResponseInterface;
 
 /**
  * Class SignupConfirmationService
@@ -18,15 +16,15 @@ use Yggdrasil\Core\Service\ServiceResponseInterface;
  *
  * @package Skeleton\Application\Service\UserModule
  */
-class SignupConfirmationService extends AbstractService implements ServiceInterface
+class SignupConfirmationService extends AbstractService
 {
     /**
      * Activates user account
      *
-     * @param ServiceRequestInterface $request
-     * @return ServiceResponseInterface
+     * @param SignupConfirmationRequest $request
+     * @return SignupConfirmationResponse
      */
-    public function process(ServiceRequestInterface $request): ServiceResponseInterface
+    public function process(SignupConfirmationRequest $request): SignupConfirmationResponse
     {
         $this->validateContracts();
 

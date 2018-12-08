@@ -2,5 +2,7 @@
 /vendor
 /var
 composer.lock
+/.docker
+docker-compose.yml
 # /src/Skeleton/Infrastructure/Configuration/config.ini
 # /src/Skeleton/Infrastructure/Log/*

@@ -8,7 +8,7 @@ use Yggdrasil\Component\TwigComponent\RoutingExtension;
 use Yggdrasil\Component\TwigComponent\StandardExtension;
 use Yggdrasil\Core\Configuration\ConfigurationInterface;
 use Yggdrasil\Core\Driver\DriverInterface;
-use Yggdrasil\Core\Driver\Abstraction\TemplateEngineDriver as AbstractDriver;
+use Yggdrasil\Core\Driver\TemplateEngineDriver as AbstractDriver;
 use Yggdrasil\Core\Exception\MissingConfigurationException;
 
 /**

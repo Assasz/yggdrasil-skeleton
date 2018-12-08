@@ -9,11 +9,11 @@ use Skeleton\Application\Service\UserModule\Request\SignupRequest;
 use Skeleton\Application\Service\UserModule\Request\AuthRequest;
 use Yggdrasil\Core\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
+use Yggdrasil\Core\Form\FormDataWrapper;
 use Yggdrasil\Core\Form\FormHandler;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Yggdrasil\Core\Service\Utils\ServiceRequestWrapper;
 
 /**
  * Class UserController
@@ -44,7 +44,7 @@ class UserController extends AbstractController
             $isRemembered = $form->hasData('remember_me');
 
             $request = new AuthRequest();
-            $request = ServiceRequestWrapper::wrap($request, $form->getDataCollection())->setRemembered($isRemembered);
+            $request = FormDataWrapper::wrap($request, $form->getDataCollection())->setRemembered($isRemembered);
 
             $response = $this->getContainer()->getService('user.auth')->process($request);
 
@@ -148,7 +148,7 @@ class UserController extends AbstractController
 
         if ($form->handle($this->getRequest())) {
             $request = new SignupRequest();
-            $request = ServiceRequestWrapper::wrap($request, $form->getDataCollection());
+            $request = FormDataWrapper::wrap($request, $form->getDataCollection());
 
             $response = $this->getContainer()->getService('user.signup')->process($request);
 

@@ -5,11 +5,9 @@ namespace Skeleton\Application\Service\UserModule;
 use Skeleton\Application\DriverInterface\EntityManagerInterface;
 use Skeleton\Application\Exception\BrokenContractException;
 use Skeleton\Application\RepositoryInterface\UserRepositoryInterface;
+use Skeleton\Application\Service\UserModule\Request\RememberedAuthRequest;
 use Skeleton\Application\Service\UserModule\Response\RememberedAuthResponse;
 use Yggdrasil\Core\Service\AbstractService;
-use Yggdrasil\Core\Service\ServiceInterface;
-use Yggdrasil\Core\Service\ServiceRequestInterface;
-use Yggdrasil\Core\Service\ServiceResponseInterface;
 
 /**
  * Class RememberedAuthService
@@ -18,15 +16,15 @@ use Yggdrasil\Core\Service\ServiceResponseInterface;
  *
  * @package Skeleton\Application\Service\UserModule
  */
-class RememberedAuthService extends AbstractService implements ServiceInterface
+class RememberedAuthService extends AbstractService
 {
     /**
      * Authenticates remembered user
      *
-     * @param ServiceRequestInterface $request
-     * @return ServiceResponseInterface
+     * @param RememberedAuthRequest $request
+     * @return RememberedAuthResponse
      */
-    public function process(ServiceRequestInterface $request): ServiceResponseInterface
+    public function process(RememberedAuthRequest $request): RememberedAuthResponse
     {
         $this->validateContracts();
 
