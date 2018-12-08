@@ -2,8 +2,6 @@
 
 namespace Skeleton\Application\Service\UserModule\Request;
 
-use Yggdrasil\Core\Service\ServiceRequestInterface;
-
 /**
  * Class SignupRequest
  *
@@ -11,7 +9,7 @@ use Yggdrasil\Core\Service\ServiceRequestInterface;
  *
  * @package Skeleton\Application\Service\UserModule\Request
  */
-class SignupRequest implements ServiceRequestInterface
+class SignupRequest
 {
     /**
      * User email address

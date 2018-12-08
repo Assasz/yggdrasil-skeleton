@@ -2,8 +2,6 @@
 
 namespace Skeleton\Application\Service\UserModule\Response;
 
-use Yggdrasil\Core\Service\ServiceResponseInterface;
-
 /**
  * Class SignupConfirmationResponse
  *
@@ -11,7 +9,7 @@ use Yggdrasil\Core\Service\ServiceResponseInterface;
  *
  * @package Skeleton\Application\Service\UserModule\Response
  */
-class SignupConfirmationResponse implements ServiceResponseInterface
+class SignupConfirmationResponse
 {
     /**
      * Result of service processing

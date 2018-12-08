@@ -2,7 +2,6 @@
 
 namespace Skeleton\Application\Service\UserModule\Response;
 
-use Yggdrasil\Core\Service\ServiceResponseInterface;
 use Skeleton\Domain\Entity\User;
 
 /**
@@ -12,7 +11,7 @@ use Skeleton\Domain\Entity\User;
  *
  * @package Skeleton\Application\Service\UserModule\Response
  */
-class RememberedAuthResponse implements ServiceResponseInterface
+class RememberedAuthResponse
 {
     /**
      * Result of service processing

@@ -2,8 +2,6 @@
 
 namespace Skeleton\Application\Service\SharedModule\Request;
 
-use Yggdrasil\Core\Service\ServiceRequestInterface;
-
 /**
  * Class MailSendRequest
  *
@@ -11,7 +9,7 @@ use Yggdrasil\Core\Service\ServiceRequestInterface;
  *
  * @package Skeleton\Application\Service\SharedModule\Request
  */
-class MailSendRequest implements ServiceRequestInterface
+class MailSendRequest
 {
     /**
      * Mail subject

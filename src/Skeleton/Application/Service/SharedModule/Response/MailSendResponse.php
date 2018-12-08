@@ -2,8 +2,6 @@
 
 namespace Skeleton\Application\Service\SharedModule\Response;
 
-use Yggdrasil\Core\Service\ServiceResponseInterface;
-
 /**
  * Class MailSendResponse
  *
@@ -11,7 +9,7 @@ use Yggdrasil\Core\Service\ServiceResponseInterface;
  *
  * @package Skeleton\Application\Service\SharedModule\Response
  */
-class MailSendResponse implements ServiceResponseInterface
+class MailSendResponse
 {
     /**
      * Result of service processing

@@ -2,8 +2,6 @@
 
 namespace Skeleton\Application\Service\UserModule\Request;
 
-use Yggdrasil\Core\Service\ServiceRequestInterface;
-
 /**
  * Class SignupConfirmationRequest
  *
@@ -11,7 +9,7 @@ use Yggdrasil\Core\Service\ServiceRequestInterface;
  *
  * @package Skeleton\Application\Service\UserModule\Request
  */
-class SignupConfirmationRequest implements ServiceRequestInterface
+class SignupConfirmationRequest
 {
     /**
      * Confirmation token
