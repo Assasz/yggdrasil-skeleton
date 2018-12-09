@@ -1,2 +1,0 @@
-[2018-12-08 19:14:04] Interface 'Yggdrasil\Core\Service\ServiceRequestInterface' not found at line 14 in C:\xampp\htdocs\yggdrasil-skeleton\src\Skeleton\Application\Service\UserModule\Request\RememberedAuthRequest.php
-[2018-12-08 19:14:04] Interface 'Yggdrasil\Core\Service\ServiceRequestInterface' not found at line 14 in C:\xampp\htdocs\yggdrasil-skeleton\src\Skeleton\Application\Service\UserModule\Request\RememberedAuthRequest.php

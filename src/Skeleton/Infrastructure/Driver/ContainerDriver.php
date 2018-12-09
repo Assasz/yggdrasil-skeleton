@@ -11,7 +11,7 @@ use Yggdrasil\Core\Driver\DriverInterface;
 use Yggdrasil\Core\Exception\MissingConfigurationException;
 use Yggdrasil\Core\Exception\NotServiceReturnedException;
 use Yggdrasil\Core\Exception\ServiceNotFoundException;
-use Yggdrasil\Core\Service\AbstractService;
+use Yggdrasil\Utils\Service\AbstractService;
 
 /**
  * Class ContainerDriver

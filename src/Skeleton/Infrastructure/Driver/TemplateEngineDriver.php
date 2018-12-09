@@ -3,9 +3,9 @@
 namespace Skeleton\Infrastructure\Driver;
 
 use Skeleton\Application\DriverInterface\TemplateEngineInterface;
-use Yggdrasil\Component\TwigComponent\FormExtension;
-use Yggdrasil\Component\TwigComponent\RoutingExtension;
-use Yggdrasil\Component\TwigComponent\StandardExtension;
+use Yggdrasil\Utils\Templating\FormExtension;
+use Yggdrasil\Utils\Templating\RoutingExtension;
+use Yggdrasil\Utils\Templating\StandardExtension;
 use Yggdrasil\Core\Configuration\ConfigurationInterface;
 use Yggdrasil\Core\Driver\DriverInterface;
 use Yggdrasil\Core\Driver\TemplateEngineDriver as AbstractDriver;

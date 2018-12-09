@@ -4,7 +4,7 @@ namespace Skeleton\Application\DriverInterface;
 
 use Yggdrasil\Core\Exception\NotServiceReturnedException;
 use Yggdrasil\Core\Exception\ServiceNotFoundException;
-use Yggdrasil\Core\Service\AbstractService;
+use Yggdrasil\Utils\Service\AbstractService;
 
 /**
  * Interface ContainerInterface

@@ -3,11 +3,10 @@
 namespace Skeleton\Application\Service\UserModule;
 
 use Skeleton\Application\DriverInterface\EntityManagerInterface;
-use Skeleton\Application\Exception\BrokenContractException;
 use Skeleton\Application\RepositoryInterface\UserRepositoryInterface;
 use Skeleton\Application\Service\UserModule\Request\SignupConfirmationRequest;
 use Skeleton\Application\Service\UserModule\Response\SignupConfirmationResponse;
-use Yggdrasil\Core\Service\AbstractService;
+use Yggdrasil\Utils\Service\AbstractService;
 
 /**
  * Class SignupConfirmationService
@@ -26,8 +25,6 @@ class SignupConfirmationService extends AbstractService
      */
     public function process(SignupConfirmationRequest $request): SignupConfirmationResponse
     {
-        $this->validateContracts();
-
         $user = $this
             ->getEntityManager()
             ->getRepository('Entity:User')
@@ -50,18 +47,17 @@ class SignupConfirmationService extends AbstractService
     }
 
     /**
-     * Validates contracts between service and external suppliers
+     * Returns contracts between service and external suppliers
      *
-     * @throws BrokenContractException
+     * @example [EntityManagerInterface::class => $this->getEntityManager()]
+     *
+     * @return array
      */
-    private function validateContracts(): void
+    protected function getContracts(): array
     {
-        if (!$this->getEntityManager() instanceof EntityManagerInterface) {
-            throw new BrokenContractException(EntityManagerInterface::class);
-        }
-
-        if (!$this->getEntityManager()->getRepository('Entity:User') instanceof UserRepositoryInterface) {
-            throw new BrokenContractException(UserRepositoryInterface::class);
-        }
+        return [
+            EntityManagerInterface::class  => $this->getEntityManager(),
+            UserRepositoryInterface::class => $this->getEntityManager()->getRepository('Entity:User')
+        ];
     }
 }
