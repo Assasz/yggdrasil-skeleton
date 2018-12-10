@@ -3,10 +3,9 @@
 namespace Skeleton\Application\Service\SharedModule;
 
 use Skeleton\Application\DriverInterface\MailerInterface;
-use Skeleton\Application\Exception\BrokenContractException;
 use Skeleton\Application\Service\SharedModule\Request\MailSendRequest;
 use Skeleton\Application\Service\SharedModule\Response\MailSendResponse;
-use Yggdrasil\Core\Service\AbstractService;
+use Yggdrasil\Utils\Service\AbstractService;
 
 /**
  * Class MailSendService
@@ -44,14 +43,16 @@ class MailSendService extends AbstractService
     }
 
     /**
-     * Validates contracts between service and external suppliers
+     * Returns contracts between service and external suppliers
      *
-     * @throws BrokenContractException
+     * @example [EntityManagerInterface::class => $this->getEntityManager()]
+     *
+     * @return array
      */
-    private function validateContracts(): void
+    protected function getContracts(): array
     {
-        if (!$this->getMailer() instanceof MailerInterface) {
-            throw new BrokenContractException(MailerInterface::class);
-        }
+        return [
+            MailerInterface::class => $this->getMailer(),
+        ];
     }
 }
