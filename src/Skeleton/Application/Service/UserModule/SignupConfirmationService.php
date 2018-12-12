@@ -14,6 +14,9 @@ use Yggdrasil\Utils\Service\AbstractService;
  * This is a part of built-in user module, feel free to customize as needed
  *
  * @package Skeleton\Application\Service\UserModule
+ *
+ * @property EntityManagerInterface $entityManager
+ * @property UserRepositoryInterface $userRepository
  */
 class SignupConfirmationService extends AbstractService
 {
@@ -25,10 +28,7 @@ class SignupConfirmationService extends AbstractService
      */
     public function process(SignupConfirmationRequest $request): SignupConfirmationResponse
     {
-        $user = $this
-            ->getEntityManager()
-            ->getRepository('Entity:User')
-            ->findOneBy(['confirmationToken' => $request->getToken()]);
+        $user = $this->userRepository->fetchOne(['confirmationToken' => $request->getToken()]);
 
         $response = new SignupConfirmationResponse();
 
@@ -41,7 +41,7 @@ class SignupConfirmationService extends AbstractService
         }
 
         $user->setEnabled('1');
-        $this->getEntityManager()->flush();
+        $this->entityManager->flush();
 
         return $response->setSuccess(true);
     }

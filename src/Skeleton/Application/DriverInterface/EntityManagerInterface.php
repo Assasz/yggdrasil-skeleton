@@ -25,8 +25,6 @@ interface EntityManagerInterface
      * Persists given entity object
      *
      * @param object $entity Entity object to persist
-     *
-     * @throws ORMException
      */
     public function persist(object $entity): void;
 
@@ -34,8 +32,6 @@ interface EntityManagerInterface
      * Removes given entity object
      *
      * @param object $entity Entity object to remove
-     *
-     * @throws ORMException
      */
     public function remove(object $entity): void;
 
@@ -43,9 +39,6 @@ interface EntityManagerInterface
      * Flushes all changes to entity objects
      *
      * @param object? $entity Entity object to flush, if provided
-     *
-     * @throws ORMException
-     * @throws OptimisticLockException
      */
     public function flush(object $entity = null): void;
 }

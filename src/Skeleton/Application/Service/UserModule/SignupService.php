@@ -19,6 +19,12 @@ use Yggdrasil\Utils\Service\AbstractService;
  * This is a part of built-in user module, feel free to customize as needed
  *
  * @package Skeleton\Application\Service\UserModule
+ *
+ * @property ValidatorInterface $validator
+ * @property RouterInterface $router
+ * @property TemplateEngineInterface $templateEngine
+ * @property ContainerInterface $container
+ * @property EntityManagerInterface $entityManager
  */
 class SignupService extends AbstractService
 {
@@ -39,12 +45,12 @@ class SignupService extends AbstractService
 
         $response = new SignupResponse();
 
-        if ($this->getValidator()->isValid($user)) {
-            $link = $this->getRouter()->getQuery('User:signupConfirmation', [
+        if ($this->validator->isValid($user)) {
+            $link = $this->router->getQuery('User:signupConfirmation', [
                 $user->getConfirmationToken()
             ]);
 
-            $body = $this->getTemplateEngine()->render('mail/signup_confirmation.html.twig', [
+            $body = $this->templateEngine->render('mail/signup_confirmation.html.twig', [
                 'username' => $user->getUsername(),
                 'link'     => $link
             ]);
@@ -55,13 +61,13 @@ class SignupService extends AbstractService
                 ->setSender(['skeleton@yggdrasil.com' => 'Yggdrasil Skeleton'])
                 ->setReceivers([$user->getEmail() => $user->getUsername()]);
 
-            $mailSendResponse = $this->getContainer()->getService('shared.mail_send')->process($mailSendRequest);
+            $mailSendResponse = $this->container->getService('shared.mail_send')->process($mailSendRequest);
 
             if ($mailSendResponse->isSuccess()) {
                 $user->setPassword(password_hash($request->getPassword(), PASSWORD_BCRYPT));
 
-                $this->getEntityManager()->persist($user);
-                $this->getEntityManager()->flush();
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
 
                 $response->setSuccess(true);
             }

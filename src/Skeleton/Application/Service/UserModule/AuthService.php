@@ -14,6 +14,9 @@ use Yggdrasil\Utils\Service\AbstractService;
  * This is a part of built-in user module, feel free to customize as needed
  *
  * @package Skeleton\Application\Service\UserModule
+ *
+ * @property EntityManagerInterface $entityManager
+ * @property UserRepositoryInterface $userRepository
  */
 class AuthService extends AbstractService
 {
@@ -27,10 +30,7 @@ class AuthService extends AbstractService
      */
     public function process(AuthRequest $request): AuthResponse
     {
-        $user = $this
-            ->getEntityManager()
-            ->getRepository('Entity:User')
-            ->findOneBy(['email' => $request->getEmail()]);
+        $user = $this->userRepository->fetchOne(['email' => $request->getEmail()]);
 
         $response = new AuthResponse();
 
@@ -51,7 +51,7 @@ class AuthService extends AbstractService
                 $rememberToken = bin2hex(random_bytes(32));
 
                 $user->setRememberToken(password_hash($rememberToken, PASSWORD_BCRYPT));
-                $this->getEntityManager()->flush();
+                $this->entityManager->flush();
 
                 $response->setRememberToken($rememberToken);
             }

@@ -13,6 +13,8 @@ use Yggdrasil\Utils\Service\AbstractService;
  * This is a part of built-in shared module, feel free to customize as needed
  *
  * @package Skeleton\Application\Service\SharedModule
+ *
+ * @property MailerInterface $mailer
  */
 class MailSendService extends AbstractService
 {
@@ -24,9 +26,7 @@ class MailSendService extends AbstractService
      */
     public function process(MailSendRequest $request): MailSendResponse
     {
-        $this->validateContracts();
-
-        $message = $this->getMailer()->createMessage(
+        $message = $this->mailer->createMessage(
             $request->getSubject(),
             $request->getSender(),
             $request->getReceivers(),
@@ -35,7 +35,7 @@ class MailSendService extends AbstractService
 
         $response = new MailSendResponse();
 
-        if ($this->getMailer()->send($message)) {
+        if ($this->mailer->send($message)) {
             $response->setSuccess(true);
         }
 

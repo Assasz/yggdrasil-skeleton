@@ -14,6 +14,9 @@ use Yggdrasil\Utils\Service\AbstractService;
  * This is a part of built-in user module, feel free to customize as needed
  *
  * @package Skeleton\Application\Service\UserModule
+ *
+ * @property EntityManagerInterface $entityManager
+ * @property UserRepositoryInterface $userRepository
  */
 class EmailCheckService extends AbstractService
 {
@@ -25,10 +28,7 @@ class EmailCheckService extends AbstractService
      */
     public function process(EmailCheckRequest $request): EmailCheckResponse
     {
-        $users = $this
-            ->getEntityManager()
-            ->getRepository('Entity:User')
-            ->findBy(['email' => $request->getEmail()]);
+        $users = $this->userRepository->fetch(['email' => $request->getEmail()]);
 
         $response = new EmailCheckResponse();
 
