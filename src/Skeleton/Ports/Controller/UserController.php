@@ -7,6 +7,7 @@ use Skeleton\Application\Service\UserModule\Request\RememberedAuthRequest;
 use Skeleton\Application\Service\UserModule\Request\SignupConfirmationRequest;
 use Skeleton\Application\Service\UserModule\Request\SignupRequest;
 use Skeleton\Application\Service\UserModule\Request\AuthRequest;
+use Skeleton\Infrastructure\Driver\ContainerDriver;
 use Yggdrasil\Core\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Yggdrasil\Utils\Form\FormDataWrapper;
@@ -21,6 +22,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  * This is a part of built-in user module, feel free to customize as needed
  *
  * @package Skeleton\Ports\Controller
+ *
+ * @property ContainerDriver $container
  */
 class UserController extends AbstractController
 {
@@ -46,7 +49,7 @@ class UserController extends AbstractController
             $request = new AuthRequest();
             $request = FormDataWrapper::wrap($request, $form->getDataCollection())->setRemembered($isRemembered);
 
-            $response = $this->getContainer()->getService('user.auth')->process($request);
+            $response = $this->container->getService('user.auth')->process($request);
 
             if (!$response->isSuccess()) {
                 $this->addFlash('danger', 'Authentication failed. Incorrect e-mail address or password.');
@@ -116,7 +119,7 @@ class UserController extends AbstractController
                 ->setRememberIdentifier($cookie['identifier'])
                 ->setRememberToken($cookie['token']);
 
-            $response = $this->getContainer()->getService('user.remembered_auth')->process($request);
+            $response = $this->container->getService('user.remembered_auth')->process($request);
 
             if ($response->isSuccess()) {
                 $this->startUserSession($response->getUser());
@@ -150,7 +153,7 @@ class UserController extends AbstractController
             $request = new SignupRequest();
             $request = FormDataWrapper::wrap($request, $form->getDataCollection());
 
-            $response = $this->getContainer()->getService('user.signup')->process($request);
+            $response = $this->container->getService('user.signup')->process($request);
 
             if ($response->isSuccess()) {
                 $this->addFlash('success', 'Account created successfully. Check your mailbox for confirmation mail.');
@@ -183,7 +186,7 @@ class UserController extends AbstractController
         $request = (new EmailCheckRequest())
             ->setEmail($this->getRequest()->request->get('email'));
 
-        $response = $this->getContainer()->getService('user.email_check')->process($request);
+        $response = $this->container->getService('user.email_check')->process($request);
 
         return $this->json([($response->isSuccess()) ? 'true' : 'This email address is already taken.']);
     }
@@ -202,7 +205,7 @@ class UserController extends AbstractController
         $request = (new SignupConfirmationRequest())
             ->setToken($token);
 
-        $response = $this->getContainer()->getService('user.signup_confirmation')->process($request);
+        $response = $this->container->getService('user.signup_confirmation')->process($request);
 
         if ($response->isAlreadyActive()) {
             $this->addFlash('warning', 'This account is already active.');
