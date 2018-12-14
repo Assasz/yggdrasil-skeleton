@@ -52,7 +52,7 @@ class MailSendService extends AbstractService
     protected function getContracts(): array
     {
         return [
-            MailerInterface::class => $this->getMailer(),
+            MailerInterface::class => $this->getDriver('mailer'),
         ];
     }
 }

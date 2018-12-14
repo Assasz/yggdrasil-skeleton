@@ -86,11 +86,11 @@ class SignupService extends AbstractService
     protected function getContracts(): array
     {
         return [
-            ValidatorInterface::class      => $this->getValidator(),
+            ValidatorInterface::class      => $this->getDriver('validator'),
             RouterInterface::class         => $this->getRouter(),
             TemplateEngineInterface::class => $this->getTemplateEngine(),
-            ContainerInterface::class      => $this->getContainer(),
-            EntityManagerInterface::class  => $this->getEntityManager()
+            ContainerInterface::class      => $this->getDriver('container'),
+            EntityManagerInterface::class  => $this->getDriver('entityManager')
         ];
     }
 }

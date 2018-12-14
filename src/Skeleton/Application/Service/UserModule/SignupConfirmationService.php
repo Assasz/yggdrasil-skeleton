@@ -56,8 +56,8 @@ class SignupConfirmationService extends AbstractService
     protected function getContracts(): array
     {
         return [
-            EntityManagerInterface::class  => $this->getEntityManager(),
-            UserRepositoryInterface::class => $this->getEntityManager()->getRepository('Entity:User')
+            EntityManagerInterface::class  => $this->getDriver('entityManager'),
+            UserRepositoryInterface::class => $this->getDriver('entityManager')->getRepository('Entity:User')
         ];
     }
 }
