@@ -63,7 +63,7 @@ class AuthService extends AbstractService
     /**
      * Returns contracts between service and external suppliers
      *
-     * @example [EntityManagerInterface::class => $this->getEntityManager()]
+     * @example [EntityManagerInterface::class => $this->getDriver('entityManager')]
      *
      * @return array
      */
