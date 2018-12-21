@@ -34,27 +34,25 @@ class AuthService extends AbstractService
 
         $response = new AuthResponse();
 
-        if (empty($user)) {
+        if (empty($user) || !password_verify($request->getPassword(), $user->getPassword())) {
             return $response;
         }
 
-        if (password_verify($request->getPassword(), $user->getPassword())) {
-            $response
-                ->setSuccess(true)
-                ->setUser($user);
+        $response
+            ->setSuccess(true)
+            ->setUser($user);
 
-            if (!$user->isEnabled()) {
-                return $response->setEnabled(false);
-            }
+        if (!$user->isEnabled()) {
+            return $response->setEnabled(false);
+        }
 
-            if ($request->isRemembered()) {
-                $rememberToken = bin2hex(random_bytes(32));
+        if ($request->isRemembered()) {
+            $rememberToken = bin2hex(random_bytes(32));
 
-                $user->setRememberToken(password_hash($rememberToken, PASSWORD_BCRYPT));
-                $this->entityManager->flush();
+            $user->setRememberToken(password_hash($rememberToken, PASSWORD_BCRYPT));
+            $this->entityManager->flush();
 
-                $response->setRememberToken($rememberToken);
-            }
+            $response->setRememberToken($rememberToken);
         }
 
         return $response;

@@ -45,32 +45,34 @@ class SignupService extends AbstractService
 
         $response = new SignupResponse();
 
-        if ($this->validator->isValid($user)) {
-            $link = $this->router->getQuery('User:signupConfirmation', [
-                $user->getConfirmationToken()
-            ]);
+        if (!$this->validator->isValid($user)) {
+            return $response;
+        }
 
-            $body = $this->templateEngine->render('mail/signup_confirmation.html.twig', [
-                'username' => $user->getUsername(),
-                'link'     => $link
-            ]);
+        $link = $this->router->getQuery('User:signupConfirmation', [
+            $user->getConfirmationToken()
+        ]);
 
-            $mailSendRequest = (new MailSendRequest())
-                ->setSubject('Sign up confirmation')
-                ->setBody($body)
-                ->setSender(['skeleton@yggdrasil.com' => 'Yggdrasil Skeleton'])
-                ->setReceivers([$user->getEmail() => $user->getUsername()]);
+        $body = $this->templateEngine->render('mail/signup_confirmation.html.twig', [
+            'username' => $user->getUsername(),
+            'link'     => $link
+        ]);
 
-            $mailSendResponse = $this->container->getService('shared.mail_send')->process($mailSendRequest);
+        $mailSendRequest = (new MailSendRequest())
+            ->setSubject('Sign up confirmation')
+            ->setBody($body)
+            ->setSender(['skeleton@yggdrasil.com' => 'Yggdrasil Skeleton'])
+            ->setReceivers([$user->getEmail() => $user->getUsername()]);
 
-            if ($mailSendResponse->isSuccess()) {
-                $user->setPassword(password_hash($request->getPassword(), PASSWORD_BCRYPT));
+        $mailSendResponse = $this->container->getService('shared.mail_send')->process($mailSendRequest);
 
-                $this->entityManager->persist($user);
-                $this->entityManager->flush();
+        if ($mailSendResponse->isSuccess()) {
+            $user->setPassword(password_hash($request->getPassword(), PASSWORD_BCRYPT));
 
-                $response->setSuccess(true);
-            }
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+
+            $response->setSuccess(true);
         }
 
         return $response;
