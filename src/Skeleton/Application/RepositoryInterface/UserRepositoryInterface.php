@@ -1,6 +1,7 @@
 <?php
 
 namespace Skeleton\Application\RepositoryInterface;
+
 use Skeleton\Domain\Entity\User;
 
 /**
@@ -19,7 +20,7 @@ interface UserRepositoryInterface
      * @param int?   $offset
      * @return array The objects
      */
-    public function fetch(array $criteria, array $orderBy = null, int $limit = null, int $offset = null): array;
+    public function fetch(array $criteria = [], array $orderBy = null, int $limit = null, int $offset = null): array;
 
     /**
      * Finds a single user by a set of criteria
