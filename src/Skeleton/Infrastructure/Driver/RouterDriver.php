@@ -53,9 +53,11 @@ class RouterDriver extends AbstractDriver implements DriverInterface, RouterInte
 
             $configuration = $appConfiguration->getConfiguration();
 
-            $passiveActions = Yaml::parseFile(
-                dirname(__DIR__, 4) . '/src/' . $configuration['router']['resource_path'] . '/passive_actions.yaml'
-            );
+            $passiveActionsPath = dirname(__DIR__, 4) . '/src/' . $configuration['router']['resource_path'] . '/passive_actions.yaml';
+
+            if (file_exists($passiveActionsPath)) {
+                $passiveActions = Yaml::parseFile($passiveActionsPath);
+            }
 
             $routingConfig = (new RoutingConfiguration())
                 ->setBaseUrl($configuration['router']['base_url'])
@@ -63,7 +65,7 @@ class RouterDriver extends AbstractDriver implements DriverInterface, RouterInte
                 ->setDefaultController($configuration['router']['default_controller'])
                 ->setDefaultAction($configuration['router']['default_action'])
                 ->setDefaultNotFoundMsg($configuration['router']['default_not_found_msg'] ?? 'Not found.')
-                ->setPassiveActions($passiveActions ?? ['passive_actions' => []]);
+                ->setPassiveActions($passiveActions ?? []);
 
             self::$routerInstance = new Router($routingConfig);
             self::$driverInstance = new RouterDriver();
