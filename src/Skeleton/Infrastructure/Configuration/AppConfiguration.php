@@ -37,7 +37,7 @@ class AppConfiguration extends AbstractConfiguration implements ConfigurationInt
      *
      * @return array
      */
-    protected function getDriverRegistry(): array
+    protected function getDriversRegistry(): array
     {
         return [
             'exceptionHandler' => ExceptionHandlerDriver::class,
