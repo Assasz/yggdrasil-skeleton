@@ -8,10 +8,11 @@ class YjaxPlugin {
     /**
      * Initializes plugin
      *
-     * @param {?string} host           Hostname of remote - if null, Yjax will try to resolve it automatically
-     * @param {?string} routesProvider Remote action to load routes from - if null, routes will not be loaded in this stage
+     * @param {object} options
+     * @param {string} options.host           Hostname of remote, if left empty, Yjax will try to resolve it automatically
+     * @param {string} options.routesProvider Remote action to load routes from, if left empty, routes will not be loaded in this stage
      */
-    constructor(host = null, routesProvider = null) {
+    constructor({ host, routesProvider } = {}) {
         if (null !== host) {
             this.host = host;
         } else {
@@ -21,7 +22,7 @@ class YjaxPlugin {
                 let pathArray = window.location.pathname.split('/');
 
                 if (pathArray.length > 3) {
-                  this.host = [this.host, pathArray[1], pathArray[2]].join('/');
+                    this.host = [this.host, pathArray[1], pathArray[2]].join('/');
                 }
             }
         }
@@ -62,14 +63,15 @@ class YjaxPlugin {
     /**
      * Calls remote GET action
      *
-     * @param {string}    action  Alias of remote action like Controller:action
-     * @param {array}     params  Remote action parameters
-     * @param {?function} success On success callback
-     * @param {?function} error   On error callback
-     * @param {?object}   options Set of ajax options
-     * @return {boolean}          Returns false is action route doesn't exist
+     * @param {object}   options
+     * @param {string}   options.action      Alias of remote action like Controller:action
+     * @param {array}    options.params      Remote action parameters
+     * @param {function} options.success     On success callback
+     * @param {function} options.error       On error callback
+     * @param {object}   options.ajaxOptions Set of ajax options
+     * @return {boolean}                     Returns false is action route doesn't exist
      */
-    get (action, params = [], success = null, error = null, options = null) {
+    get ({ action, params = [], success, error, ajaxOptions }) {
         if (typeof this.routes[action] === 'undefined') {
             console.error('Route for ' + action + ' doesn\'t exist.');
 
@@ -89,7 +91,7 @@ class YjaxPlugin {
                 },
             };
 
-        $.each(options, function (key, value) {
+        $.each(ajaxOptions, function (key, value) {
             request[key] = value;
         });
 
@@ -101,15 +103,16 @@ class YjaxPlugin {
     /**
      * Calls remote POST action
      *
-     * @param {string}    action  Alias of remote action like Controller:action
-     * @param {object}    data    Data to send
-     * @param {array}     params  Remote action parameters
-     * @param {?function} success On success callback
-     * @param {?function} error   On error callback
-     * @param {?object}   options Set of ajax options
-     * @return {boolean}          Returns false is action route doesn't exist
+     * @param {object}   options
+     * @param {string}   options.action      Alias of remote action like Controller:action
+     * @param {object}   options.data        Data to send
+     * @param {array}    options.params      Remote action parameters
+     * @param {function} options.success     On success callback
+     * @param {function} options.error       On error callback
+     * @param {object}   options.ajaxOptions Set of ajax options
+     * @return {boolean}                     Returns false is action route doesn't exist
      */
-    post (action, data, params = [], success = null, error = null, options = null) {
+    post ({ action, data, params = [], success, error, ajaxOptions }) {
         if (typeof this.routes[action] === 'undefined') {
             console.error('Route for ' + action + ' doesn\'t exist.');
 
@@ -132,7 +135,7 @@ class YjaxPlugin {
                 },
             };
 
-        $.each(options, function (key, value) {
+        $.each(ajaxOptions, function (key, value) {
             request[key] = value;
         });
 
@@ -144,15 +147,16 @@ class YjaxPlugin {
     /**
      * Calls remote PUT action
      *
-     * @param {string}    action  Alias of remote action like Controller:action
-     * @param {object}    data    Data to send
-     * @param {array}     params  Remote action parameters
-     * @param {?function} success On success callback
-     * @param {?function} error   On error callback
-     * @param {?object}   options Set of ajax options
-     * @return {boolean}          Returns false is action route doesn't exist
+     * @param {object}   options
+     * @param {string}   options.action      Alias of remote action like Controller:action
+     * @param {object}   options.data        Data to send
+     * @param {array}    options.params      Remote action parameters
+     * @param {function} options.success     On success callback
+     * @param {function} options.error       On error callback
+     * @param {object}   options.ajaxOptions Set of ajax options
+     * @return {boolean}                     Returns false is action route doesn't exist
      */
-    put (action, data, params = [], success = null, error = null, options = null) {
+    put ({ action, data, params = [], success, error, ajaxOptions }) {
         if (typeof this.routes[action] === 'undefined') {
             console.error('Route for ' + action + ' doesn\'t exist.');
 
@@ -175,7 +179,7 @@ class YjaxPlugin {
                 },
             };
 
-        $.each(options, function (key, value) {
+        $.each(ajaxOptions, function (key, value) {
             request[key] = value;
         });
 
@@ -187,14 +191,15 @@ class YjaxPlugin {
     /**
      * Calls remote DELETE action
      *
-     * @param {string}    action  Alias of remote action like Controller:action
-     * @param {array}     params  Remote action parameters
-     * @param {?function} success On success callback
-     * @param {?function} error   On error callback
-     * @param {?object}   options Set of ajax options
-     * @return {boolean}          Returns false is action route doesn't exist
+     * @param {object}    options
+     * @param {string}    options.action      Alias of remote action like Controller:action
+     * @param {array}     options.params      Remote action parameters
+     * @param {?function} options.success     On success callback
+     * @param {?function} options.error       On error callback
+     * @param {?object}   options.ajaxOptions Set of ajax options
+     * @return {boolean}                      Returns false is action route doesn't exist
      */
-    delete (action, params = [], success = null, error = null, options = null) {
+    delete ({ action, params = [], success, error, ajaxOptions }) {
         if (typeof this.routes[action] === 'undefined') {
             console.error('Route for ' + action + ' doesn\'t exist.');
 
@@ -215,7 +220,7 @@ class YjaxPlugin {
                 },
             };
 
-        $.each(options, function (key, value) {
+        $.each(ajaxOptions, function (key, value) {
             request[key] = value;
         });
 
