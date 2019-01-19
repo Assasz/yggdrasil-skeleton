@@ -4,5 +4,5 @@
 composer.lock
 /.docker
 docker-compose.yml
+error_logs.txt
 # /src/Skeleton/Infrastructure/Configuration/config.ini
-# /src/Skeleton/Infrastructure/Log/*
