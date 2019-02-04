@@ -9,7 +9,7 @@ use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Skeleton\Infrastructure\Configuration\AppConfiguration;
 use Skeleton\Ports\Command\SeedsPersistCommand;
 use Yggdrasil\Utils\Entity\EntityGenerateCommand;
-use Yggdrasil\Utils\Service\ServicePortGenerateCommand;
+use Yggdrasil\Utils\Service\ServiceDTOGenerateCommand;
 
 try {
     $consoleApplication = new Application('Yggdrasil CLI', 'dev');
@@ -30,7 +30,7 @@ try {
         default:
             // register commands here
             $consoleApplication->add(new EntityGenerateCommand($appConfiguration));
-            $consoleApplication->add(new ServicePortGenerateCommand($appConfiguration));
+            $consoleApplication->add(new ServiceDTOGenerateCommand($appConfiguration));
             $consoleApplication->add(new SeedsPersistCommand($appConfiguration));
 
             break;
