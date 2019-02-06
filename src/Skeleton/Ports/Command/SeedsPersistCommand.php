@@ -2,7 +2,9 @@
 
 namespace Skeleton\Ports\Command;
 
-use Skeleton\Infrastructure\Seeds\AbstractSeeds;
+use Skeleton\Infrastructure\Seeds\Abstraction\AbstractSeeds;
+use Skeleton\Infrastructure\Exception\InvalidSeedsException;
+use Skeleton\Ports\Exception\SeedsNotFoundException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -55,8 +57,8 @@ class SeedsPersistCommand extends Command
      * @param OutputInterface $output
      *
      * @throws MissingConfigurationException if seeds_namespace is not configured
-     * @throws \InvalidArgumentException if seeds class cannot be found
-     * @throws \LogicException if seeds class is not a subclass of AbstractSeeds
+     * @throws SeedsNotFoundException if seeds class cannot be found
+     * @throws InvalidSeedsException if seeds class is not a subclass of AbstractSeeds
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
@@ -68,13 +70,13 @@ class SeedsPersistCommand extends Command
         $seedsName = $configuration['entity_manager']['seeds_namespace'] . $input->getArgument('name') . 'Seeds';
 
         if (!class_exists($seedsName)) {
-            throw new \InvalidArgumentException($seedsName . ' class doesn\'t exist.');
+            throw new SeedsNotFoundException($seedsName . ' class doesn\'t exist.');
         }
 
         $seeds = new $seedsName($this->appConfiguration->loadDriver('entityManager'));
         
         if (!$seeds instanceof AbstractSeeds) {
-            throw new \LogicException($seedsName . ' class is not a valid seeds class');
+            throw new InvalidSeedsException($seedsName . ' class is not a valid seeds class');
         }
         
         $seeds->persist();

@@ -11,7 +11,9 @@ use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\OptimisticLockException;
+use Doctrine\DBAL\ConnectionException;
 use Skeleton\Application\DriverInterface\EntityManagerInterface;
+use Skeleton\Infrastructure\Seeds\Abstraction\SeederInterface;
 use Yggdrasil\Core\Configuration\ConfigurationInterface;
 use Yggdrasil\Core\Driver\DriverInterface;
 use Yggdrasil\Core\Exception\MissingConfigurationException;
@@ -23,7 +25,7 @@ use Yggdrasil\Core\Exception\MissingConfigurationException;
  *
  * @package Skeleton\Infrastructure\Driver
  */
-class EntityManagerDriver implements DriverInterface, EntityManagerInterface
+class EntityManagerDriver implements DriverInterface, EntityManagerInterface, SeederInterface
 {
     /**
      * Instance of driver
@@ -164,5 +166,35 @@ class EntityManagerDriver implements DriverInterface, EntityManagerInterface
     public function flush(object $entity = null): void
     {
         self::$managerInstance->flush($entity);
+    }
+
+    /**
+     * Truncates given table
+     *
+     * @param string $table Name of entity table
+     * @return bool
+     *
+     * @throws ConnectionException
+     */
+    public function truncate(string $table): bool
+    {
+        $conn = self::$managerInstance->getConnection();
+
+        $conn->beginTransaction();
+
+        try {
+            $conn->query('SET FOREIGN_KEY_CHECKS=0');
+            $conn->query('TRUNCATE TABLE ' . $table);
+            $conn->query('SET FOREIGN_KEY_CHECKS=1');
+            $conn->commit();
+
+            self::$managerInstance->flush();
+        } catch (\Throwable $t) {
+            $conn->rollBack();
+
+            return false;
+        }
+
+        return true;
     }
 }

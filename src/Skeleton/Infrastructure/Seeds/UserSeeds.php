@@ -3,6 +3,7 @@
 namespace Skeleton\Infrastructure\Seeds;
 
 use Skeleton\Domain\Entity\User;
+use Skeleton\Infrastructure\Seeds\Abstraction\AbstractSeeds;
 
 /**
  * Class UserSeeds
