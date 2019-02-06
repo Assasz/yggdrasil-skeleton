@@ -29,5 +29,5 @@ interface UserRepositoryInterface
      * @param array? $orderBy
      * @return User? The entity instance or NULL if the entity can not be found
      */
-    public function fetchOne(array $criteria, array $orderBy = null): User;
+    public function fetchOne(array $criteria, array $orderBy = null): ?User;
 }
