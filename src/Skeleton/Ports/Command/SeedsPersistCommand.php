@@ -81,6 +81,6 @@ class SeedsPersistCommand extends Command
         
         $seeds->persist();
 
-        $output->writeln($input->getArgument('name') . ' seeds persisted successfully.');
+        $output->writeln("{$seeds->getPersistedSeeds()} {$input->getArgument('name')} seeds persisted successfully.");
     }
 }

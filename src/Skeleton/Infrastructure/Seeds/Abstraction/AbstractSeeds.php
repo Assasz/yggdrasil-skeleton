@@ -19,6 +19,13 @@ abstract class AbstractSeeds
     protected $seeder;
 
     /**
+     * Number of already persisted seeds
+     *
+     * @var int
+     */
+    protected $persistedSeeds;
+
+    /**
      * AbstractSeeds constructor.
      *
      * @param SeederInterface $seeder
@@ -26,6 +33,7 @@ abstract class AbstractSeeds
     public function __construct(SeederInterface $seeder)
     {
         $this->seeder = $seeder;
+        $this->persistedSeeds = 0;
     }
 
     /**
@@ -35,9 +43,20 @@ abstract class AbstractSeeds
     {
         foreach ($this->create() as $seed) {
             $this->seeder->persist($seed);
+            $this->persistedSeeds++;
         }
 
         $this->seeder->flush();
+    }
+
+    /**
+     * Returns number of already persisted seeds
+     *
+     * @return int
+     */
+    public function getPersistedSeeds(): int
+    {
+        return $this->persistedSeeds;
     }
 
     /**
