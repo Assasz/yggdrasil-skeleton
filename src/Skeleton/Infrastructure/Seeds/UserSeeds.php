@@ -3,7 +3,7 @@
 namespace Skeleton\Infrastructure\Seeds;
 
 use Skeleton\Domain\Entity\User;
-use Skeleton\Infrastructure\Seeds\Abstraction\AbstractSeeds;
+use Yggdrasil\Utils\Seeds\AbstractSeeds;
 
 /**
  * Class UserSeeds

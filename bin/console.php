@@ -7,9 +7,9 @@ require __DIR__ . '/../vendor/autoload.php';
 use Symfony\Component\Console\Application;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Skeleton\Infrastructure\Configuration\AppConfiguration;
-use Skeleton\Ports\Command\SeedsPersistCommand;
 use Yggdrasil\Utils\Entity\EntityGenerateCommand;
 use Yggdrasil\Utils\Service\ServiceDTOGenerateCommand;
+use Yggdrasil\Utils\Seeds\SeedsPersistCommand;
 
 try {
     $consoleApplication = new Application('Yggdrasil CLI', 'dev');

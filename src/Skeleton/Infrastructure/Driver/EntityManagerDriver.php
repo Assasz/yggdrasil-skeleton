@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\DBAL\ConnectionException;
 use Skeleton\Application\DriverInterface\EntityManagerInterface;
-use Skeleton\Infrastructure\Seeds\Abstraction\SeederInterface;
+use Yggdrasil\Utils\Seeds\SeederInterface;
 use Yggdrasil\Core\Configuration\ConfigurationInterface;
 use Yggdrasil\Core\Driver\DriverInterface;
 use Yggdrasil\Core\Exception\MissingConfigurationException;
