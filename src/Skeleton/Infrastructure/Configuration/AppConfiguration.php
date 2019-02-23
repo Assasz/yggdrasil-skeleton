@@ -7,7 +7,7 @@ use Yggdrasil\Core\Configuration\ConfigurationInterface;
 use Skeleton\Infrastructure\Driver\CacheDriver;
 use Skeleton\Infrastructure\Driver\ContainerDriver;
 use Skeleton\Infrastructure\Driver\EntityManagerDriver;
-use Skeleton\Infrastructure\Driver\ExceptionHandlerDriver;
+use Skeleton\Infrastructure\Driver\ErrorHandlerDriver;
 use Skeleton\Infrastructure\Driver\MailerDriver;
 use Skeleton\Infrastructure\Driver\RouterDriver;
 use Skeleton\Infrastructure\Driver\TemplateEngineDriver;
@@ -40,15 +40,15 @@ class AppConfiguration extends AbstractConfiguration implements ConfigurationInt
     protected function getDriversRegistry(): array
     {
         return [
-            'exceptionHandler' => ExceptionHandlerDriver::class,
-            'router'           => RouterDriver::class,
-            'entityManager'    => EntityManagerDriver::class,
-            'templateEngine'   => TemplateEngineDriver::class,
-            'container'        => ContainerDriver::class,
-            'validator'        => ValidatorDriver::class,
-            'mailer'           => MailerDriver::class,
+            'router' => RouterDriver::class,
+            'errorHandler' => ErrorHandlerDriver::class,
+            'entityManager' => EntityManagerDriver::class,
+            'templateEngine' => TemplateEngineDriver::class,
+            'container' => ContainerDriver::class,
+            'validator' => ValidatorDriver::class,
+            'mailer' => MailerDriver::class,
             // Uncomment if have Redis installed
-            // 'cache'            => CacheDriver::class,
+            // 'cache' => CacheDriver::class,
         ];
     }
 }
