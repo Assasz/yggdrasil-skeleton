@@ -67,6 +67,10 @@ class RouterDriver extends AbstractDriver implements DriverInterface, RouterInte
                 ->setNotFoundMsg($configuration['router']['not_found_msg'] ?? 'Not found.')
                 ->setPassiveActions($passiveActions ?? []);
 
+            if ($appConfiguration->isConfigured(['simple_api_routing'], 'router')) {
+                $routingConfig->setSimpleApiRouting();
+            }
+
             self::$routerInstance = new Router($routingConfig);
             self::$driverInstance = new RouterDriver();
         }
