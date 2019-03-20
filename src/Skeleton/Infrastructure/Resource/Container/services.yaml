@@ -1,19 +1,8 @@
 services:
-  user.auth:
-    class: Skeleton\Application\Service\UserModule\AuthService
-    arguments: ['%app.configuration%']
-  user.remembered_auth:
-    class: Skeleton\Application\Service\UserModule\RememberedAuthService
-    arguments: ['%app.configuration%']
-  user.email_check:
-    class: Skeleton\Application\Service\UserModule\EmailCheckService
-    arguments: ['%app.configuration%']
-  user.signup:
-    class: Skeleton\Application\Service\UserModule\SignupService
-    arguments: ['%app.configuration%']
-  user.signup_confirmation:
-    class: Skeleton\Application\Service\UserModule\SignupConfirmationService
-    arguments: ['%app.configuration%']
-  shared.mail_send:
-    class: Skeleton\Application\Service\SharedModule\MailSendService
+  _defaults:
+    public: true
+
+  Skeleton\Application\Service\:
+    resource: '../../../Application/Service/*'
+    exclude: '../../../Application/Service/*/{Request, Response}/*'
     arguments: ['%app.configuration%']
