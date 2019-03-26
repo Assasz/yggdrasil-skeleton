@@ -7,6 +7,7 @@ use Skeleton\Application\DriverInterface\EntityManagerInterface;
 use Skeleton\Application\DriverInterface\RouterInterface;
 use Skeleton\Application\DriverInterface\TemplateEngineInterface;
 use Skeleton\Application\DriverInterface\ValidatorInterface;
+use Skeleton\Application\Service\SharedModule\MailSendService;
 use Skeleton\Application\Service\SharedModule\Request\MailSendRequest;
 use Skeleton\Application\Service\UserModule\Request\SignupRequest;
 use Skeleton\Application\Service\UserModule\Response\SignupResponse;
@@ -64,7 +65,7 @@ class SignupService extends AbstractService
             ->setSender(['skeleton@yggdrasil.com' => 'Yggdrasil Skeleton'])
             ->setReceivers([$user->getEmail() => $user->getUsername()]);
 
-        $mailSendResponse = $this->container->getService('shared.mail_send')->process($mailSendRequest);
+        $mailSendResponse = $this->container->getService(MailSendService::class)->process($mailSendRequest);
 
         if ($mailSendResponse->isSuccess()) {
             $user->setPassword(password_hash($request->getPassword(), PASSWORD_BCRYPT));
