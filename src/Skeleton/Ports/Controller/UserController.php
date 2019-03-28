@@ -13,8 +13,10 @@ use Skeleton\Application\Service\UserModule\Request\AuthRequest;
 use Skeleton\Application\Service\UserModule\SignupConfirmationService;
 use Skeleton\Application\Service\UserModule\SignupService;
 use Skeleton\Infrastructure\Driver\ContainerDriver;
+use Symfony\Component\HttpFoundation\Request;
 use Yggdrasil\Core\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
+use Yggdrasil\Core\Driver\DriverCollection;
 use Yggdrasil\Utils\Form\FormDataWrapper;
 use Yggdrasil\Utils\Form\FormHandler;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -32,6 +34,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 class UserController extends AbstractController
 {
+    /**
+     * UserController constructor.
+     *
+     * @param DriverCollection $drivers
+     * @param Request $request
+     * @param Response $response
+     */
+    public function __construct(DriverCollection $drivers, Request $request, Response $response)
+    {
+        parent::__construct($drivers, $request, $response);
+
+        $this->installDrivers(['container']);
+    }
+
     /**
      * Sign in action
      * Route: /user/signin

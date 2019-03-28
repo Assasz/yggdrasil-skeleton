@@ -4,6 +4,7 @@ namespace Skeleton\Ports\Controller;
 
 use Yggdrasil\Core\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Yggdrasil\Core\Controller\ErrorControllerInterface;
 
 /**
  * Class ErrorController
@@ -13,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @package Skeleton\Ports\Controller
  */
-class ErrorController extends AbstractController
+class ErrorController extends AbstractController implements ErrorControllerInterface
 {
     /**
      * Bad Request action

@@ -49,15 +49,13 @@ class SignupConfirmationService extends AbstractService
     /**
      * Returns contracts between service and external suppliers
      *
-     * @example [EntityManagerInterface::class => $this->getDriver('entityManager')]
-     *
      * @return array
      */
     protected function getContracts(): array
     {
         return [
             EntityManagerInterface::class  => $this->getDriver('entityManager'),
-            UserRepositoryInterface::class => $this->getDriver('entityManager')->getRepository('Entity:User')
+            UserRepositoryInterface::class => $this->getRepositoryProvider('entityManager')->getRepository('Entity:User')
         ];
     }
 }
