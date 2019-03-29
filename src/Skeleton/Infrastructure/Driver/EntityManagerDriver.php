@@ -13,7 +13,6 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\DBAL\ConnectionException;
 use Skeleton\Application\DriverInterface\EntityManagerInterface;
-use Yggdrasil\Core\Driver\RepositoryProviderInterface;
 use Yggdrasil\Utils\Seeds\SeederInterface;
 use Yggdrasil\Core\Configuration\ConfigurationInterface;
 use Yggdrasil\Core\Driver\DriverInterface;
@@ -26,7 +25,7 @@ use Yggdrasil\Core\Exception\MissingConfigurationException;
  *
  * @package Skeleton\Infrastructure\Driver
  */
-class EntityManagerDriver implements DriverInterface, EntityManagerInterface, SeederInterface, RepositoryProviderInterface
+class EntityManagerDriver implements DriverInterface, EntityManagerInterface, SeederInterface
 {
     /**
      * Instance of driver

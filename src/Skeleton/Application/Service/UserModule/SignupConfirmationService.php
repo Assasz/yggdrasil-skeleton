@@ -7,6 +7,8 @@ use Skeleton\Application\RepositoryInterface\UserRepositoryInterface;
 use Skeleton\Application\Service\UserModule\Request\SignupConfirmationRequest;
 use Skeleton\Application\Service\UserModule\Response\SignupConfirmationResponse;
 use Yggdrasil\Utils\Service\AbstractService;
+use Yggdrasil\Utils\Annotation\Drivers;
+use Yggdrasil\Utils\Annotation\Repository;
 
 /**
  * Class SignupConfirmationService
@@ -14,6 +16,9 @@ use Yggdrasil\Utils\Service\AbstractService;
  * This is a part of built-in user module, feel free to customize as needed
  *
  * @package Skeleton\Application\Service\UserModule
+ *
+ * @Drivers(install={EntityManagerInterface::class:"entityManager"})
+ * @Repository(name="Entity:User", contract=UserRepositoryInterface::class, repositoryProvider="entityManager")
  *
  * @property EntityManagerInterface $entityManager
  * @property UserRepositoryInterface $userRepository

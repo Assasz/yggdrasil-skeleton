@@ -13,6 +13,7 @@ use Skeleton\Application\Service\UserModule\Request\SignupRequest;
 use Skeleton\Application\Service\UserModule\Response\SignupResponse;
 use Skeleton\Domain\Entity\User;
 use Yggdrasil\Utils\Service\AbstractService;
+use Yggdrasil\Utils\Annotation\Drivers;
 
 /**
  * Class SignupService
@@ -20,6 +21,14 @@ use Yggdrasil\Utils\Service\AbstractService;
  * This is a part of built-in user module, feel free to customize as needed
  *
  * @package Skeleton\Application\Service\UserModule
+ *
+ * @Drivers(install={
+ *     ValidatorInterface::class:"validator",
+ *     RouterInterface::class:"router",
+ *     EntityManagerInterface::class:"entityManager",
+ *     TemplateEngineInterface::class:"templateEngine",
+ *     ContainerInterface::class:"container"
+ * })
  *
  * @property ValidatorInterface $validator
  * @property RouterInterface $router
@@ -77,21 +86,5 @@ class SignupService extends AbstractService
         }
 
         return $response;
-    }
-
-    /**
-     * Returns contracts between service and external suppliers
-     *
-     * @return array
-     */
-    protected function getContracts(): array
-    {
-        return [
-            ValidatorInterface::class      => $this->getDriver('validator'),
-            RouterInterface::class         => $this->getRouter(),
-            TemplateEngineInterface::class => $this->getTemplateEngine(),
-            ContainerInterface::class      => $this->getDriver('container'),
-            EntityManagerInterface::class  => $this->getDriver('entityManager')
-        ];
     }
 }

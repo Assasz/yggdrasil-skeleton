@@ -7,6 +7,8 @@ use Skeleton\Application\RepositoryInterface\UserRepositoryInterface;
 use Skeleton\Application\Service\UserModule\Request\AuthRequest;
 use Skeleton\Application\Service\UserModule\Response\AuthResponse;
 use Yggdrasil\Utils\Service\AbstractService;
+use Yggdrasil\Utils\Annotation\Drivers;
+use Yggdrasil\Utils\Annotation\Repository;
 
 /**
  * Class AuthService
@@ -14,6 +16,9 @@ use Yggdrasil\Utils\Service\AbstractService;
  * This is a part of built-in user module, feel free to customize as needed
  *
  * @package Skeleton\Application\Service\UserModule
+ *
+ * @Drivers(install={EntityManagerInterface::class:"entityManager"})
+ * @Repository(name="Entity:User", contract=UserRepositoryInterface::class, repositoryProvider="entityManager")
  *
  * @property EntityManagerInterface $entityManager
  * @property UserRepositoryInterface $userRepository
@@ -56,18 +61,5 @@ class AuthService extends AbstractService
         }
 
         return $response;
-    }
-
-    /**
-     * Returns contracts between service and external suppliers
-     *
-     * @return array
-     */
-    protected function getContracts(): array
-    {
-        return [
-            EntityManagerInterface::class  => $this->getDriver('entityManager'),
-            UserRepositoryInterface::class => $this->getRepositoryProvider('entityManager')->getRepository('Entity:User')
-        ];
     }
 }
