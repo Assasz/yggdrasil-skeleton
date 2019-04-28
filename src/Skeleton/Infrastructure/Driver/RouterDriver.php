@@ -52,7 +52,6 @@ class RouterDriver extends AbstractDriver implements DriverInterface, RouterInte
             }
 
             $configuration = $appConfiguration->getConfiguration();
-
             $passiveActionsPath = dirname(__DIR__, 4) . '/src/' . $configuration['router']['resource_path'] . '/passive_actions.yaml';
 
             if (file_exists($passiveActionsPath)) {
@@ -67,8 +66,8 @@ class RouterDriver extends AbstractDriver implements DriverInterface, RouterInte
                 ->setNotFoundMsg($configuration['router']['not_found_msg'] ?? 'Not found.')
                 ->setPassiveActions($passiveActions ?? []);
 
-            if ($appConfiguration->isConfigured(['simple_api_routing'], 'router')) {
-                $routingConfig->setSimpleApiRouting();
+            if ($appConfiguration->isConfigured(['rest_routing'], 'router')) {
+                $routingConfig->enableRestRouting();
             }
 
             self::$routerInstance = new Router($routingConfig);

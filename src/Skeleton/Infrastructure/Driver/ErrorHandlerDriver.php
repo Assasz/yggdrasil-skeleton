@@ -5,7 +5,7 @@ namespace Skeleton\Infrastructure\Driver;
 use Whoops\Run;
 use Yggdrasil\Core\Configuration\ConfigurationInterface;
 use Yggdrasil\Core\Driver\DriverInterface;
-use Yggdrasil\Utils\ErrorLogger;
+use Yggdrasil\Utils\Logger\ErrorLogger;
 use Yggdrasil\Core\Exception\MissingConfigurationException;
 
 /**
@@ -56,7 +56,6 @@ class ErrorHandlerDriver implements DriverInterface
             }
 
             $configuration = $appConfiguration->getConfiguration();
-
             $run = new Run();
 
             if ('dev' === $configuration['framework']['env']) {
