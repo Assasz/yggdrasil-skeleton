@@ -14,6 +14,7 @@ use Skeleton\Application\Service\UserModule\Response\SignupResponse;
 use Skeleton\Domain\Entity\User;
 use Yggdrasil\Utils\Service\AbstractService;
 use Yggdrasil\Utils\Annotation\Drivers;
+use Yggdrasil\Utils\Annotation\Services;
 
 /**
  * Class SignupService
@@ -26,15 +27,16 @@ use Yggdrasil\Utils\Annotation\Drivers;
  *     ValidatorInterface::class:"validator",
  *     RouterInterface::class:"router",
  *     EntityManagerInterface::class:"entityManager",
- *     TemplateEngineInterface::class:"templateEngine",
- *     ContainerInterface::class:"container"
+ *     TemplateEngineInterface::class:"templateEngine"
  * })
+ *
+ * @Services(install={MailSendService::class})
  *
  * @property ValidatorInterface $validator
  * @property RouterInterface $router
  * @property TemplateEngineInterface $templateEngine
- * @property ContainerInterface $container
  * @property EntityManagerInterface $entityManager
+ * @property MailSendService $sharedMailSendService
  */
 class SignupService extends AbstractService
 {
@@ -74,7 +76,7 @@ class SignupService extends AbstractService
             ->setSender(['skeleton@yggdrasil.com' => 'Yggdrasil Skeleton'])
             ->setReceivers([$user->getEmail() => $user->getUsername()]);
 
-        $mailSendResponse = $this->container->getService(MailSendService::class)->process($mailSendRequest);
+        $mailSendResponse = $this->sharedMailSendService->process($mailSendRequest);
 
         if ($mailSendResponse->isSuccess()) {
             $user->setPassword(password_hash($request->getPassword(), PASSWORD_BCRYPT));

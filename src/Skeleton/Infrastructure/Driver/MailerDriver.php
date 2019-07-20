@@ -54,15 +54,13 @@ class MailerDriver implements DriverInterface, MailerInterface
                 throw new MissingConfigurationException($requiredConfig, 'mailer');
             }
 
-            $configuration = $appConfiguration->getConfiguration();
-
             $transport = (new \Swift_SmtpTransport(
-                $configuration['mailer']['host'],
-                $configuration['mailer']['port'] ?? 465,
-                $configuration['mailer']['encryption'] ?? 'ssl'
+                $appConfiguration->get('host', 'mailer'),
+                $appConfiguration->get('port', 'mailer') ?? 465,
+                $appConfiguration->get('encryption', 'mailer') ?? 'ssl'
             ))
-                ->setUsername($configuration['mailer']['username'])
-                ->setPassword($configuration['mailer']['password']);
+                ->setUsername($appConfiguration->get('username', 'mailer'))
+                ->setPassword($appConfiguration->get('password', 'mailer'));
 
             self::$mailerInstance = new \Swift_Mailer($transport);
             self::$driverInstance = new MailerDriver();

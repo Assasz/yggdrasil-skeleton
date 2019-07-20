@@ -53,12 +53,10 @@ class CacheDriver implements DriverInterface
                 throw new MissingConfigurationException($requiredConfig, 'cache');
             }
 
-            $configuration = $appConfiguration->getConfiguration();
-
             $redis = new \Redis();
             $redis->connect(
-                $configuration['cache']['redis_host'],
-                $configuration['cache']['redis_port']
+                $appConfiguration->get('redis_host', 'cache'),
+                $appConfiguration->get('redis_port', 'cache')
             );
 
             self::$cacheInstance = $redis;

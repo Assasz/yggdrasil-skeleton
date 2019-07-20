@@ -11,7 +11,7 @@ AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 
 $appConfiguration = new AppConfiguration();
 
-if ('prod' === $appConfiguration->getConfiguration()['framework']['env']) {
+if ('prod' === $appConfiguration->get('env', 'framework')) {
     ini_set('display_errors', 0);
 }
 

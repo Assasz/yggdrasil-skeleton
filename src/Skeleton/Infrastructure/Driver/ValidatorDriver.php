@@ -54,9 +54,7 @@ class ValidatorDriver implements DriverInterface, ValidatorInterface
                 throw new MissingConfigurationException(['resource_path'], 'validator');
             }
 
-            $configuration = $appConfiguration->getConfiguration();
-
-            $constraintsPath = dirname(__DIR__, 4) . '/src/' . $configuration['validator']['resource_path'] . '/constraints.yaml';
+            $constraintsPath = dirname(__DIR__, 4) . '/src/' . $appConfiguration->get('resource_path', 'validator') . '/constraints.yaml';
 
             $validator = Validation::createValidatorBuilder()
                 ->addYamlMapping($constraintsPath)

@@ -51,19 +51,17 @@ class TemplateEngineDriver extends AbstractDriver implements DriverInterface, Te
                 throw new MissingConfigurationException($requiredConfig, 'template_engine');
             }
 
-            $configuration = $appConfiguration->getConfiguration();
-
             $basePath = dirname(__DIR__, 4) . '/src/';
-            $viewPath = $basePath . $configuration['template_engine']['view_path'];
-            $formPath = $basePath . $configuration['template_engine']['form_path'];
+            $viewPath = $basePath . $appConfiguration->get('view_path', 'template_engine');
+            $formPath = $basePath . $appConfiguration->get('form_path', 'template_engine');
 
             $loader = new \Twig_Loader_Filesystem($viewPath);
             $twig   = new \Twig_Environment(
-                $loader, ['cache' => ('prod' === $configuration['framework']['env']) ? dirname(__DIR__, 4) . '/var/twig' : false]
+                $loader, ['cache' => ('prod' === $appConfiguration->get('env', 'framework')) ? dirname(__DIR__, 4) . '/var/twig' : false]
             );
 
-            $twig->addExtension(new StandardExtension($configuration['template_engine']['application_name']));
-            $twig->addExtension(new RoutingExtension($appConfiguration->loadDriver('router')));
+            $twig->addExtension(new StandardExtension($appConfiguration->get('application_name', 'template_engine')));
+            $twig->addExtension(new RoutingExtension($appConfiguration->installDriver('router')));
             $twig->addExtension(new FormExtension($formPath));
 
             self::$engineInstance = $twig;

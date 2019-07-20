@@ -12,7 +12,6 @@ use Skeleton\Application\Service\UserModule\Request\SignupRequest;
 use Skeleton\Application\Service\UserModule\Request\AuthRequest;
 use Skeleton\Application\Service\UserModule\SignupConfirmationService;
 use Skeleton\Application\Service\UserModule\SignupService;
-use Skeleton\Infrastructure\Driver\ContainerDriver;
 use Yggdrasil\Core\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Yggdrasil\Utils\Form\FormDataWrapper;
@@ -20,7 +19,7 @@ use Yggdrasil\Utils\Form\FormHandler;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Yggdrasil\Utils\Annotation\Drivers;
+use Yggdrasil\Utils\Annotation\Services;
 
 /**
  * Class UserController
@@ -29,9 +28,19 @@ use Yggdrasil\Utils\Annotation\Drivers;
  *
  * @package Skeleton\Ports\Controller
  *
- * @Drivers(install={"container"})
+ * @Services(install={
+ *     AuthService::class,
+ *     RememberedAuthService::class,
+ *     SignupService::class,
+ *     SignupConfirmationService::class,
+ *     EmailCheckService::class
+ * })
  *
- * @property ContainerDriver $container
+ * @property AuthService $userAuthService
+ * @property RememberedAuthService $userRememberedAuthService
+ * @property SignupService $userSignupService
+ * @property SignupConfirmationService $userSignupConfirmationService
+ * @property EmailCheckService $userEmailCheckService
  */
 class UserController extends AbstractController
 {
@@ -57,7 +66,7 @@ class UserController extends AbstractController
             $request = new AuthRequest();
             $request = FormDataWrapper::wrap($request, $form->getDataCollection())->setRemembered($isRemembered);
 
-            $response = $this->container->getService(AuthService::class)->process($request);
+            $response = $this->userAuthService->process($request);
 
             if (!$response->isSuccess()) {
                 $this->addFlash('danger', 'Authentication failed. Incorrect e-mail address or password.');
@@ -127,7 +136,7 @@ class UserController extends AbstractController
                 ->setRememberIdentifier($cookie['identifier'])
                 ->setRememberToken($cookie['token']);
 
-            $response = $this->container->getService(RememberedAuthService::class)->process($request);
+            $response = $this->userRememberedAuthService->process($request);
 
             if ($response->isSuccess()) {
                 $this->startUserSession($response->getUser());
@@ -161,7 +170,7 @@ class UserController extends AbstractController
             $request = new SignupRequest();
             $request = FormDataWrapper::wrap($request, $form->getDataCollection());
 
-            $response = $this->container->getService(SignupService::class)->process($request);
+            $response = $this->userSignupService->process($request);
 
             if ($response->isSuccess()) {
                 $this->addFlash('success', 'Account created successfully. Check your mailbox for confirmation mail.');
@@ -194,7 +203,7 @@ class UserController extends AbstractController
         $request = (new EmailCheckRequest())
             ->setEmail($this->getRequest()->request->get('email'));
 
-        $response = $this->container->getService(EmailCheckService::class)->process($request);
+        $response = $this->userEmailCheckService->process($request);
 
         return $this->json([($response->isSuccess()) ? 'true' : 'This email address is already taken.']);
     }
@@ -213,7 +222,7 @@ class UserController extends AbstractController
         $request = (new SignupConfirmationRequest())
             ->setToken($token);
 
-        $response = $this->container->getService(SignupConfirmationService::class)->process($request);
+        $response = $this->userSignupConfirmationService->process($request);
 
         if ($response->isAlreadyActive()) {
             $this->addFlash('warning', 'This account is already active.');
