@@ -39,7 +39,7 @@ class App {
 
     /**
      * Initializes NProgress
-     * Ij Pjax is not initialized, Ajax events will be handled instead
+     * If Pjax is not initialized, Ajax events will be handled instead
      *
      * @return {App}
      */

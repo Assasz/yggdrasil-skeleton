@@ -55,9 +55,9 @@ class AuthService extends AbstractService
             $rememberToken = bin2hex(random_bytes(32));
 
             $user->setRememberToken(password_hash($rememberToken, PASSWORD_BCRYPT));
-            $this->entityManager->flush();
-
             $response->setRememberToken($rememberToken);
+
+            $this->entityManager->flush();
         }
 
         return $response;
